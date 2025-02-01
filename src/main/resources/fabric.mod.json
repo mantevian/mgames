@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mgames",
+  "version": "${version}",
+  "name": "mgames",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/mgames/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "xyz.mantevian.mgames.Main"
+    ]
+  },
+  "mixins": [
+    "mgames.mixins.json",
+    {
+      "config": "mgames.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-language-kotlin": ">=${kotlin_loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
