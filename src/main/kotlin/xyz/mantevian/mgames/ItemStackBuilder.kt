@@ -1,5 +1,6 @@
 package xyz.mantevian.mgames
 
+import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.item.DyeItem
 import net.minecraft.item.ItemConvertible

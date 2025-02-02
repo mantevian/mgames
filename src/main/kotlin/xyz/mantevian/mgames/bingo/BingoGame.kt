@@ -18,7 +18,7 @@ class BingoGame(val mg: MG) {
 		generateTasks()
 
 		mg.util.deleteScoreboard("bingo.score")
-		mg.util.createScoreboardSidebar("bingo.score", "⭐ Points ⭐")
+		mg.util.createScoreboardSidebar("bingo.score", "★ Points ★")
 	}
 
 	fun generateTasks() {
@@ -74,7 +74,7 @@ class BingoGame(val mg: MG) {
 		mg.util.announce(
 			Text.literal("").apply {
 				append(Text.literal("[").formatted(Formatting.GRAY))
-				append(Text.literal("+${task.reward} ⭐").formatted(Formatting.YELLOW))
+				append(Text.literal("+${task.reward} ★").formatted(Formatting.YELLOW))
 				append(Text.literal("] ").formatted(Formatting.GRAY))
 				append(Text.literal(player.nameForScoreboard).formatted(Formatting.GREEN))
 				append(Text.literal(" has collected ").formatted(Formatting.GRAY))

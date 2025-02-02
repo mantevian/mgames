@@ -5,7 +5,7 @@ import com.mojang.brigadier.context.CommandContext
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
-import xyz.mantevian.mgames.bingo.BingoMenuFactory
+import xyz.mantevian.mgames.bingo.BingoMenu
 
 fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>) {
 	val root = CommandManager.literal("mg").requires { it.hasPermissionLevel(1) }
@@ -34,7 +34,7 @@ private fun startCommand(context: CommandContext<ServerCommandSource>): Int {
 	mg.startGame()
 
 	mg.server.playerManager.playerList.forEach {
-		it.openHandledScreen(BingoMenuFactory(mg))
+		BingoMenu(it, mg).open()
 	}
 
 	context.source.sendFeedback({ Text.literal("Starting the game") }, true)
