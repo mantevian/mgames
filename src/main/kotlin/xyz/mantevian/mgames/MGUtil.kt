@@ -116,4 +116,8 @@ class MGUtil(private val mg: MG) {
 		val stack = ItemStackBuilder(Items.WOLF_ARMOR).ofColorMix(colors.map { DyeColor.byName(it, DyeColor.BLACK)!! }).build()
 		return DyedColorComponent.getColor(stack, 0)
 	}
+
+	fun nextInt(range: IntRange): Int {
+		return mg.server.overworld.random.nextBetween(range.first, range.last)
+	}
 }

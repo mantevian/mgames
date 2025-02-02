@@ -2,14 +2,12 @@ package xyz.mantevian.mgames.bingo
 
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
-import net.minecraft.registry.Registries
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
-import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
 import xyz.mantevian.mgames.*
 
-class BingoGame(val mg: MG) {
+class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 	fun init() {
 		mg.worldgen.bedrockBoxAtWorldBottom()
 		mg.util.tpPlayersToWorldBottom()
@@ -22,12 +20,29 @@ class BingoGame(val mg: MG) {
 	}
 
 	fun generateTasks() {
-		mg.storage.bingo.tasks[1] = BingoTaskData(3, BingoTypedTaskData.Item("minecraft:dirt", 6))
-		mg.storage.bingo.tasks[2] = BingoTaskData(4, BingoTypedTaskData.Enchantment("minecraft:sharpness"))
-		mg.storage.bingo.tasks[3] = BingoTaskData(4, BingoTypedTaskData.Potion("minecraft:speed"))
+		for (i in 0..24) {
+			val s = taskSourceSet.tasks[mg.util.nextInt(0..<taskSourceSet.tasks.size)]
 
-		val dyes = listOf("red", "yellow")
-		mg.storage.bingo.tasks[4] = BingoTaskData(3, BingoTypedTaskData.ColoredItem("minecraft:wolf_armor", dyes, mg.util.calculateColorValue(dyes)))
+			mg.storage.bingo.tasks[i] = when (s) {
+				is BingoTaskSource.Item -> {
+					BingoTaskData(s.rarity, BingoTypedTaskData.Item(s.id, mg.util.nextInt(s.minCount..s.maxCount)))
+				}
+
+				is BingoTaskSource.Enchantment -> {
+					BingoTaskData(s.options[0].rarity, BingoTypedTaskData.Enchantment(s.options[0].id))
+				}
+
+				is BingoTaskSource.Potion -> {
+					BingoTaskData(s.options[0].rarity, BingoTypedTaskData.Potion(s.options[0].id))
+				}
+
+				else -> {
+					BingoTaskData(0, BingoTypedTaskData.None)
+				}
+			}
+		}
+
+		println(mg.storage.bingo.tasks)
 	}
 
 	fun start() {

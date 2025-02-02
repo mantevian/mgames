@@ -34,7 +34,7 @@ fun load(): MGStorage {
 	val path = Paths.get("data", "mgames", "storage.json")
 	if (Files.exists(path)) {
 		return try {
-			json.decodeFromString<MGStorage>(Files.readString(path))
+			json.decodeFromString(Files.readString(path))
 		} catch (e: Exception) {
 			default()
 		}
@@ -49,7 +49,7 @@ fun save(storage: MGStorage) {
 		Files.createDirectories(path.parent)
 		Files.createFile(path)
 	}
-	Files.writeString(path, json.encodeToString(storage, ))
+	Files.writeString(path, json.encodeToString(storage))
 }
 
 @Serializable

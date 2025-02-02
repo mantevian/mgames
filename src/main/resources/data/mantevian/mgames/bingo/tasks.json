@@ -1,0 +1,44 @@
+{
+	"tasks": [
+		{
+			"type": "item",
+			"id": "minecraft:diamond",
+			"min_count": 1,
+			"max_count": 8,
+			"tags": [
+				"underground",
+				"diamond"
+			],
+			"rarity": 3
+		},
+		{
+			"type": "item",
+			"id": "minecraft:gold_ingot",
+			"min_count": 1,
+			"max_count": 64,
+			"tags": [
+				"underground",
+				"gold"
+			],
+			"rarity": 3
+		},
+		{
+			"type": "enchantment",
+			"options": [
+				{
+					"id": "minecraft:sharpness",
+					"rarity": 3
+				}
+			]
+		},
+		{
+			"type": "potion",
+			"options": [
+				{
+					"id": "minecraft:speed",
+					"rarity": 4
+				}
+			]
+		}
+	]
+}

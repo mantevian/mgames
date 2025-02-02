@@ -22,13 +22,13 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 		}
 
 		for (i in 0..24) {
-			val task = mg.storage.bingo.tasks[i + 1]?.data
+			val task = mg.storage.bingo.tasks[i]?.data
 
 			val x = i % 5
 			val y = i / 5
 
 			setSlot(y * 9 + x + 2, when (task) {
-				is BingoTypedTaskData.Item -> ItemStackBuilder(task.id).build()
+				is BingoTypedTaskData.Item -> ItemStackBuilder(task.id).withCount(task.count).build()
 				is BingoTypedTaskData.Enchantment -> ItemStackBuilder(Items.ENCHANTED_BOOK).storeEnchant().build()
 				is BingoTypedTaskData.Potion -> ItemStackBuilder(Items.POTION).setPotion().build()
 				is BingoTypedTaskData.ColoredItem -> ItemStackBuilder(task.id).build()

@@ -4,9 +4,10 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.server.MinecraftServer
 import xyz.mantevian.mgames.bingo.BingoGame
+import xyz.mantevian.mgames.bingo.BingoTaskSourceSet
 
-class MG(val server: MinecraftServer, val storage: MGStorage) {
-	val bingo = BingoGame(this)
+class MG(val server: MinecraftServer, val storage: MGStorage, bingoTaskSourceSet: BingoTaskSourceSet) {
+	val bingo = BingoGame(this, bingoTaskSourceSet)
 	val util = MGUtil(this)
 	val worldgen = MGWorldgen(this)
 

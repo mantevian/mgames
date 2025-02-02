@@ -9,11 +9,13 @@ class Main : ModInitializer {
 		const val MOD_ID = "mgames"
 
 		var mg: MG? = null
+
+		private lateinit var bingoTasksResource: Resource
 	}
 
 	override fun onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTING.register {
-			mg = MG(it, load())
+			mg = MG(it, load(), bingoTasksResource.get(xyz.mantevian.mgames.bingo.json))
 		}
 
 		ServerLifecycleEvents.BEFORE_SAVE.register { _, _, _ ->
@@ -23,5 +25,7 @@ class Main : ModInitializer {
 		CommandRegistrationCallback.EVENT.register { dispatcher, _, _ ->
 			registerCommands(dispatcher)
 		}
+
+		bingoTasksResource = Resource("mgames/bingo/tasks.json")
 	}
 }
