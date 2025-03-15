@@ -33,10 +33,6 @@ private fun startCommand(context: CommandContext<ServerCommandSource>): Int {
 
 	mg.startGame()
 
-	mg.server.playerManager.playerList.forEach {
-		BingoMenu(it, mg).open()
-	}
-
 	context.source.sendFeedback({ Text.literal("Starting the game") }, true)
 
 	return 1

@@ -27,5 +27,7 @@ class Main : ModInitializer {
 		}
 
 		bingoTasksResource = Resource("mgames/bingo/tasks.json")
+
+		MGItems.init()
 	}
 }

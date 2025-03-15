@@ -54,6 +54,8 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 			}
 
 			mg.storage.bingo.players[it.uuidAsString] = playerData
+
+			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
 		}
 	}
 

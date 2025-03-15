@@ -56,6 +56,7 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0-RC")
 
 	include("eu.pb4:sgui:1.8.2+1.21.4")?.let { modImplementation(it) }
+	include("eu.pb4:polymer-core:0.11.8+1.21.4")?.let { modImplementation(it) }
 }
 
 tasks.processResources {
