@@ -1,10 +1,14 @@
 package xyz.mantevian.mgames.bingo
 
+import net.fabricmc.fabric.api.item.v1.EnchantingContext
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
+import net.minecraft.component.type.UnbreakableComponent
+import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Hand
 import xyz.mantevian.mgames.*
 
 class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
@@ -46,6 +50,8 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 	}
 
 	fun start() {
+		mg.storage.time.set(-20 * 10)
+
 		mg.server.playerManager.playerList.forEach {
 			val playerData = BingoPlayer()
 
@@ -162,6 +168,100 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 						.forEach { (i, _) -> setCompletedTask(player, i) }
 
 					mg.util.setScore(player.nameForScoreboard, "bingo.score", countPoints(player))
+
+					val mainHandStack = player.getStackInHand(Hand.MAIN_HAND)
+					mg.storage.bingo.handEnchantments.forEach { (id, level) ->
+						val enchantment = RegistryEntry.of(mg.util.enchantmentById(id))
+						if (mainHandStack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE)) {
+							mainHandStack.addEnchantment(enchantment, level)
+						}
+					}
+
+					if (mg.storage.bingo.unbreakableItems) {
+						player.getStackInHand(Hand.MAIN_HAND).set(DataComponentTypes.UNBREAKABLE, UnbreakableComponent(true))
+					}
+				}
+
+				val pvpTime = mg.storage.bingo.pvpTime.getFullSeconds()
+				val gameTime = mg.storage.bingo.gameTime.getFullSeconds()
+				if (mg.storage.time.getTicks() % 20 == 0) {
+					when (mg.storage.time.getFullSeconds()) {
+						-10 -> {
+							mg.util.announce(Text.literal("Bingo starts in 10 seconds!"))
+						}
+
+						0 -> {
+							mg.util.announce(Text.literal("Bingo has started!"))
+						}
+
+						pvpTime - 300 -> {
+							mg.util.announce(Text.literal("PVP enables in 5 minutes!"))
+						}
+
+						pvpTime - 30 -> {
+							mg.util.announce(Text.literal("PVP enables in 30 seconds!"))
+						}
+
+						pvpTime - 5 -> {
+							mg.util.announce(Text.literal("PVP enables in 5 seconds!"))
+						}
+
+						pvpTime - 4 -> {
+							mg.util.announce(Text.literal("PVP enables in 4 seconds!"))
+						}
+
+						pvpTime - 3 -> {
+							mg.util.announce(Text.literal("PVP enables in 3 seconds!"))
+						}
+
+						pvpTime - 2 -> {
+							mg.util.announce(Text.literal("PVP enables in 2 seconds!"))
+						}
+
+						pvpTime - 1 -> {
+							mg.util.announce(Text.literal("PVP enables in 1 seconds!"))
+						}
+
+						pvpTime -> {
+							mg.util.announce(Text.literal("PVP is enabled!"))
+						}
+
+						gameTime - 900 -> {
+							mg.util.announce(Text.literal("Bingo ends in 15 minutes!"))
+						}
+
+						gameTime - 300 -> {
+							mg.util.announce(Text.literal("Bingo ends in 5 minutes!"))
+						}
+
+						gameTime - 30 -> {
+							mg.util.announce(Text.literal("Bingo ends in 30 seconds!"))
+						}
+
+						gameTime - 5 -> {
+							mg.util.announce(Text.literal("Bingo ends in 5 seconds!"))
+						}
+
+						gameTime - 4 -> {
+							mg.util.announce(Text.literal("Bingo ends in 4 seconds!"))
+						}
+
+						gameTime - 3 -> {
+							mg.util.announce(Text.literal("Bingo ends in 3 seconds!"))
+						}
+
+						gameTime - 2 -> {
+							mg.util.announce(Text.literal("Bingo ends in 2 seconds!"))
+						}
+
+						gameTime - 1 -> {
+							mg.util.announce(Text.literal("Bingo ends in 1 seconds!"))
+						}
+
+						gameTime -> {
+							mg.util.announce(Text.literal("Bingo has ended!"))
+						}
+					}
 				}
 			}
 

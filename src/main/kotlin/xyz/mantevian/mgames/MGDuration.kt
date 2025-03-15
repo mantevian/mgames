@@ -39,11 +39,33 @@ class MGDuration private constructor(private var ticks: Int) {
 		ticks = i
 	}
 
+	fun set(formattedString: String): Boolean {
+		val (ok, dur) = fromFormattedTime(formattedString)
+		if (ok) {
+			ticks = dur.getTicks()
+		}
+		return ok
+	}
+
 	companion object {
 		fun zero() = MGDuration(0)
+
 		fun fromTicks(ticks: Int) = MGDuration(ticks)
+
 		fun fromSeconds(seconds: Int) = MGDuration(seconds * 20)
+
 		fun fromMinutes(minutes: Int, seconds: Int = 0) = MGDuration((minutes * 60 + seconds) * 20)
+
 		fun fromHours(hours: Int, minutes: Int = 0, seconds: Int = 0) = MGDuration((hours * 60 * 60 + minutes * 60 + seconds) * 20)
+
+		fun fromFormattedTime(input: String): Pair<Boolean, MGDuration> = input.run {
+			val parts = split(":")
+
+			return@run when (parts.size) {
+				2 -> true to fromSeconds(parts[0].toInt() * 60 + parts[1].toInt())
+				3 -> true to fromSeconds(parts[0].toInt() * 60 * 60 + parts[1].toInt() * 60 + parts[2].toInt())
+				else -> false to zero()
+			}
+		}
 	}
 }
