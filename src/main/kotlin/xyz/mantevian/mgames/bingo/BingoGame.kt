@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.item.v1.EnchantingContext
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.UnbreakableComponent
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
@@ -62,7 +64,17 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 			mg.storage.bingo.players[it.uuidAsString] = playerData
 
 			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
+
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 200, 0, false, false, false))
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 200, 10, false, false, false))
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.MINING_FATIGUE, 200, 10, false, false, false))
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 200, 10, false, false, false))
+
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5, 0, false, false, false))
+			it.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, 200 * 60 * 5, 1, false, false, false))
 		}
+
+		mg.util.teleportInCircle(mg.server.playerManager.playerList, 500, 10)
 	}
 
 	private fun setCompletedTask(player: ServerPlayerEntity, n: Int) {

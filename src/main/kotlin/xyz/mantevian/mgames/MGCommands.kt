@@ -9,10 +9,11 @@ import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.command.argument.RegistryEntryReferenceArgumentType
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.server.command.CommandManager
+import net.minecraft.server.command.CommandManager.RegistrationEnvironment
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.Text
 
-fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, registryAccess: CommandRegistryAccess) {
+fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, registryAccess: CommandRegistryAccess, env: RegistrationEnvironment) {
 	val root = CommandManager.literal("mg").requires { it.hasPermissionLevel(1) }
 
 	val initBingo = CommandManager.literal("bingo").executes(::initBingoCommand)

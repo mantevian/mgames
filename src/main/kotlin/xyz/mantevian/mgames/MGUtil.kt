@@ -15,9 +15,13 @@ import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.scoreboard.ScoreHolder
 import net.minecraft.scoreboard.ScoreboardCriterion
 import net.minecraft.scoreboard.ScoreboardDisplaySlot
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 infix fun ItemStack.isId(id: String): Boolean {
 	return Registries.ITEM.getId(this.item).toString() == id
@@ -119,5 +123,23 @@ class MGUtil(private val mg: MG) {
 
 	fun nextInt(range: IntRange): Int {
 		return mg.server.overworld.random.nextBetween(range.first, range.last)
+	}
+
+	fun teleportInCircle(players: List<ServerPlayerEntity>, radius: Int, precision: Int) {
+		val count = players.size
+		for (i in players.indices) {
+			val player = players[i]
+			val angle = i.toDouble() / count.toDouble()
+			val x = cos(angle) * radius
+			val y = sin(angle) * radius
+			mg.executeCommand("spreadplayers $x $y 1 $precision true ${player.nameForScoreboard}")
+		}
+	}
+
+	fun randomTeleport(player: ServerPlayerEntity, radius: Int, precision: Int) {
+		val angle = mg.server.overworld.random.nextFloat() * PI * 2
+		val x = cos(angle) * radius
+		val y = sin(angle) * radius
+		mg.executeCommand("spreadplayers $x $y 1 $precision true ${player.nameForScoreboard}")
 	}
 }

@@ -1,8 +1,11 @@
 package xyz.mantevian.mgames.bingo
 
+import eu.pb4.sgui.api.ClickType
+import eu.pb4.sgui.api.elements.GuiElementInterface
 import eu.pb4.sgui.api.gui.SimpleGui
 import net.minecraft.item.Items
 import net.minecraft.screen.ScreenHandlerType
+import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import xyz.mantevian.mgames.BingoTypedTaskData
@@ -36,5 +39,21 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				else -> ItemStackBuilder(Items.BEDROCK).build()
 			})
 		}
+
+		// 9, 27
+		setSlot(9, ItemStackBuilder(Items.ENDER_PEARL)
+			.setName()
+			.addLore()
+			.build())
+	}
+
+	override fun onClick(index: Int, type: ClickType, action: SlotActionType, element: GuiElementInterface): Boolean {
+		when (index) {
+			9 -> {
+				mg.util.randomTeleport(player, mg.storage.bingo.worldSize / 2, mg.storage.bingo.worldSize / 8)
+			}
+		}
+
+		return super.onClick(index, type, action, element)
 	}
 }

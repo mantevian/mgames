@@ -22,8 +22,8 @@ class Main : ModInitializer {
 			mg?.storage?.let { save(it) }
 		}
 
-		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, _ ->
-			registerCommands(dispatcher, registryAccess)
+		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
+			registerCommands(dispatcher, registryAccess, env)
 		}
 
 		bingoTasksResource = Resource("mgames/bingo/tasks.json")
