@@ -2,15 +2,24 @@ package xyz.mantevian.mgames
 
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
+import net.minecraft.component.type.LoreComponent
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.DyeItem
+import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
+import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 
 class ItemStackBuilder() {
 	private lateinit var stack: ItemStack
+	private var mg: MG? = null
+
+	constructor(mg: MG) : this() {
+		this.mg = mg
+	}
 
 	constructor(item: ItemConvertible) : this() {
 		stack = ItemStack(item)
@@ -30,7 +39,11 @@ class ItemStackBuilder() {
 		return this
 	}
 
-	fun enchant(): ItemStackBuilder {
+	fun enchant(enchantment: Enchantment, level: Int): ItemStackBuilder {
+		mg?.let {
+			stack.addEnchantment(it.util.getEnchantmentEntry(enchantment), level)
+		}
+
 		return this
 	}
 
@@ -46,11 +59,20 @@ class ItemStackBuilder() {
 		return this
 	}
 
-	fun setName(): ItemStackBuilder {
+	fun setName(name: Text): ItemStackBuilder {
+		stack.set(DataComponentTypes.ITEM_NAME, name)
 		return this
 	}
 
-	fun addLore(): ItemStackBuilder {
+	fun setCustomName(name: Text): ItemStackBuilder {
+		stack.set(DataComponentTypes.CUSTOM_NAME, name)
+		return this
+	}
+
+	fun addLore(lore: Text): ItemStackBuilder {
+		val component = stack.getOrDefault(DataComponentTypes.LORE, LoreComponent.DEFAULT)
+		component.with(lore)
+		stack.set(DataComponentTypes.LORE, component)
 		return this
 	}
 

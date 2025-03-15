@@ -42,8 +42,8 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 
 		// 9, 27
 		setSlot(9, ItemStackBuilder(Items.ENDER_PEARL)
-			.setName()
-			.addLore()
+			.setCustomName(Text.literal("Random teleport"))
+			.addLore(Text.literal("Click to teleport randomly"))
 			.build())
 	}
 

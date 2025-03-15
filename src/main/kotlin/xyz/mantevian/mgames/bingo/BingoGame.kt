@@ -6,7 +6,6 @@ import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.UnbreakableComponent
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -183,9 +182,11 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 
 					val mainHandStack = player.getStackInHand(Hand.MAIN_HAND)
 					mg.storage.bingo.handEnchantments.forEach { (id, level) ->
-						val enchantment = RegistryEntry.of(mg.util.enchantmentById(id))
-						if (mainHandStack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE)) {
-							mainHandStack.addEnchantment(enchantment, level)
+						mg.util.enchantmentById(id)?.let { enchantment ->
+							val entry = mg.util.getEnchantmentEntry(enchantment)
+							if (mainHandStack.canBeEnchantedWith(entry, EnchantingContext.ACCEPTABLE)) {
+								mainHandStack.addEnchantment(entry, level)
+							}
 						}
 					}
 

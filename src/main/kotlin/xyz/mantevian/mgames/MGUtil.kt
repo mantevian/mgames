@@ -77,6 +77,10 @@ class MGUtil(private val mg: MG) {
 		return mg.server.registryManager.getOrThrow(RegistryKeys.ENCHANTMENT).get(Identifier.of(id))
 	}
 
+	fun getEnchantmentEntry(enchantment: Enchantment): RegistryEntry<Enchantment> {
+		return mg.server.registryManager.getOrThrow(RegistryKeys.ENCHANTMENT).getEntry(enchantment)
+	}
+
 	fun potionById(id: String): Potion? {
 		return Registries.POTION.get(Identifier.of(id))
 	}
@@ -132,7 +136,7 @@ class MGUtil(private val mg: MG) {
 			val angle = i.toDouble() / count.toDouble()
 			val x = cos(angle) * radius
 			val y = sin(angle) * radius
-			mg.executeCommand("spreadplayers $x $y 1 $precision true ${player.nameForScoreboard}")
+			mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
 		}
 	}
 
@@ -140,6 +144,6 @@ class MGUtil(private val mg: MG) {
 		val angle = mg.server.overworld.random.nextFloat() * PI * 2
 		val x = cos(angle) * radius
 		val y = sin(angle) * radius
-		mg.executeCommand("spreadplayers $x $y 1 $precision true ${player.nameForScoreboard}")
+		mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
 	}
 }
