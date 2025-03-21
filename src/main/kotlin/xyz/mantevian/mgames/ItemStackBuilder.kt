@@ -3,18 +3,21 @@ package xyz.mantevian.mgames
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.LoreComponent
+import net.minecraft.component.type.PotionContentsComponent
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.DyeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
+import net.minecraft.potion.Potion
 import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
+import net.minecraft.util.Unit
 
 class ItemStackBuilder() {
-	private lateinit var stack: ItemStack
+	private var stack: ItemStack = ItemStack.EMPTY
 	private var mg: MG? = null
 
 	constructor(mg: MG) : this() {
@@ -30,7 +33,12 @@ class ItemStackBuilder() {
 	}
 
 	fun ofItem(item: ItemConvertible): ItemStackBuilder {
-		stack.withItem(item)
+		stack = stack.withItem { item as Item }
+		return this
+	}
+
+	fun ofItem(itemId: String): ItemStackBuilder {
+		stack = stack.withItem { (Registries.ITEM.get(Identifier.of(itemId))) }
 		return this
 	}
 
@@ -47,19 +55,16 @@ class ItemStackBuilder() {
 		return this
 	}
 
-	fun storeEnchant(): ItemStackBuilder {
-		return this
-	}
-
 	fun addStatusEffect(): ItemStackBuilder {
 		return this
 	}
 
-	fun setPotion(): ItemStackBuilder {
+	fun setPotion(potion: Potion): ItemStackBuilder {
+		stack.set(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent(Registries.POTION.getEntry(potion)))
 		return this
 	}
 
-	fun setName(name: Text): ItemStackBuilder {
+	fun setItemName(name: Text): ItemStackBuilder {
 		stack.set(DataComponentTypes.ITEM_NAME, name)
 		return this
 	}
@@ -71,13 +76,17 @@ class ItemStackBuilder() {
 
 	fun addLore(lore: Text): ItemStackBuilder {
 		val component = stack.getOrDefault(DataComponentTypes.LORE, LoreComponent.DEFAULT)
-		component.with(lore)
-		stack.set(DataComponentTypes.LORE, component)
+		stack.set(DataComponentTypes.LORE, component.with(lore))
 		return this
 	}
 
 	fun ofColorMix(colors: List<DyeColor>): ItemStackBuilder {
 		stack = DyedColorComponent.setColor(stack, colors.map { DyeItem.byColor(it) })
+		return this
+	}
+
+	fun hideTooltip(): ItemStackBuilder {
+		stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE)
 		return this
 	}
 

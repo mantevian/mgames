@@ -23,6 +23,17 @@
 			"rarity": 3
 		},
 		{
+			"type": "item",
+			"id": "minecraft:iron_ingot",
+			"min_count": 1,
+			"max_count": 64,
+			"tags": [
+				"underground",
+				"gold"
+			],
+			"rarity": 3
+		},
+		{
 			"type": "enchantment",
 			"options": [
 				{
@@ -35,7 +46,16 @@
 			"type": "potion",
 			"options": [
 				{
-					"id": "minecraft:speed",
+					"id": "minecraft:swiftness",
+					"rarity": 4
+				}
+			]
+		},
+		{
+			"type": "potion",
+			"options": [
+				{
+					"id": "minecraft:slowness",
 					"rarity": 4
 				}
 			]

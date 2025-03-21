@@ -43,9 +43,9 @@ class MG(val server: MinecraftServer, val storage: MGStorage, bingoTaskSourceSet
 	private fun tick() {
 		when (storage.state) {
 			GameState.WAITING -> {
-				util.infiniteEffect(StatusEffects.RESISTANCE, 4)
-				util.infiniteEffect(StatusEffects.SATURATION)
-				util.infiniteEffect(StatusEffects.NIGHT_VISION)
+				util.infiniteEffectForEveryone(StatusEffects.RESISTANCE, 4)
+				util.infiniteEffectForEveryone(StatusEffects.SATURATION)
+				util.infiniteEffectForEveryone(StatusEffects.NIGHT_VISION)
 			}
 			GameState.PLAYING -> {
 				storage.time.inc()

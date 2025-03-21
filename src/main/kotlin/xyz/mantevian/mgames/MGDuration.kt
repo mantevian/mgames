@@ -47,6 +47,10 @@ class MGDuration private constructor(private var ticks: Int) {
 		return ok
 	}
 
+	fun clone(): MGDuration {
+		return MGDuration(this.getTicks())
+	}
+
 	companion object {
 		fun zero() = MGDuration(0)
 

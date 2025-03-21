@@ -4,12 +4,13 @@ import net.fabricmc.fabric.api.item.v1.EnchantingContext
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.UnbreakableComponent
-import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
+import net.minecraft.util.math.BlockPos
 import xyz.mantevian.mgames.*
 
 class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
@@ -53,69 +54,91 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 	fun start() {
 		mg.storage.time.set(-20 * 10)
 
-		mg.server.playerManager.playerList.forEach {
+		mg.util.forEachPlayer {
 			val playerData = BingoPlayer()
 
 			mg.storage.bingo.tasks.forEach { (i, _) ->
-				playerData.tasks[i] = false
+				playerData.tasks[i] = null
 			}
 
 			mg.storage.bingo.players[it.uuidAsString] = playerData
 
+			mg.util.resetPlayers()
+
 			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
-
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.BLINDNESS, 200, 0, false, false, false))
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 200, 10, false, false, false))
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.MINING_FATIGUE, 200, 10, false, false, false))
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 200, 10, false, false, false))
-
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5, 0, false, false, false))
-			it.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, 200 * 60 * 5, 1, false, false, false))
 		}
 
-		mg.util.teleportInCircle(mg.server.playerManager.playerList, 500, 10)
+		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 200, 0)
+		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 200, 0)
+		mg.util.effectForEveryone(StatusEffects.MINING_FATIGUE, 200, 0)
+		mg.util.effectForEveryone(StatusEffects.WEAKNESS, 200, 0)
+
+		mg.util.effectForEveryone(StatusEffects.FIRE_RESISTANCE, 200 * 50 * 5, 0)
+		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 200 * 60 * 5, 0)
+
+		mg.util.teleportInCircle(mg.util.getAllPlayers(), 500, 10)
+	}
+
+	fun finish() {
+		val sortedPlayers = mg.util.getAllPlayers()
+			.map {
+				val playerData = mg.storage.bingo.players[it.uuidAsString] ?: return
+				val lastTime = playerData.tasks.map { task -> task.value }.sortedByDescending { dur -> dur?.getTicks() }[0]
+				Triple(it, countPoints(it), lastTime ?: MGDuration.zero())
+			}
+			.sortedWith(compareBy({ it.second }, { it.third.getTicks() }))
+
+		sortedPlayers.forEachIndexed { i, (player, points, time) ->
+			mg.util.announce(standardText("${i + 1}. ${player.nameForScoreboard} $points ★ [${time.formatHourMinSec()}]"))
+		}
+
+		mg.util.forEachPlayer {
+			mg.util.teleport(it, mg.server.overworld, BlockPos(0, -62, 0))
+		}
 	}
 
 	private fun setCompletedTask(player: ServerPlayerEntity, n: Int) {
 		val task = mg.storage.bingo.tasks[n] ?: return
 		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return
 
-		playerData.tasks[n] = true
+		playerData.tasks[n] = mg.storage.time.clone()
 
 		val taskTypedText = when (task.data) {
-			is BingoTypedTaskData.Item -> Text.literal("").run {
+			is BingoTypedTaskData.Item -> standardText("").run {
 				append(Text.translatable(mg.util.itemById(task.data.id).translationKey))
 				append(" (${task.data.count})")
 			}
 
-			is BingoTypedTaskData.Enchantment -> Text.literal("").run {
+			is BingoTypedTaskData.Enchantment -> standardText("").run {
 				append("Enchantment ")
 				append(mg.util.enchantmentById(task.data.id)?.description)
 			}
 
-			is BingoTypedTaskData.Potion -> Text.literal("").run {
+			is BingoTypedTaskData.Potion -> standardText("").run {
 				append("Potion of ")
 				append(Text.translatable(mg.util.statusEffectById(task.data.id)?.translationKey))
 			}
 
-			is BingoTypedTaskData.ColoredItem -> Text.literal("").run {
+			is BingoTypedTaskData.ColoredItem -> standardText("").run {
 				append(Text.translatable(mg.util.itemById(task.data.id).translationKey))
 			}
 
-			else -> Text.literal("")
+			else -> standardText("")
 		}
 
 		mg.util.announce(
-			Text.literal("").apply {
-				append(Text.literal("[").formatted(Formatting.GRAY))
-				append(Text.literal("+${task.reward} ★").formatted(Formatting.YELLOW))
-				append(Text.literal("] ").formatted(Formatting.GRAY))
-				append(Text.literal(player.nameForScoreboard).formatted(Formatting.GREEN))
-				append(Text.literal(" has collected ").formatted(Formatting.GRAY))
+			standardText("").apply {
+				append(standardText("[").formatted(Formatting.GRAY))
+				append(standardText("+${task.reward} ★").formatted(Formatting.YELLOW))
+				append(standardText("] ").formatted(Formatting.GRAY))
+				append(standardText(player.nameForScoreboard).formatted(Formatting.GREEN))
+				append(standardText(" has collected ").formatted(Formatting.GRAY))
 				append(taskTypedText.formatted(Formatting.GREEN))
-				append(Text.literal(" [" + mg.storage.time.formatHourMinSec() + "]").formatted(Formatting.GRAY))
+				append(standardText(" [" + mg.storage.time.formatHourMinSec() + "]").formatted(Formatting.GRAY))
 			}
 		)
+
+		mg.util.playSound(player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP)
 	}
 
 	private fun checkTask(player: ServerPlayerEntity, task: BingoTypedTaskData): Boolean {
@@ -168,12 +191,12 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 	fun tick() {
 		when (mg.storage.state) {
 			GameState.PLAYING -> {
-				mg.server.playerManager.playerList.forEach { player ->
+				mg.util.forEachPlayer { player ->
 					val uuid = player.uuidAsString
 					val playerTasks = mg.storage.bingo.players[uuid]?.tasks ?: mutableMapOf()
 
 					playerTasks
-						.filter { !it.value }
+						.filter { it.value == null }
 						.map { (i, _) -> (i to mg.storage.bingo.tasks[i]) }
 						.filter { (_, task) -> task != null && checkTask(player, task.data) }
 						.forEach { (i, _) -> setCompletedTask(player, i) }
@@ -195,91 +218,60 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 					}
 				}
 
-				val pvpTime = mg.storage.bingo.pvpTime.getFullSeconds()
 				val gameTime = mg.storage.bingo.gameTime.getFullSeconds()
 				if (mg.storage.time.getTicks() % 20 == 0) {
 					when (mg.storage.time.getFullSeconds()) {
 						-10 -> {
-							mg.util.announce(Text.literal("Bingo starts in 10 seconds!"))
+							mg.util.announce(standardText("Bingo starts in 10 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.server.isPvpEnabled = false
 						}
 
 						0 -> {
-							mg.util.announce(Text.literal("Bingo has started!"))
-						}
-
-						pvpTime - 300 -> {
-							mg.util.announce(Text.literal("PVP enables in 5 minutes!"))
-						}
-
-						pvpTime - 30 -> {
-							mg.util.announce(Text.literal("PVP enables in 30 seconds!"))
-						}
-
-						pvpTime - 5 -> {
-							mg.util.announce(Text.literal("PVP enables in 5 seconds!"))
-						}
-
-						pvpTime - 4 -> {
-							mg.util.announce(Text.literal("PVP enables in 4 seconds!"))
-						}
-
-						pvpTime - 3 -> {
-							mg.util.announce(Text.literal("PVP enables in 3 seconds!"))
-						}
-
-						pvpTime - 2 -> {
-							mg.util.announce(Text.literal("PVP enables in 2 seconds!"))
-						}
-
-						pvpTime - 1 -> {
-							mg.util.announce(Text.literal("PVP enables in 1 seconds!"))
-						}
-
-						pvpTime -> {
-							mg.util.announce(Text.literal("PVP is enabled!"))
+							mg.util.announce(standardText("Bingo has started!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 900 -> {
-							mg.util.announce(Text.literal("Bingo ends in 15 minutes!"))
+							mg.util.announce(standardText("Bingo ends in 15 minutes!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 300 -> {
-							mg.util.announce(Text.literal("Bingo ends in 5 minutes!"))
+							mg.util.announce(standardText("Bingo ends in 5 minutes!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 30 -> {
-							mg.util.announce(Text.literal("Bingo ends in 30 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 30 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 5 -> {
-							mg.util.announce(Text.literal("Bingo ends in 5 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 5 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 4 -> {
-							mg.util.announce(Text.literal("Bingo ends in 4 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 4 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 3 -> {
-							mg.util.announce(Text.literal("Bingo ends in 3 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 3 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 2 -> {
-							mg.util.announce(Text.literal("Bingo ends in 2 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 2 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime - 1 -> {
-							mg.util.announce(Text.literal("Bingo ends in 1 seconds!"))
+							mg.util.announce(standardText("Bingo ends in 1 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 						}
 
 						gameTime -> {
-							mg.util.announce(Text.literal("Bingo has ended!"))
+							mg.util.announce(standardText("Bingo has ended!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							finish()
 						}
 					}
 				}
 			}
 
 			GameState.WAITING -> {
-				mg.server.playerManager.playerList.forEach { player ->
+				mg.util.forEachPlayer { player ->
 					mg.util.setScore(player.nameForScoreboard, "bingo.score", 0)
 				}
 			}
@@ -290,8 +282,8 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 
 	fun countPoints(player: ServerPlayerEntity): Int {
 		var sum = 0
-		mg.storage.bingo.players[player.uuidAsString]?.tasks?.forEach { (i, b) ->
-			if (b) {
+		mg.storage.bingo.players[player.uuidAsString]?.tasks?.forEach { (i, d) ->
+			if (d != null) {
 				sum += mg.storage.bingo.tasks[i]?.reward ?: 0
 			}
 		}

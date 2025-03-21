@@ -82,10 +82,7 @@ enum class GameState {
 @Serializable
 class BingoStorage {
 	@SerialName("game_time")
-	var gameTime = MGDuration.zero()
-
-	@SerialName("pvp_time")
-	var pvpTime = MGDuration.zero()
+	var gameTime = MGDuration.fromHours(1, 30, 0)
 
 	@SerialName("world_size")
 	var worldSize: Int = 10000
@@ -105,7 +102,8 @@ class BingoStorage {
 
 @Serializable
 class BingoPlayer {
-	val tasks: MutableMap<Int, Boolean> = mutableMapOf()
+	val tasks: MutableMap<Int, MGDuration?> = mutableMapOf()
+	var usedRTP: Int = 0
 }
 
 @Serializable

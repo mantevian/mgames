@@ -23,10 +23,6 @@ fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, registr
 
 	val start = CommandManager.literal("start").executes(::startCommand)
 
-	val configBingoPvpTime = CommandManager.literal("pvp_time")
-		.then(CommandManager.argument("value", StringArgumentType.greedyString())
-			.executes(::configBingoPvpTimeCommand))
-
 	val configBingoGameTime = CommandManager.literal("game_time")
 		.then(CommandManager.argument("value", StringArgumentType.greedyString())
 			.executes(::configBingoGameTimeCommand))
@@ -46,7 +42,6 @@ fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, registr
 			.executes(::configBingoUnbreakableCommand))
 
 	val configBingo = CommandManager.literal("bingo")
-		.then(configBingoPvpTime)
 		.then(configBingoGameTime)
 		.then(configBingoWorldSize)
 		.then(configBingoEnchantment)
@@ -67,7 +62,7 @@ private fun initBingoCommand(context: CommandContext<ServerCommandSource>): Int 
 
 	mg.initGame(GameType.BINGO)
 
-	context.source.sendFeedback({ Text.literal("Initializing the game Bingo") }, true)
+	context.source.sendFeedback({ standardText("Initializing the game Bingo") }, true)
 
 	return 1
 }
@@ -77,23 +72,9 @@ private fun startCommand(context: CommandContext<ServerCommandSource>): Int {
 
 	mg.startGame()
 
-	context.source.sendFeedback({ Text.literal("Starting the game") }, true)
+	context.source.sendFeedback({ standardText("Starting the game") }, true)
 
 	return 1
-}
-
-private fun configBingoPvpTimeCommand(context: CommandContext<ServerCommandSource>): Int {
-	val mg = Main.mg ?: return 0
-
-	val value = StringArgumentType.getString(context, "value")
-
-	if (mg.storage.bingo.pvpTime.set(value)) {
-		context.source.sendFeedback({ Text.literal("Set PVP time to $value") }, true)
-		return 1
-	}
-
-	context.source.sendFeedback({ Text.literal("Couldn't parse the time") }, false)
-	return 0
 }
 
 private fun configBingoGameTimeCommand(context: CommandContext<ServerCommandSource>): Int {
@@ -102,11 +83,11 @@ private fun configBingoGameTimeCommand(context: CommandContext<ServerCommandSour
 	val value = StringArgumentType.getString(context, "value")
 
 	if (mg.storage.bingo.gameTime.set(value)) {
-		context.source.sendFeedback({ Text.literal("Set game time to $value") }, true)
+		context.source.sendFeedback({ standardText("Set game time to $value") }, true)
 		return 1
 	}
 
-	context.source.sendFeedback({ Text.literal("Couldn't parse the time") }, false)
+	context.source.sendFeedback({ standardText("Couldn't parse the time") }, false)
 	return 0
 }
 
@@ -117,7 +98,7 @@ private fun configBingoWorldSizeCommand(context: CommandContext<ServerCommandSou
 
 	mg.storage.bingo.worldSize = value
 
-	context.source.sendFeedback({ Text.literal("Set world size to $value") }, true)
+	context.source.sendFeedback({ standardText("Set world size to $value") }, true)
 
 	return 1
 }
@@ -130,7 +111,7 @@ private fun configBingoEnchantmentCommand(context: CommandContext<ServerCommandS
 
 	mg.storage.bingo.handEnchantments[id.idAsString] = level
 
-	context.source.sendFeedback({ Text.literal("Set enchantment $id to level $level") }, true)
+	context.source.sendFeedback({ standardText("Set enchantment $id to level $level") }, true)
 
 	return 1
 }
@@ -142,7 +123,7 @@ private fun configBingoUnbreakableCommand(context: CommandContext<ServerCommandS
 
 	mg.storage.bingo.unbreakableItems = value
 
-	context.source.sendFeedback({ Text.literal("Set unbreakable items to $value") }, true)
+	context.source.sendFeedback({ standardText("Set unbreakable items to $value") }, true)
 
 	return 1
 }

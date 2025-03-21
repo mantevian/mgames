@@ -7,18 +7,25 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.network.packet.s2c.play.PositionFlag
 import net.minecraft.potion.Potion
 import net.minecraft.registry.Registries
-import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.scoreboard.ScoreHolder
 import net.minecraft.scoreboard.ScoreboardCriterion
 import net.minecraft.scoreboard.ScoreboardDisplaySlot
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.network.ServerRecipeBook
+import net.minecraft.server.world.ServerWorld
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvent
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
+import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -31,9 +38,17 @@ infix fun ItemStack.isId(ids: List<String>): Boolean {
 	return ids.contains(Registries.ITEM.getId(this.item).toString())
 }
 
+fun standardText(text: String): MutableText {
+	return Text.literal(text).styled { it.withItalic(false).withColor(Formatting.WHITE) }
+}
+
+fun MutableText.resetStyle(): MutableText {
+	return this.styled { it.withItalic(false).withColor(Formatting.WHITE) }
+}
+
 class MGUtil(private val mg: MG) {
 	fun resetPlayersMinecraftStats() {
-		mg.server.playerManager.playerList.forEach {
+		forEachPlayer {
 			it.clearStatusEffects()
 			it.advancementTracker.clearCriteria()
 			it.setExperienceLevel(0)
@@ -43,7 +58,7 @@ class MGUtil(private val mg: MG) {
 	}
 
 	fun tpPlayersToWorldBottom() {
-		mg.server.playerManager.playerList.forEach { player ->
+		forEachPlayer { player ->
 			player.teleport(
 				mg.server.overworld,
 				0.0,
@@ -59,14 +74,34 @@ class MGUtil(private val mg: MG) {
 		}
 	}
 
-	fun infiniteEffect(effect: RegistryEntry<StatusEffect>, level: Int = 0) {
-		mg.server.playerManager.playerList.forEach { player ->
-			player.addStatusEffect(StatusEffectInstance(effect, -1, level, true, false))
+	fun infiniteEffectForEveryone(effect: RegistryEntry<StatusEffect>, level: Int = 0) {
+		forEachPlayer { player ->
+			player.addStatusEffect(StatusEffectInstance(effect, -1, level, false, false))
+		}
+	}
+
+	fun effectForEveryone(effect: RegistryEntry<StatusEffect>, duration: Int = 0, level: Int = 0) {
+		forEachPlayer { player ->
+			player.addStatusEffect(StatusEffectInstance(effect, duration, level, false, false))
+		}
+	}
+
+	fun resetPlayers() {
+		forEachPlayer {
+			it.clearStatusEffects()
+			it.inventory.clear()
+			it.advancementTracker.clearCriteria()
+			it.recipeBook.lockRecipes(mg.server.recipeManager.values(), it)
 		}
 	}
 
 	fun announce(text: Text) {
 		mg.server.playerManager.broadcast(text, false)
+	}
+
+	fun announce(text: Text, soundEvent: SoundEvent, pitch: Float = 1.0f, volume: Float = 1.0f) {
+		mg.server.playerManager.broadcast(text, false)
+		playSoundToEveryone(soundEvent, volume, pitch)
 	}
 
 	fun itemById(id: String): Item {
@@ -93,7 +128,7 @@ class MGUtil(private val mg: MG) {
 		if (mg.server.scoreboard.getNullableObjective("${Main.MOD_ID}.$scoreboardName") != null) {
 			return
 		}
-		val objective = mg.server.scoreboard.addObjective("${Main.MOD_ID}.$scoreboardName", ScoreboardCriterion.DUMMY, Text.literal(displayName), ScoreboardCriterion.RenderType.INTEGER, true, null)
+		val objective = mg.server.scoreboard.addObjective("${Main.MOD_ID}.$scoreboardName", ScoreboardCriterion.DUMMY, standardText(displayName), ScoreboardCriterion.RenderType.INTEGER, true, null)
 		mg.server.scoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, objective)
 	}
 
@@ -145,5 +180,31 @@ class MGUtil(private val mg: MG) {
 		val x = cos(angle) * radius
 		val y = sin(angle) * radius
 		mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
+	}
+
+	fun getAllPlayers(): MutableList<ServerPlayerEntity> {
+		return mg.server.playerManager.playerList
+	}
+
+	fun forEachPlayer(fn: ((player: ServerPlayerEntity) -> Unit)) {
+		getAllPlayers().forEach(fn)
+	}
+
+	fun playSoundToEveryone(soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
+		playSound(getAllPlayers(), soundEvent, volume, pitch)
+	}
+
+	fun playSound(players: List<ServerPlayerEntity>, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
+		players.forEach {
+			it.playSoundToPlayer(soundEvent, SoundCategory.MASTER, volume, pitch)
+		}
+	}
+
+	fun playSound(player: ServerPlayerEntity, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
+		player.playSoundToPlayer(soundEvent, SoundCategory.MASTER, volume, pitch)
+	}
+
+	fun teleport(player: ServerPlayerEntity, world: ServerWorld, pos: BlockPos) {
+		player.teleport(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), PositionFlag.getFlags(0), player.yaw, player.pitch, false)
 	}
 }
