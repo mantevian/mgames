@@ -46,7 +46,7 @@
 			"type": "potion",
 			"options": [
 				{
-					"id": "minecraft:swiftness",
+					"id": "minecraft:speed",
 					"rarity": 4
 				}
 			]

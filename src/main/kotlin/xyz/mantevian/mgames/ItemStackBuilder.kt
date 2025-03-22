@@ -5,6 +5,7 @@ import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.LoreComponent
 import net.minecraft.component.type.PotionContentsComponent
 import net.minecraft.enchantment.Enchantment
+import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.item.DyeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
@@ -15,6 +16,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
 import net.minecraft.util.Unit
+import java.util.*
 
 class ItemStackBuilder() {
 	private var stack: ItemStack = ItemStack.EMPTY
@@ -64,6 +66,11 @@ class ItemStackBuilder() {
 		return this
 	}
 
+	fun setPotionColor(statusEffect: StatusEffect): ItemStackBuilder {
+		stack.set(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent(Optional.empty(), Optional.of(statusEffect.color), listOf(), Optional.empty()))
+		return this
+	}
+
 	fun setItemName(name: Text): ItemStackBuilder {
 		stack.set(DataComponentTypes.ITEM_NAME, name)
 		return this
@@ -85,8 +92,13 @@ class ItemStackBuilder() {
 		return this
 	}
 
-	fun hideTooltip(): ItemStackBuilder {
+	fun hideAdditionalTooltip(): ItemStackBuilder {
 		stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE)
+		return this
+	}
+
+	fun hideTooltip(): ItemStackBuilder {
+		stack.set(DataComponentTypes.HIDE_TOOLTIP, Unit.INSTANCE)
 		return this
 	}
 

@@ -54,6 +54,7 @@ class MGUtil(private val mg: MG) {
 			it.setExperienceLevel(0)
 			it.setExperiencePoints(0)
 			it.inventory.clear()
+			it.recipeBook.lockRecipes(mg.server.recipeManager.values(), it)
 		}
 	}
 
@@ -86,15 +87,6 @@ class MGUtil(private val mg: MG) {
 		}
 	}
 
-	fun resetPlayers() {
-		forEachPlayer {
-			it.clearStatusEffects()
-			it.inventory.clear()
-			it.advancementTracker.clearCriteria()
-			it.recipeBook.lockRecipes(mg.server.recipeManager.values(), it)
-		}
-	}
-
 	fun announce(text: Text) {
 		mg.server.playerManager.broadcast(text, false)
 	}
@@ -102,6 +94,10 @@ class MGUtil(private val mg: MG) {
 	fun announce(text: Text, soundEvent: SoundEvent, pitch: Float = 1.0f, volume: Float = 1.0f) {
 		mg.server.playerManager.broadcast(text, false)
 		playSoundToEveryone(soundEvent, volume, pitch)
+	}
+
+	fun title(text: String) {
+		mg.executeCommand("title @a title {\"text\":\"$text\"}")
 	}
 
 	fun itemById(id: String): Item {

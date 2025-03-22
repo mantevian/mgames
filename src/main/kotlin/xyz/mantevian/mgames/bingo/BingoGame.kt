@@ -11,6 +11,7 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.GameMode
 import xyz.mantevian.mgames.*
 
 class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
@@ -63,23 +64,27 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 
 			mg.storage.bingo.players[it.uuidAsString] = playerData
 
-			mg.util.resetPlayers()
+			mg.util.resetPlayersMinecraftStats()
 
 			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
+
+			it.changeGameMode(GameMode.SURVIVAL)
 		}
 
-		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 200, 0)
-		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 200, 0)
-		mg.util.effectForEveryone(StatusEffects.MINING_FATIGUE, 200, 0)
-		mg.util.effectForEveryone(StatusEffects.WEAKNESS, 200, 0)
+		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 20 * 10, 0)
+		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 20 * 10, 5)
+		mg.util.effectForEveryone(StatusEffects.MINING_FATIGUE, 20 * 10, 5)
+		mg.util.effectForEveryone(StatusEffects.WEAKNESS, 20 * 10, 5)
 
-		mg.util.effectForEveryone(StatusEffects.FIRE_RESISTANCE, 200 * 50 * 5, 0)
-		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 200 * 60 * 5, 0)
+		mg.util.effectForEveryone(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5, 0)
+		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 20 * 60 * 5, 0)
 
 		mg.util.teleportInCircle(mg.util.getAllPlayers(), 500, 10)
 	}
 
 	fun finish() {
+		mg.storage.state = GameState.NOT_INIT
+
 		val sortedPlayers = mg.util.getAllPlayers()
 			.map {
 				val playerData = mg.storage.bingo.players[it.uuidAsString] ?: return
@@ -88,8 +93,22 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 			}
 			.sortedWith(compareBy({ it.second }, { it.third.getTicks() }))
 
+		mg.util.title("Bingo has ended!")
+
+		mg.util.announce(standardText("Leaderboard for this game:").formatted(Formatting.AQUA))
+
 		sortedPlayers.forEachIndexed { i, (player, points, time) ->
-			mg.util.announce(standardText("${i + 1}. ${player.nameForScoreboard} $points ★ [${time.formatHourMinSec()}]"))
+			mg.util.announce(standardText("").apply {
+				append(standardText("${i + 1}. "))
+				append(standardText(player.nameForScoreboard).formatted(when (i) {
+					0 -> Formatting.YELLOW
+					1 -> Formatting.GRAY
+					2 -> Formatting.GOLD
+					else -> Formatting.WHITE
+				}))
+				append(standardText(" $points ★").formatted(Formatting.WHITE))
+				append(standardText(" [${time.formatHourMinSec()}]").formatted(Formatting.GRAY))
+			})
 		}
 
 		mg.util.forEachPlayer {
@@ -228,6 +247,7 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 
 						0 -> {
 							mg.util.announce(standardText("Bingo has started!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.title("Bingo has started!")
 						}
 
 						gameTime - 900 -> {
@@ -288,5 +308,9 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 			}
 		}
 		return sum
+	}
+
+	fun maxPoints(): Int {
+		return mg.storage.bingo.tasks.map { it.value.reward }.reduce { a, b -> a + b }
 	}
 }

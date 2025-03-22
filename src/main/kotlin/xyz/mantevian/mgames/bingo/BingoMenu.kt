@@ -3,8 +3,8 @@ package xyz.mantevian.mgames.bingo
 import eu.pb4.sgui.api.ClickType
 import eu.pb4.sgui.api.elements.GuiElementInterface
 import eu.pb4.sgui.api.gui.SimpleGui
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Items
-import net.minecraft.potion.Potions
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.server.network.ServerPlayerEntity
@@ -14,7 +14,7 @@ import xyz.mantevian.mgames.*
 
 class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandlerType.GENERIC_9X5, player, false) {
 	override fun getTitle(): Text {
-		return standardText("Bingo")
+		return standardText("Bingo").formatted(Formatting.BLACK)
 	}
 
 	override fun onOpen() {
@@ -23,7 +23,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return
 
 		for (i in 0..44) {
-			setSlot(i, ItemStackBuilder(Items.LIGHT_GRAY_STAINED_GLASS_PANE).build())
+			setSlot(i, ItemStackBuilder(Items.WHITE_STAINED_GLASS_PANE).hideTooltip().build())
 		}
 
 		for (i in 0..24) {
@@ -47,10 +47,11 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				}
 
 				is BingoTypedTaskData.Potion -> {
-					val potion = mg.util.potionById(task.id) ?: Potions.AWKWARD.value()
+					val effect = mg.util.statusEffectById(task.id) ?: StatusEffects.WITHER.value()
 
 					ItemStackBuilder(Items.POTION)
-						.setPotion(potion)
+						.setPotionColor(effect)
+						.setCustomName(standardText("Potion"))
 						.addLore(standardText(Text.translatable("effect.${task.id.replace(":", ".")}").string).formatted(Formatting.AQUA))
 						.addLore(standardText("Obtain a potion with this effect").formatted(Formatting.GRAY))
 				}
@@ -69,7 +70,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				builder.addLore(standardText("Reward: $reward ★").formatted(Formatting.YELLOW))
 			}
 
-			builder.hideTooltip()
+			builder.hideAdditionalTooltip()
 
 			setSlot(y * 9 + x + 2, builder.build())
 		}
@@ -102,6 +103,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				val canUseRTP = mg.bingo.countPoints(player) >= requiredPoints
 
 				if (canUseRTP) {
+					close()
 					mg.util.randomTeleport(player, mg.storage.bingo.worldSize / 2, mg.storage.bingo.worldSize / 8)
 					playerData.usedRTP++
 				}
