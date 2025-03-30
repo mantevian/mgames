@@ -36,13 +36,17 @@ class MG(
 	}
 
 	fun startGame() {
+		val started = when (storage.game) {
+			GameType.BINGO -> bingo.start()
+			else -> false
+		}
+
+		if (!started) {
+			return
+		}
+
 		storage.state = GameState.PLAYING
 		storage.time.set(0)
-
-		when (storage.game) {
-			GameType.BINGO -> bingo.start()
-			else -> {}
-		}
 	}
 
 	private fun tick() {

@@ -111,18 +111,32 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 		val requiredPoints = (playerData.usedRTP + 1) * 15
 		val canUseRTP = mg.bingo.countPoints(player) >= requiredPoints
 
-		val builder = ItemStackBuilder(Items.ENDER_PEARL)
+		val rtpBuilder = ItemStackBuilder(Items.ENDER_PEARL)
 			.setCustomName(standardText("Random teleport"))
 
 		if (canUseRTP) {
-			builder.addLore(standardText("Click to use").formatted(Formatting.AQUA))
-			builder.addLore(standardText(""))
-			builder.addLore(standardText("Next use activates at ${requiredPoints + 15} ★").formatted(Formatting.YELLOW))
+			rtpBuilder.addLore(standardText("Click to use").formatted(Formatting.AQUA))
+			rtpBuilder.addLore(standardText(""))
+			rtpBuilder.addLore(standardText("Next use activates at ${requiredPoints + 15} ★").formatted(Formatting.YELLOW))
 		} else {
-			builder.addLore(standardText("Requires $requiredPoints ★ to use").formatted(Formatting.RED))
+			rtpBuilder.addLore(standardText("Requires $requiredPoints ★ to use").formatted(Formatting.RED))
 		}
 
-		setSlot(9, builder.build())
+		setSlot(9, rtpBuilder.build())
+
+		setSlot(
+			18, ItemStackBuilder(Items.RED_BED)
+				.setCustomName(standardText("Teleport to your spawn"))
+				.addLore(standardText("Click to use").formatted(Formatting.AQUA))
+				.build()
+		)
+
+		setSlot(
+			27, ItemStackBuilder(Items.NETHER_STAR)
+				.setCustomName(standardText("Teleport to world spawn"))
+				.addLore(standardText("Click to use").formatted(Formatting.AQUA))
+				.build()
+		)
 	}
 
 	override fun onClick(index: Int, type: ClickType, action: SlotActionType, element: GuiElementInterface): Boolean {
@@ -138,6 +152,16 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 					mg.util.randomTeleport(player, mg.storage.bingo.worldSize / 2, mg.storage.bingo.worldSize / 8)
 					playerData.usedRTP++
 				}
+			}
+
+			18 -> {
+				close()
+				mg.util.teleportToOwnSpawn(player)
+			}
+
+			27 -> {
+				close()
+				mg.util.teleportToWorldSpawn(player)
 			}
 		}
 

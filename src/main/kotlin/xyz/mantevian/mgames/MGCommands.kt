@@ -108,9 +108,9 @@ private fun initBingoCommand(context: CommandContext<ServerCommandSource>): Int 
 private fun startCommand(context: CommandContext<ServerCommandSource>): Int {
 	val mg = Main.mg ?: return 0
 
-	mg.startGame()
-
 	context.source.sendFeedback({ standardText("Starting the game") }, true)
+
+	mg.startGame()
 
 	return 1
 }

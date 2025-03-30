@@ -5,6 +5,8 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.UnbreakableComponent
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -25,28 +27,33 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 
 		mg.util.deleteScoreboard("bingo.score")
 		mg.util.createScoreboardSidebar("bingo.score", "★ Points ★")
+
+		mg.executeCommand("worldborder set 50")
+
+		mg.executeCommand("gamerule keepInventory true")
 	}
 
-	private fun setupData() {
-		val setName = mg.storage.bingo.useSet
+	private fun setupData(): Boolean {
+		mg.storage.bingo.tasks.clear()
 
-		if (setName == null) {
-			BingoGenerator(taskSourceSet).generateTasks(mg)
-			return
-		}
+		val setName = mg.storage.bingo.useSet ?: return BingoGenerator(taskSourceSet).generateTasks(mg)
 
 		val data = Main.resourceManager.get<BingoStorage>("bingo/set/$setName.json", json)
-
-		if (data == null) {
-			BingoGenerator(taskSourceSet).generateTasks(mg)
-			return
-		}
+			?: return BingoGenerator(taskSourceSet).generateTasks(mg)
 
 		mg.storage.bingo = data
+		return true
 	}
 
-	fun start() {
-		setupData()
+	fun start(): Boolean {
+		if (!setupData()) {
+			mg.util.announce(
+				standardText("Couldn't create a bingo with the specified picker or set. Please change the setup or try again").formatted(
+					Formatting.RED
+				)
+			)
+			return false
+		}
 
 		mg.storage.time.set(-20 * 10)
 
@@ -67,16 +74,28 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 		}
 
 		mg.executeCommand("time set 0")
+		mg.executeCommand("weather clear 9999999")
+
+		mg.executeCommand("execute in overworld run worldborder set ${mg.storage.bingo.worldSize * 2}")
+		mg.executeCommand("execute in the_nether run worldborder set ${mg.storage.bingo.worldSize * 2}")
+		mg.executeCommand("execute in the_end run worldborder set ${mg.storage.bingo.worldSize * 2}")
 
 		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 20 * 10, 0)
 		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 20 * 10, 5)
 		mg.util.effectForEveryone(StatusEffects.MINING_FATIGUE, 20 * 10, 5)
 		mg.util.effectForEveryone(StatusEffects.WEAKNESS, 20 * 10, 5)
+		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 20 * 10, 2)
 
 		mg.util.effectForEveryone(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5, 0)
 		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 20 * 60 * 5, 0)
 
 		mg.util.teleportInCircle(mg.util.getAllPlayers(), 500, 10)
+
+		mg.util.forEachPlayer {
+			it.setSpawnPointFrom(it)
+		}
+
+		return true
 	}
 
 	fun finish() {
@@ -160,6 +179,8 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 		)
 
 		mg.util.playSound(player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP)
+
+		player.giveItemStack(ItemStack(Items.ENDER_EYE))
 	}
 
 	private fun checkTask(player: ServerPlayerEntity, task: BingoTypedTaskData): Boolean {
@@ -212,6 +233,8 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 	fun tick() {
 		when (mg.storage.state) {
 			GameState.PLAYING -> {
+				mg.util.infiniteEffectForEveryone(StatusEffects.SATURATION)
+
 				mg.util.forEachPlayer { player ->
 					val uuid = player.uuidAsString
 

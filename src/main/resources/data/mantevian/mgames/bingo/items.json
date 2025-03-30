@@ -139,7 +139,10 @@
 		"id": "minecraft:activator_rail",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"iron",
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:allium",
@@ -268,7 +271,7 @@
 	{
 		"id": "minecraft:arrow",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -468,47 +471,43 @@
 		]
 	},
 	{
-		"id": "minecraft:beacon",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
-	},
-	{
 		"id": "minecraft:bee_nest",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:beef",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:beehive",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 4,
 		"tags": [
 			"silk_touch"
 		]
 	},
 	{
 		"id": "minecraft:beetroot",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:beetroot_seeds",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:beetroot_soup",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -520,8 +519,10 @@
 	{
 		"id": "minecraft:big_dripleaf",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:birch_boat",
@@ -686,14 +687,18 @@
 	{
 		"id": "minecraft:black_candle",
 		"max_count": 4,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:black_carpet",
 		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:black_concrete",
@@ -730,8 +735,10 @@
 	{
 		"id": "minecraft:black_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:black_stained_glass",
@@ -855,15 +862,19 @@
 	},
 	{
 		"id": "minecraft:blue_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:blue_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:blue_concrete",
@@ -917,8 +928,10 @@
 	{
 		"id": "minecraft:blue_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:blue_stained_glass",
@@ -962,38 +975,40 @@
 	},
 	{
 		"id": "minecraft:bone",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:bone_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:bone_meal",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 64,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:book",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 64,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:bookshelf",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:bordure_indented_banner_pattern",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -1004,39 +1019,50 @@
 	},
 	{
 		"id": "minecraft:bowl",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:brain_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:brain_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:brain_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:bread",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:breeze_rod",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"trial_chamber"
+		]
 	},
 	{
 		"id": "minecraft:brewer_pottery_sherd",
@@ -1049,12 +1075,14 @@
 	{
 		"id": "minecraft:brewing_stand",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:brick",
-		"max_count": 1,
+		"max_count": 32,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1066,19 +1094,19 @@
 	},
 	{
 		"id": "minecraft:brick_stairs",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:brick_wall",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:bricks",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1108,15 +1136,19 @@
 	},
 	{
 		"id": "minecraft:brown_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:brown_carpet",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:brown_concrete",
@@ -1152,21 +1184,23 @@
 	},
 	{
 		"id": "minecraft:brown_mushroom",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:brown_mushroom_block",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:brown_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:brown_stained_glass",
@@ -1208,27 +1242,38 @@
 	},
 	{
 		"id": "minecraft:bubble_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:bubble_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:bubble_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:bucket",
 		"max_count": 1,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:bundle",
@@ -1246,26 +1291,28 @@
 	},
 	{
 		"id": "minecraft:cactus",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:cake",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:calcite",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:calibrated_sculk_sensor",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 4,
 		"tags": []
 	},
 	{
@@ -1276,73 +1323,83 @@
 	},
 	{
 		"id": "minecraft:candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:carrot",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:carrot_on_a_stick",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cartography_table",
-		"max_count": 1,
+		"max_count": 4,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:carved_pumpkin",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cauldron",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chain",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chainmail_boots",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:chainmail_chestplate",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:chainmail_helmet",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:chainmail_leggings",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:charcoal",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1501,51 +1558,51 @@
 	},
 	{
 		"id": "minecraft:chest",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chest_minecart",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:chicken",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
-	},
-	{
-		"id": "minecraft:chipped_anvil",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chiseled_bookshelf",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chiseled_copper",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:chiseled_deepslate",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_nether_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_polished_blackstone",
@@ -1557,9 +1614,11 @@
 	},
 	{
 		"id": "minecraft:chiseled_quartz_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_red_sandstone",
@@ -1571,9 +1630,11 @@
 	},
 	{
 		"id": "minecraft:chiseled_resin_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_sandstone",
@@ -1589,37 +1650,45 @@
 	},
 	{
 		"id": "minecraft:chiseled_tuff",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_tuff_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:chorus_flower",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:chorus_fruit",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:clay",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:clay_ball",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1627,7 +1696,10 @@
 		"id": "minecraft:clock",
 		"max_count": 1,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"gold",
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:closed_eyeblossom",
@@ -1642,25 +1714,33 @@
 		"id": "minecraft:coal",
 		"max_count": 1,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:coal_block",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:coal_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:coarse_dirt",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:coast_armor_trim_smithing_template",
@@ -1670,9 +1750,11 @@
 	},
 	{
 		"id": "minecraft:cobbled_deepslate",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cobbled_deepslate_slab",
@@ -1684,19 +1766,23 @@
 	},
 	{
 		"id": "minecraft:cobbled_deepslate_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cobbled_deepslate_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cobblestone",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1708,122 +1794,139 @@
 	},
 	{
 		"id": "minecraft:cobblestone_stairs",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cobblestone_wall",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cobweb",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cocoa_beans",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:cod",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cod_bucket",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:comparator",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"redstone",
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:compass",
 		"max_count": 1,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:composter",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:conduit",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:cooked_beef",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cooked_chicken",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cooked_cod",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cooked_mutton",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 12,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cooked_porkchop",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cooked_rabbit",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 2,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:cooked_salmon",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cookie",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:copper_block",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:copper_bulb",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -1836,21 +1939,23 @@
 	},
 	{
 		"id": "minecraft:copper_grate",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 64,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:copper_ingot",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:copper_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:copper_trapdoor",
@@ -1870,25 +1975,31 @@
 	},
 	{
 		"id": "minecraft:cracked_deepslate_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cracked_deepslate_tiles",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:cracked_nether_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:cracked_polished_blackstone_bricks",
-		"max_count": 64,
+		"max_count": 16,
 		"rarity": 2,
 		"tags": [
 			"nether"
@@ -1896,27 +2007,31 @@
 	},
 	{
 		"id": "minecraft:cracked_stone_bricks",
-		"max_count": 64,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:crafter",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:crafting_table",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:creaking_heart",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:creeper_banner_pattern",
@@ -2066,19 +2181,19 @@
 	{
 		"id": "minecraft:crossbow",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:crying_obsidian",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:cut_copper",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -2091,8 +2206,8 @@
 	},
 	{
 		"id": "minecraft:cut_copper_stairs",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -2149,15 +2264,19 @@
 	},
 	{
 		"id": "minecraft:cyan_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:cyan_carpet",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:cyan_concrete",
@@ -2194,8 +2313,10 @@
 	{
 		"id": "minecraft:cyan_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:cyan_stained_glass",
@@ -2228,12 +2349,6 @@
 		"tags": [
 			"colored"
 		]
-	},
-	{
-		"id": "minecraft:damaged_anvil",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
 	},
 	{
 		"id": "minecraft:dandelion",
@@ -2390,134 +2505,187 @@
 	{
 		"id": "minecraft:dark_prismarine",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"ocean"
+		]
 	},
 	{
 		"id": "minecraft:dark_prismarine_slab",
-		"max_count": 64,
+		"max_count": 1,
 		"rarity": 3,
-		"tags": []
+		"tags": [
+			"ocean"
+		]
 	},
 	{
 		"id": "minecraft:dark_prismarine_stairs",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"ocean"
+		]
 	},
 	{
 		"id": "minecraft:daylight_detector",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"nether",
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:dead_brain_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_brain_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_brain_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_bubble_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_bubble_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_bubble_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_bush",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_fire_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_fire_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_fire_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_horn_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_horn_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_horn_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_tube_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:dead_tube_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:dead_tube_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"rare_biomes",
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:decorated_pot",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:deepslate",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_brick_slab",
@@ -2529,33 +2697,43 @@
 	},
 	{
 		"id": "minecraft:deepslate_brick_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_brick_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_coal_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_copper_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_diamond_ore",
@@ -2568,32 +2746,43 @@
 	{
 		"id": "minecraft:deepslate_emerald_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"silk_touch",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_gold_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_iron_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_lapis_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_redstone_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_tile_slab",
@@ -2605,27 +2794,36 @@
 	},
 	{
 		"id": "minecraft:deepslate_tile_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_tile_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:deepslate_tiles",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:detector_rail",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"iron",
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:diamond",
@@ -2765,27 +2963,33 @@
 	},
 	{
 		"id": "minecraft:dirt",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:disc_fragment_5",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"deep_dark"
+		]
 	},
 	{
 		"id": "minecraft:dispenser",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:dragon_breath",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"end_mainland"
+		]
 	},
 	{
 		"id": "minecraft:dragon_head",
@@ -2797,27 +3001,31 @@
 	},
 	{
 		"id": "minecraft:dried_kelp",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 64,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:dried_kelp_block",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:dripstone_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:dropper",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:dune_armor_trim_smithing_template",
@@ -2827,39 +3035,45 @@
 	},
 	{
 		"id": "minecraft:echo_shard",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"deep_dark"
+		]
 	},
 	{
 		"id": "minecraft:egg",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:elytra",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:emerald",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:emerald_block",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:emerald_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:enchanted_golden_apple",
@@ -2877,21 +3091,27 @@
 	},
 	{
 		"id": "minecraft:end_crystal",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:end_rod",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:end_stone",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 4,
+		"tags": [
+			"end_mainland"
+		]
 	},
 	{
 		"id": "minecraft:end_stone_brick_slab",
@@ -2927,14 +3147,14 @@
 	},
 	{
 		"id": "minecraft:ender_pearl",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:experience_bottle",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -2953,92 +3173,103 @@
 	},
 	{
 		"id": "minecraft:feather",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:fermented_spider_eye",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:fern",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:field_masoned_banner_pattern",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:filled_map",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:fire_charge",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:fire_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:fire_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:fire_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:firework_rocket",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:firework_star",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:fishing_rod",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:fletching_table",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:flint",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:flint_and_steel",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -3069,20 +3300,22 @@
 	{
 		"id": "minecraft:flower_banner_pattern",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:flower_pot",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:flowering_azalea",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:flowering_azalea_leaves",
@@ -3102,21 +3335,25 @@
 	},
 	{
 		"id": "minecraft:furnace",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:furnace_minecart",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:ghast_tear",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:gilded_blackstone",
@@ -3129,27 +3366,29 @@
 	},
 	{
 		"id": "minecraft:glass",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:glass_bottle",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:glass_pane",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:glistering_melon_slice",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:globe_banner_pattern",
@@ -3162,141 +3401,183 @@
 	},
 	{
 		"id": "minecraft:glow_berries",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:glow_ink_sac",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:glow_item_frame",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:glow_lichen",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:glowstone",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:glowstone_dust",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:goat_horn",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:gold_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:gold_ingot",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:gold_nugget",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:gold_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:golden_apple",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_axe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_boots",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_carrot",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_chestplate",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_helmet",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_hoe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_horse_armor",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:golden_leggings",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_pickaxe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_shovel",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:golden_sword",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"gold"
+		]
 	},
 	{
 		"id": "minecraft:granite",
@@ -3333,12 +3614,14 @@
 	{
 		"id": "minecraft:grass_block",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch_alternative"
+		]
 	},
 	{
 		"id": "minecraft:gravel",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
@@ -3368,15 +3651,19 @@
 	},
 	{
 		"id": "minecraft:gray_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:gray_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:gray_concrete",
@@ -3413,8 +3700,10 @@
 	{
 		"id": "minecraft:gray_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:gray_stained_glass",
@@ -3474,15 +3763,19 @@
 	},
 	{
 		"id": "minecraft:green_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:green_carpet",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:green_concrete",
@@ -3519,8 +3812,10 @@
 	{
 		"id": "minecraft:green_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:green_stained_glass",
@@ -3556,14 +3851,14 @@
 	},
 	{
 		"id": "minecraft:grindstone",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:gunpowder",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -3591,14 +3886,14 @@
 	},
 	{
 		"id": "minecraft:hay_block",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 2,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:heart_of_the_sea",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -3620,8 +3915,11 @@
 	{
 		"id": "minecraft:heavy_core",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"trial_chamber",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:heavy_weighted_pressure_plate",
@@ -3634,56 +3932,77 @@
 	{
 		"id": "minecraft:honey_block",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:honey_bottle",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:honeycomb",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:honeycomb_block",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:hopper",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:hopper_minecart",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:horn_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:horn_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:horn_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:host_armor_trim_smithing_template",
@@ -3704,138 +4023,170 @@
 	{
 		"id": "minecraft:ice",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:ink_sac",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:iron_axe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_bars",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_boots",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_chestplate",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_door",
 		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"iron"
 		]
 	},
 	{
 		"id": "minecraft:iron_helmet",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_hoe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_horse_armor",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:iron_ingot",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_leggings",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_nugget",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:iron_pickaxe",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_shovel",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_sword",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:iron_trapdoor",
 		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"iron"
 		]
 	},
 	{
 		"id": "minecraft:item_frame",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:jack_o_lantern",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:jukebox",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 3,
+		"tags": [
+			"diamond"
+		]
 	},
 	{
 		"id": "minecraft:jungle_boat",
@@ -3992,111 +4343,129 @@
 	},
 	{
 		"id": "minecraft:kelp",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:ladder",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
 	{
 		"id": "minecraft:lantern",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:lapis_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:lapis_lazuli",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:lapis_ore",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:large_amethyst_bud",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:large_fern",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:lava_bucket",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:lead",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:leather",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:leather_boots",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:leather_chestplate",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:leather_helmet",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:leather_horse_armor",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:leather_leggings",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:lectern",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:lever",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:light_blue_banner",
@@ -4124,15 +4493,19 @@
 	},
 	{
 		"id": "minecraft:light_blue_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:light_blue_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:light_blue_concrete",
@@ -4169,8 +4542,10 @@
 	{
 		"id": "minecraft:light_blue_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:light_blue_stained_glass",
@@ -4230,15 +4605,19 @@
 	},
 	{
 		"id": "minecraft:light_gray_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:light_gray_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:light_gray_concrete",
@@ -4275,8 +4654,10 @@
 	{
 		"id": "minecraft:light_gray_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:light_gray_stained_glass",
@@ -4320,8 +4701,8 @@
 	},
 	{
 		"id": "minecraft:lightning_rod",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -4342,14 +4723,14 @@
 	},
 	{
 		"id": "minecraft:lily_pad",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:lime_banner",
 		"max_count": 2,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4357,7 +4738,7 @@
 	{
 		"id": "minecraft:lime_bed",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4365,27 +4746,31 @@
 	{
 		"id": "minecraft:lime_bundle",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
 	},
 	{
 		"id": "minecraft:lime_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:lime_carpet",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:lime_concrete",
 		"max_count": 32,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4393,7 +4778,7 @@
 	{
 		"id": "minecraft:lime_concrete_powder",
 		"max_count": 32,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4401,7 +4786,7 @@
 	{
 		"id": "minecraft:lime_dye",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4409,7 +4794,7 @@
 	{
 		"id": "minecraft:lime_glazed_terracotta",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4417,13 +4802,15 @@
 	{
 		"id": "minecraft:lime_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:lime_stained_glass",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4431,7 +4818,7 @@
 	{
 		"id": "minecraft:lime_stained_glass_pane",
 		"max_count": 32,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4439,7 +4826,7 @@
 	{
 		"id": "minecraft:lime_terracotta",
 		"max_count": 32,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
@@ -4447,28 +4834,33 @@
 	{
 		"id": "minecraft:lime_wool",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": [
 			"colored"
 		]
 	},
 	{
 		"id": "minecraft:lodestone",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:loom",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mace",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare",
+			"trial_chamber"
+		]
 	},
 	{
 		"id": "minecraft:magenta_banner",
@@ -4496,15 +4888,19 @@
 	},
 	{
 		"id": "minecraft:magenta_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:magenta_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:magenta_concrete",
@@ -4541,8 +4937,10 @@
 	{
 		"id": "minecraft:magenta_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:magenta_stained_glass",
@@ -4578,15 +4976,19 @@
 	},
 	{
 		"id": "minecraft:magma_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:magma_cream",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:mangrove_boat",
@@ -4753,44 +5155,50 @@
 	{
 		"id": "minecraft:map",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:medium_amethyst_bud",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:melon",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:melon_seeds",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:melon_slice",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:milk_bucket",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:minecart",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:miner_pottery_sherd",
@@ -4808,38 +5216,38 @@
 	},
 	{
 		"id": "minecraft:moss_block",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:moss_carpet",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mossy_cobblestone",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mossy_cobblestone_slab",
-		"max_count": 64,
+		"max_count": 16,
 		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mossy_cobblestone_stairs",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mossy_cobblestone_wall",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -4876,32 +5284,32 @@
 	},
 	{
 		"id": "minecraft:mud",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mud_brick_slab",
-		"max_count": 32,
-		"rarity": 2,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mud_brick_stairs",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mud_brick_wall",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mud_bricks",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -4916,152 +5324,202 @@
 	{
 		"id": "minecraft:mushroom_stem",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:mushroom_stew",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:music_disc_11",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_13",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_5",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"deep_dark"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_blocks",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_cat",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_chirp",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_creator",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"trial_chamber",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_creator_music_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"trial_chamber",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_far",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_mall",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_mellohi",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_otherside",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_pigstep",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"bastion"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_precipice",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"trial_chamber",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_relic",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"brush",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_stal",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_strad",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_wait",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:music_disc_ward",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"music_disс_creeper"
+		]
 	},
 	{
 		"id": "minecraft:mutton",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:mycelium",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 5,
+		"tags": [
+			"rare_biomes",
+			"silk_touch",
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:name_tag",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:nautilus_shell",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"ocean"
+		]
 	},
 	{
 		"id": "minecraft:nether_brick",
@@ -5114,7 +5572,7 @@
 	{
 		"id": "minecraft:nether_gold_ore",
 		"max_count": 1,
-		"rarity": 3,
+		"rarity": 4,
 		"tags": [
 			"silk_touch"
 		]
@@ -5122,7 +5580,7 @@
 	{
 		"id": "minecraft:nether_quartz_ore",
 		"max_count": 1,
-		"rarity": 3,
+		"rarity": 4,
 		"tags": [
 			"silk_touch"
 		]
@@ -5266,9 +5724,11 @@
 	},
 	{
 		"id": "minecraft:note_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:oak_boat",
@@ -5426,20 +5886,26 @@
 	{
 		"id": "minecraft:ochre_froglight",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:ominous_bottle",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"trial_chamber"
+		]
 	},
 	{
 		"id": "minecraft:ominous_trial_key",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"trial_chamber"
+		]
 	},
 	{
 		"id": "minecraft:open_eyeblossom",
@@ -5476,15 +5942,19 @@
 	},
 	{
 		"id": "minecraft:orange_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:orange_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:orange_concrete",
@@ -5521,8 +5991,10 @@
 	{
 		"id": "minecraft:orange_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:orange_stained_glass",
@@ -5575,19 +6047,21 @@
 	{
 		"id": "minecraft:packed_ice",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"silk_touch"
+		]
 	},
 	{
 		"id": "minecraft:packed_mud",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 16,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:painting",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 8,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -5772,15 +6246,17 @@
 	},
 	{
 		"id": "minecraft:paper",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 64,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:pearlescent_froglight",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:peony",
@@ -5793,8 +6269,10 @@
 	{
 		"id": "minecraft:phantom_membrane",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:piglin_banner_pattern",
@@ -5838,15 +6316,19 @@
 	},
 	{
 		"id": "minecraft:pink_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:pink_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:pink_concrete",
@@ -5882,15 +6364,19 @@
 	},
 	{
 		"id": "minecraft:pink_petals",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:pink_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:pink_stained_glass",
@@ -5941,8 +6427,10 @@
 	{
 		"id": "minecraft:pitcher_pod",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"ultra_rare"
+		]
 	},
 	{
 		"id": "minecraft:plenty_pottery_sherd",
@@ -5955,19 +6443,24 @@
 	{
 		"id": "minecraft:podzol",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"silk_touch_alternative",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:pointed_dripstone",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:poisonous_potato",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -6084,9 +6577,11 @@
 	},
 	{
 		"id": "minecraft:polished_deepslate",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:polished_deepslate_slab",
@@ -6098,15 +6593,19 @@
 	},
 	{
 		"id": "minecraft:polished_deepslate_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:polished_deepslate_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:polished_diorite",
@@ -6158,9 +6657,11 @@
 	},
 	{
 		"id": "minecraft:polished_tuff",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:polished_tuff_slab",
@@ -6172,21 +6673,27 @@
 	},
 	{
 		"id": "minecraft:polished_tuff_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:polished_tuff_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:popped_chorus_fruit",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:poppy",
@@ -6198,32 +6705,37 @@
 	},
 	{
 		"id": "minecraft:porkchop",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
-	},
-	{
-		"id": "minecraft:potato",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
-	},
-	{
-		"id": "minecraft:powder_snow_bucket",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
-	},
-	{
-		"id": "minecraft:powered_rail",
 		"max_count": 16,
 		"rarity": 2,
 		"tags": []
 	},
 	{
-		"id": "minecraft:prismarine",
+		"id": "minecraft:potato",
+		"max_count": 32,
+		"rarity": 2,
+		"tags": []
+	},
+	{
+		"id": "minecraft:powder_snow_bucket",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 3,
+		"tags": [
+			"iron"
+		]
+	},
+	{
+		"id": "minecraft:powered_rail",
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"gold",
+			"redstone"
+		]
+	},
+	{
+		"id": "minecraft:prismarine",
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -6234,26 +6746,26 @@
 	},
 	{
 		"id": "minecraft:prismarine_brick_stairs",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:prismarine_bricks",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:prismarine_crystals",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:prismarine_shard",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -6264,14 +6776,14 @@
 	},
 	{
 		"id": "minecraft:prismarine_stairs",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
 		"id": "minecraft:prismarine_wall",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 4,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -6284,32 +6796,35 @@
 	},
 	{
 		"id": "minecraft:pufferfish",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 2,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:pufferfish_bucket",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"iron",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:pumpkin",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:pumpkin_pie",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:pumpkin_seeds",
-		"max_count": 1,
-		"rarity": 1,
+		"max_count": 32,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -6338,15 +6853,19 @@
 	},
 	{
 		"id": "minecraft:purple_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:purple_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:purple_concrete",
@@ -6383,8 +6902,10 @@
 	{
 		"id": "minecraft:purple_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:purple_stained_glass",
@@ -6420,15 +6941,19 @@
 	},
 	{
 		"id": "minecraft:purpur_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 4,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:purpur_pillar",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 4,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:purpur_slab",
@@ -6440,33 +6965,43 @@
 	},
 	{
 		"id": "minecraft:purpur_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 4,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:quartz",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:quartz_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:quartz_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:quartz_pillar",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:quartz_slab",
@@ -6478,39 +7013,52 @@
 	},
 	{
 		"id": "minecraft:quartz_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 32,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:rabbit",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 2,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:rabbit_foot",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:rabbit_hide",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 2,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:rabbit_stew",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:rail",
 		"max_count": 64,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"iron",
+			"redstone"
+		]
 	},
 	{
 		"id": "minecraft:raiser_armor_trim_smithing_template",
@@ -6522,45 +7070,59 @@
 	},
 	{
 		"id": "minecraft:raw_copper",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:raw_copper_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:raw_gold",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:raw_gold_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:raw_iron",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 64,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:raw_iron_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 2,
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:recovery_compass",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 4,
+		"tags": [
+			"deep_dark"
+		]
 	},
 	{
 		"id": "minecraft:red_banner",
@@ -6588,15 +7150,19 @@
 	},
 	{
 		"id": "minecraft:red_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:red_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:red_concrete",
@@ -6792,7 +7358,7 @@
 	{
 		"id": "minecraft:redstone_ore",
 		"max_count": 1,
-		"rarity": 3,
+		"rarity": 4,
 		"tags": [
 			"silk_touch"
 		]
@@ -6815,47 +7381,59 @@
 	},
 	{
 		"id": "minecraft:resin_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:resin_brick",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:resin_brick_slab",
 		"max_count": 16,
-		"rarity": 2,
+		"rarity": 3,
 		"tags": [
 			"rare_biomes"
 		]
 	},
 	{
 		"id": "minecraft:resin_brick_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:resin_brick_wall",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:resin_bricks",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:resin_clump",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 3,
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:respawn_anchor",
@@ -6902,18 +7480,20 @@
 	{
 		"id": "minecraft:salmon",
 		"max_count": 16,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
 		"id": "minecraft:salmon_bucket",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 2,
+		"tags": [
+			"iron"
+		]
 	},
 	{
 		"id": "minecraft:sand",
-		"max_count": 1,
+		"max_count": 64,
 		"rarity": 1,
 		"tags": []
 	},
@@ -7184,9 +7764,11 @@
 	},
 	{
 		"id": "minecraft:smooth_quartz",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:smooth_quartz_slab",
@@ -7198,9 +7780,11 @@
 	},
 	{
 		"id": "minecraft:smooth_quartz_stairs",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 16,
+		"rarity": 2,
+		"tags": [
+			"nether"
+		]
 	},
 	{
 		"id": "minecraft:smooth_red_sandstone",
@@ -7864,7 +8448,7 @@
 	{
 		"id": "minecraft:tadpole_bucket",
 		"max_count": 1,
-		"rarity": 3,
+		"rarity": 4,
 		"tags": [
 			"rare_biomes"
 		]
@@ -7995,25 +8579,37 @@
 		"id": "minecraft:tropical_fish_bucket",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"iron",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:tube_coral",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:tube_coral_block",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:tube_coral_fan",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 8,
+		"rarity": 4,
+		"tags": [
+			"silk_touch",
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:tuff",
@@ -8428,15 +9024,19 @@
 	},
 	{
 		"id": "minecraft:white_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:white_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:white_concrete",
@@ -8473,8 +9073,10 @@
 	{
 		"id": "minecraft:white_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:white_stained_glass",
@@ -8592,7 +9194,7 @@
 	{
 		"id": "minecraft:written_book",
 		"max_count": 1,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -8621,15 +9223,19 @@
 	},
 	{
 		"id": "minecraft:yellow_candle",
-		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"max_count": 4,
+		"rarity": 3,
+		"tags": [
+			"honey"
+		]
 	},
 	{
 		"id": "minecraft:yellow_carpet",
-		"max_count": 1,
+		"max_count": 16,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"colored"
+		]
 	},
 	{
 		"id": "minecraft:yellow_concrete",
@@ -8666,8 +9272,10 @@
 	{
 		"id": "minecraft:yellow_shulker_box",
 		"max_count": 1,
-		"rarity": 1,
-		"tags": []
+		"rarity": 5,
+		"tags": [
+			"end_islands"
+		]
 	},
 	{
 		"id": "minecraft:yellow_stained_glass",

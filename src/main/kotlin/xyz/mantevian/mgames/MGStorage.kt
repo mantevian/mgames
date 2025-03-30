@@ -137,7 +137,7 @@ class BingoPlayer {
 
 @Serializable
 data class BingoTaskData(
-	val reward: Int = 0,
+	var reward: Int = 0,
 	val data: BingoTypedTaskData = BingoTypedTaskData.None
 )
 

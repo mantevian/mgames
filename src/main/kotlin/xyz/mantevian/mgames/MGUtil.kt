@@ -70,7 +70,7 @@ class MGUtil(private val mg: MG) {
 				false
 			)
 
-			player.setSpawnPointFrom(player)
+			mg.server.overworld.setSpawnPos(BlockPos(0, -62, 0), 0.0f)
 		}
 	}
 
@@ -184,6 +184,25 @@ class MGUtil(private val mg: MG) {
 			val y = sin(angle) * radius
 			mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
 		}
+	}
+
+	fun teleportToWorldSpawn(player: ServerPlayerEntity) {
+		mg.executeCommand("execute in overworld run spreadplayers 0 0 0 20 true ${player.nameForScoreboard}")
+	}
+
+	fun teleportToOwnSpawn(player: ServerPlayerEntity) {
+		val pos = player.spawnPointPosition ?: mg.server.overworld.spawnPos
+		val dimension = player.spawnPointDimension
+		player.teleport(
+			mg.server.getWorld(dimension),
+			pos.x.toDouble(),
+			pos.y.toDouble(),
+			pos.z.toDouble(),
+			setOf(),
+			player.yaw,
+			player.pitch,
+			false
+		)
 	}
 
 	fun randomTeleport(player: ServerPlayerEntity, radius: Int, precision: Int) {

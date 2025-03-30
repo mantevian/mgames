@@ -1,47 +1,159 @@
-[
-	{
-		"tag": "diamond",
-		"count": 1,
-		"exclude": true
+{
+	"rules": {
+		"target_points": 60,
+		"never_repeat": [
+			"oak",
+			"birch",
+			"spruce",
+			"jungle",
+			"acacia",
+			"dark_oak",
+			"bamboo",
+			"cherry",
+			"mangrove",
+			"pale",
+			"crimson",
+			"warped",
+			"andesite",
+			"granite",
+			"diorite",
+			"blackstone",
+			"basalt",
+			"deepslate",
+			"red",
+			"orange",
+			"yellow",
+			"lime",
+			"green",
+			"cyan",
+			"light_blue",
+			"blue",
+			"purple",
+			"magenta",
+			"pink",
+			"brown",
+			"white",
+			"light_gray",
+			"gray",
+			"black",
+			"concrete",
+			"glass",
+			"terracotta",
+			"soul",
+			"music",
+			"wooden",
+			"resin",
+			"amethyst",
+			"quartz",
+			"purpur",
+			"prismarine",
+			"coral",
+			"leather",
+			"wool",
+			"carpet",
+			"copper",
+			"banner",
+			"slab",
+			"stairs",
+			"pressure_plate",
+			"button",
+			"door",
+			"boat",
+			"stripped",
+			"bundle",
+			"rail",
+			"minecart",
+			"book",
+			"sign",
+			"lantern",
+			"torch",
+			"bucket",
+			"tuff",
+			"sapling",
+			"log",
+			"nylium"
+		]
 	},
-	{
-		"tag": "end_mainland",
-		"count": 1,
-		"exclude": true
-	},
-	{
-		"tag": "nether",
-		"count": 5,
-		"exclude": true
-	},
-	{
-		"tag": "*",
-		"count": 1,
-		"exclude": false
-	},
-	{
-		"tag": "colored",
-		"count": 3,
-		"exclude": true
-	},
-	{
-		"tag": "wood",
-		"count": 3,
-		"exclude": true
-	},
-	{
-		"tag": "*",
-		"count": 1,
-		"exclude": false
-	},
-	{
-		"tag": "underground",
-		"count": 5,
-		"exclude": true
-	},
-	{
-		"tag": "rare_biomes",
-		"count": 1,
-		"exclude": true
-	}
-]
+	"list": [
+		{
+			"tag": "*",
+			"count": 0,
+			"exclude_tags": [
+				"ultra_rare",
+				"silk_touch",
+				"brush",
+				"honey",
+				"end_islands",
+				"music_disc_creeper"
+			]
+		},
+		{
+			"tag": "diamond",
+			"count": 1,
+			"exclude_tags": [
+				"diamond"
+			]
+		},
+		{
+			"tag": "end_mainland",
+			"count": 1,
+			"exclude_tags": [
+				"end_mainland"
+			]
+		},
+		{
+			"tag": "nether",
+			"count": 5,
+			"exclude_tags": [
+				"nether"
+			]
+		},
+		{
+			"tag": "*",
+			"count": 1,
+			"exclude_tags": []
+		},
+		{
+			"tag": "iron",
+			"count": 1,
+			"exclude_tags": []
+		},
+		{
+			"tag": "gold",
+			"count": 1,
+			"exclude_tags": []
+		},
+		{
+			"tag": "redstone",
+			"count": 1,
+			"exclude_tags": []
+		},
+		{
+			"tag": "colored",
+			"count": 3,
+			"exclude_tags": []
+		},
+		{
+			"tag": "*",
+			"count": 1,
+			"exclude_tags": []
+		},
+		{
+			"tag": "underground",
+			"count": 5,
+			"exclude_tags": []
+		},
+		{
+			"tag": "wood",
+			"count": 3,
+			"exclude_tags": []
+		},
+		{
+			"tag": "rare_biomes",
+			"count": 1,
+			"exclude_tags": [
+				"rare_biomes"
+			]
+		}
+	]
+}

@@ -11,7 +11,7 @@ data class BingoTaskSourceSet(
 	val items: List<BingoTaskSourceItemEntry>,
 	val enchantments: List<BingoTaskSourceEnchantmentEntry>,
 	val potions: List<BingoTaskSourcePotionEntry>,
-	val picker: List<BingoTaskSourcePickerEntry>
+	val picker: BingoPicker
 )
 
 @Serializable
@@ -35,8 +35,21 @@ data class BingoTaskSourcePotionEntry(
 )
 
 @Serializable
-data class BingoTaskSourcePickerEntry(
+data class BingoPicker(
+	val rules: BingoPickerRuleSet,
+	val list: List<BingoPickerEntry>
+)
+
+@Serializable
+data class BingoPickerRuleSet(
+	@SerialName("never_repeat") val neverRepeat: List<String> = listOf(),
+	@SerialName("target_points") val targetPoints: Int = 60
+)
+
+@Serializable
+data class BingoPickerEntry(
 	val tag: String = "*",
+	@SerialName("except_tags") val exceptTags: List<String> = listOf(),
 	val count: Int = 1,
-	val exclude: Boolean = false
+	@SerialName("exclude_tags") val excludeTags: List<String> = listOf()
 )
