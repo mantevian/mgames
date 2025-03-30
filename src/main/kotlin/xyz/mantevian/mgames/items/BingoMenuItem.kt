@@ -55,5 +55,7 @@ class BingoMenuItem(settings: Settings) : SimplePolymerItem(settings) {
 		stack.set(DataComponentTypes.MAX_DAMAGE, maxPoints)
 		stack.set(DataComponentTypes.DAMAGE, maxPoints - points)
 		stack.set(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+
+		stack.set(DataComponentTypes.CUSTOM_NAME, standardText("Bingo ($points / $maxPoints ★)"))
 	}
 }

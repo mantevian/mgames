@@ -4,6 +4,7 @@ import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.component.type.LoreComponent
 import net.minecraft.component.type.PotionContentsComponent
+import net.minecraft.component.type.UseCooldownComponent
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.item.DyeItem
@@ -67,7 +68,10 @@ class ItemStackBuilder() {
 	}
 
 	fun setPotionColor(statusEffect: StatusEffect): ItemStackBuilder {
-		stack.set(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent(Optional.empty(), Optional.of(statusEffect.color), listOf(), Optional.empty()))
+		stack.set(
+			DataComponentTypes.POTION_CONTENTS,
+			PotionContentsComponent(Optional.empty(), Optional.of(statusEffect.color), listOf(), Optional.empty())
+		)
 		return this
 	}
 
@@ -99,6 +103,14 @@ class ItemStackBuilder() {
 
 	fun hideTooltip(): ItemStackBuilder {
 		stack.set(DataComponentTypes.HIDE_TOOLTIP, Unit.INSTANCE)
+		return this
+	}
+
+	fun setCooldown(cooldownGroup: Identifier, ticks: Int): ItemStackBuilder {
+		stack.set(
+			DataComponentTypes.USE_COOLDOWN,
+			UseCooldownComponent(ticks.toFloat().div(20.0f), Optional.of(cooldownGroup))
+		)
 		return this
 	}
 

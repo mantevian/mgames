@@ -6,8 +6,13 @@ import net.minecraft.server.MinecraftServer
 import xyz.mantevian.mgames.bingo.BingoGame
 import xyz.mantevian.mgames.bingo.BingoTaskSourceSet
 
-class MG(val server: MinecraftServer, val storage: MGStorage, bingoTaskSourceSet: BingoTaskSourceSet) {
-	val bingo = BingoGame(this, bingoTaskSourceSet)
+class MG(
+	val server: MinecraftServer,
+	val storage: MGStorage,
+	bingoTaskSourceSet: BingoTaskSourceSet,
+	bingoSplashes: List<String>
+) {
+	val bingo = BingoGame(this, bingoTaskSourceSet, bingoSplashes)
 	val util = MGUtil(this)
 	val worldgen = MGWorldgen(this)
 

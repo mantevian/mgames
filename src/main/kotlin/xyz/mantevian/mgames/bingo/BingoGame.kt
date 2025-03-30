@@ -10,11 +10,12 @@ import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Hand
+import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.GameMode
 import xyz.mantevian.mgames.*
 
-class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet) {
+class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes: List<String>) {
 	fun init() {
 		mg.worldgen.bedrockBoxAtWorldBottom()
 		mg.util.tpPlayersToWorldBottom()
@@ -64,6 +65,8 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet) {
 
 			it.changeGameMode(GameMode.SURVIVAL)
 		}
+
+		mg.executeCommand("time set 0")
 
 		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 20 * 10, 0)
 		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 20 * 10, 5)
@@ -211,13 +214,22 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet) {
 			GameState.PLAYING -> {
 				mg.util.forEachPlayer { player ->
 					val uuid = player.uuidAsString
-					val playerTasks = mg.storage.bingo.players[uuid]?.tasks ?: mutableMapOf()
 
-					playerTasks
-						.filter { it.value == null }
-						.map { (i, _) -> (i to mg.storage.bingo.tasks[i]) }
-						.filter { (_, task) -> task != null && checkTask(player, task.data) }
-						.forEach { (i, _) -> setCompletedTask(player, i) }
+					mg.storage.bingo.tasks.forEach {
+						val completed = checkTask(player, it.value.data)
+						val alreadyMarkedCompleted = mg.storage.bingo.players[uuid]?.tasks?.get(it.key) != null
+
+						if (completed && !alreadyMarkedCompleted) {
+							setCompletedTask(player, it.key)
+						}
+
+						player.itemCooldownManager.set(
+							Identifier.of(
+								"mantevian",
+								"${Main.MOD_ID}/bingo/item_${it.key}"
+							), if (completed) 2000 else 0
+						)
+					}
 
 					mg.util.setScore(player.nameForScoreboard, "bingo.score", countPoints(player))
 

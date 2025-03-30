@@ -10,11 +10,12 @@ import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 import xyz.mantevian.mgames.*
 
 class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandlerType.GENERIC_9X5, player, false) {
 	override fun getTitle(): Text {
-		return standardText("Bingo").formatted(Formatting.BLACK)
+		return Text.literal(mg.bingo.splashes.shuffled()[0])
 	}
 
 	override fun onOpen() {
@@ -23,7 +24,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return
 
 		for (i in 0..44) {
-			setSlot(i, ItemStackBuilder(Items.WHITE_STAINED_GLASS_PANE).hideTooltip().build())
+			setSlot(i, ItemStackBuilder(Items.GRAY_STAINED_GLASS_PANE).hideTooltip().build())
 		}
 
 		for (i in 0..24) {
@@ -42,7 +43,18 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				is BingoTypedTaskData.Enchantment -> {
 					ItemStackBuilder(Items.ENCHANTED_BOOK)
 						.setCustomName(standardText("Enchantment"))
-						.addLore(standardText(Text.translatable("enchantment.${task.id.replace(":", ".")}").string).formatted(Formatting.AQUA))
+						.addLore(
+							standardText(
+								Text.translatable(
+									"enchantment.${
+										task.id.replace(
+											":",
+											"."
+										)
+									}"
+								).string
+							).formatted(Formatting.AQUA)
+						)
 						.addLore(standardText("Obtain any item with this enchantment").formatted(Formatting.GRAY))
 				}
 
@@ -52,7 +64,18 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 					ItemStackBuilder(Items.POTION)
 						.setPotionColor(effect)
 						.setCustomName(standardText("Potion"))
-						.addLore(standardText(Text.translatable("effect.${task.id.replace(":", ".")}").string).formatted(Formatting.AQUA))
+						.addLore(
+							standardText(
+								Text.translatable(
+									"effect.${
+										task.id.replace(
+											":",
+											"."
+										)
+									}"
+								).string
+							).formatted(Formatting.AQUA)
+						)
 						.addLore(standardText("Obtain a potion with this effect").formatted(Formatting.GRAY))
 				}
 
@@ -61,13 +84,21 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				else -> ItemStackBuilder(Items.BEDROCK)
 			}
 
-			if (playerData.tasks[i] != null) {
-				builder.ofItem(Items.NETHER_STAR).withCount(1)
-			}
-
 			if (reward != null) {
 				builder.addLore(standardText(""))
 				builder.addLore(standardText("Reward: $reward ★").formatted(Formatting.YELLOW))
+			}
+
+			if (playerData.tasks[i] != null) {
+				builder.setCooldown(
+					Identifier.of(
+						"mantevian",
+						"${Main.MOD_ID}/bingo/item_${i}"
+					), 2000
+				)
+
+				builder.addLore(standardText(""))
+				builder.addLore(standardText("COMPLETED").formatted(Formatting.GREEN))
 			}
 
 			builder.hideAdditionalTooltip()

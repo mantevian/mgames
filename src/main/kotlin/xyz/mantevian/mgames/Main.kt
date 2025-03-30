@@ -19,12 +19,15 @@ class Main : ModInitializer {
 			val json = xyz.mantevian.mgames.bingo.json
 
 			mg = MG(
-				server, load(), BingoTaskSourceSet(
+				server,
+				load(),
+				BingoTaskSourceSet(
 					resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json", json)!!,
 					resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json", json)!!,
 					resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
 					resourceManager.get<List<BingoTaskSourcePickerEntry>>("bingo/picker.json", json)!!
-				)
+				),
+				resourceManager.get<List<String>>("bingo/splashes.json", json)!!
 			)
 		}
 
@@ -39,6 +42,7 @@ class Main : ModInitializer {
 				resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
 				resourceManager.get<List<BingoTaskSourcePickerEntry>>("bingo/picker.json", json)!!
 			)
+			mg?.bingo?.splashes = resourceManager.get<List<String>>("bingo/splashes.json", json)!!
 		}
 
 		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
@@ -50,6 +54,7 @@ class Main : ModInitializer {
 			registerFile("bingo/enchantments.json")
 			registerFile("bingo/potions.json")
 			registerFile("bingo/picker.json")
+			registerFile("bingo/splashes.json")
 
 			registerDir("bingo/set")
 		}
