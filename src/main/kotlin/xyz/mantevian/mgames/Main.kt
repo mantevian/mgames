@@ -3,6 +3,7 @@ package xyz.mantevian.mgames
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
+import xyz.mantevian.mgames.bingo.*
 
 class Main : ModInitializer {
 	companion object {
@@ -10,23 +11,48 @@ class Main : ModInitializer {
 
 		var mg: MG? = null
 
-		private lateinit var bingoTasksResource: Resource
+		val resourceManager = ResourceManager()
 	}
 
 	override fun onInitialize() {
-		ServerLifecycleEvents.SERVER_STARTING.register {
-			mg = MG(it, load(), bingoTasksResource.get(xyz.mantevian.mgames.bingo.json))
+		ServerLifecycleEvents.SERVER_STARTING.register { server ->
+			val json = xyz.mantevian.mgames.bingo.json
+
+			mg = MG(
+				server, load(), BingoTaskSourceSet(
+					resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json", json)!!,
+					resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json", json)!!,
+					resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
+					resourceManager.get<List<BingoTaskSourcePickerEntry>>("bingo/picker.json", json)!!
+				)
+			)
 		}
 
 		ServerLifecycleEvents.BEFORE_SAVE.register { _, _, _ ->
 			mg?.storage?.let { save(it) }
 		}
 
+		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { _, _, _ ->
+			mg?.bingo?.taskSourceSet = BingoTaskSourceSet(
+				resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json", json)!!,
+				resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json", json)!!,
+				resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
+				resourceManager.get<List<BingoTaskSourcePickerEntry>>("bingo/picker.json", json)!!
+			)
+		}
+
 		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
 			registerCommands(dispatcher, registryAccess, env)
 		}
 
-		bingoTasksResource = Resource("mgames/bingo/tasks.json")
+		resourceManager.apply {
+			registerFile("bingo/items.json")
+			registerFile("bingo/enchantments.json")
+			registerFile("bingo/potions.json")
+			registerFile("bingo/picker.json")
+
+			registerDir("bingo/set")
+		}
 
 		MGItems.init()
 	}

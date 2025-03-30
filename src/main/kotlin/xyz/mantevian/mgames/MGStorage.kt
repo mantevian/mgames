@@ -22,6 +22,8 @@ val json = Json {
 	}
 
 	prettyPrint = true
+	encodeDefaults = true
+	explicitNulls = true
 }
 
 fun default(): MGStorage {
@@ -61,7 +63,7 @@ class MGStorage {
 	var time = MGDuration.zero()
 
 	@SerialName("bingo")
-	val bingo = BingoStorage()
+	var bingo = BingoStorage()
 
 	@SerialName("state")
 	var state: GameState? = null
@@ -69,14 +71,20 @@ class MGStorage {
 
 @Serializable
 enum class GameType {
-	@SerialName("bingo") BINGO
+	@SerialName("bingo")
+	BINGO
 }
 
 @Serializable
 enum class GameState {
-	@SerialName("not_init") NOT_INIT,
-	@SerialName("waiting") WAITING,
-	@SerialName("playing") PLAYING
+	@SerialName("not_init")
+	NOT_INIT,
+
+	@SerialName("waiting")
+	WAITING,
+
+	@SerialName("playing")
+	PLAYING
 }
 
 @Serializable
@@ -85,7 +93,7 @@ class BingoStorage {
 	var gameTime = MGDuration.fromHours(1, 30, 0)
 
 	@SerialName("world_size")
-	var worldSize: Int = 10000
+	var worldSize: Int = 20000
 
 	@SerialName("hand_enchantments")
 	var handEnchantments: MutableMap<String, Int> = mutableMapOf()
@@ -93,11 +101,32 @@ class BingoStorage {
 	@SerialName("unbreakable_items")
 	var unbreakableItems: Boolean = false
 
+	@SerialName("use_set")
+	var useSet: String? = null
+
+	@SerialName("task_enchantment")
+	var taskEnchantment: Boolean = true
+
+	@SerialName("task_potion")
+	var taskPotion: Boolean = true
+
 	@SerialName("tasks")
-	val tasks: MutableMap<Int, BingoTaskData> = mutableMapOf()
+	var tasks: MutableMap<Int, BingoTaskData> = mutableMapOf()
 
 	@SerialName("players")
 	var players: MutableMap<String, BingoPlayer> = mutableMapOf()
+
+	fun reset() {
+		gameTime = MGDuration.fromHours(1, 30, 0)
+		worldSize = 20000
+		handEnchantments = mutableMapOf()
+		unbreakableItems = false
+		useSet = null
+		taskEnchantment = true
+		taskPotion = true
+		tasks = mutableMapOf()
+		players = mutableMapOf()
+	}
 }
 
 @Serializable

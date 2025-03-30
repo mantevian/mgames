@@ -14,45 +14,39 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.GameMode
 import xyz.mantevian.mgames.*
 
-class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
+class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet) {
 	fun init() {
 		mg.worldgen.bedrockBoxAtWorldBottom()
 		mg.util.tpPlayersToWorldBottom()
 		mg.util.resetPlayersMinecraftStats()
 
-		generateTasks()
+		mg.storage.bingo.reset()
 
 		mg.util.deleteScoreboard("bingo.score")
 		mg.util.createScoreboardSidebar("bingo.score", "★ Points ★")
 	}
 
-	fun generateTasks() {
-		for (i in 0..24) {
-			val s = taskSourceSet.tasks[mg.util.nextInt(0..<taskSourceSet.tasks.size)]
+	private fun setupData() {
+		val setName = mg.storage.bingo.useSet
 
-			mg.storage.bingo.tasks[i] = when (s) {
-				is BingoTaskSource.Item -> {
-					BingoTaskData(s.rarity, BingoTypedTaskData.Item(s.id, mg.util.nextInt(s.minCount..s.maxCount)))
-				}
-
-				is BingoTaskSource.Enchantment -> {
-					BingoTaskData(s.options[0].rarity, BingoTypedTaskData.Enchantment(s.options[0].id))
-				}
-
-				is BingoTaskSource.Potion -> {
-					BingoTaskData(s.options[0].rarity, BingoTypedTaskData.Potion(s.options[0].id))
-				}
-
-				else -> {
-					BingoTaskData(0, BingoTypedTaskData.None)
-				}
-			}
+		if (setName == null) {
+			BingoGenerator(taskSourceSet).generateTasks(mg)
+			return
 		}
 
-		println(mg.storage.bingo.tasks)
+		val data = Main.resourceManager.get<BingoStorage>("bingo/set/$setName.json", json)
+
+		if (data == null) {
+			BingoGenerator(taskSourceSet).generateTasks(mg)
+			return
+		}
+
+		mg.storage.bingo = data
 	}
 
 	fun start() {
+		setupData()
+
 		mg.storage.time.set(-20 * 10)
 
 		mg.util.forEachPlayer {
@@ -88,7 +82,8 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 		val sortedPlayers = mg.util.getAllPlayers()
 			.map {
 				val playerData = mg.storage.bingo.players[it.uuidAsString] ?: return
-				val lastTime = playerData.tasks.map { task -> task.value }.sortedByDescending { dur -> dur?.getTicks() }[0]
+				val lastTime =
+					playerData.tasks.map { task -> task.value }.sortedByDescending { dur -> dur?.getTicks() }[0]
 				Triple(it, countPoints(it), lastTime ?: MGDuration.zero())
 			}
 			.sortedWith(compareBy({ it.second }, { it.third.getTicks() }))
@@ -100,12 +95,16 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 		sortedPlayers.forEachIndexed { i, (player, points, time) ->
 			mg.util.announce(standardText("").apply {
 				append(standardText("${i + 1}. "))
-				append(standardText(player.nameForScoreboard).formatted(when (i) {
-					0 -> Formatting.YELLOW
-					1 -> Formatting.GRAY
-					2 -> Formatting.GOLD
-					else -> Formatting.WHITE
-				}))
+				append(
+					standardText(player.nameForScoreboard).formatted(
+						when (i) {
+							0 -> Formatting.YELLOW
+							1 -> Formatting.GRAY
+							2 -> Formatting.GOLD
+							else -> Formatting.WHITE
+						}
+					)
+				)
 				append(standardText(" $points ★").formatted(Formatting.WHITE))
 				append(standardText(" [${time.formatHourMinSec()}]").formatted(Formatting.GRAY))
 			})
@@ -233,7 +232,8 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 					}
 
 					if (mg.storage.bingo.unbreakableItems) {
-						player.getStackInHand(Hand.MAIN_HAND).set(DataComponentTypes.UNBREAKABLE, UnbreakableComponent(true))
+						player.getStackInHand(Hand.MAIN_HAND)
+							.set(DataComponentTypes.UNBREAKABLE, UnbreakableComponent(true))
 					}
 				}
 
@@ -241,49 +241,104 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 				if (mg.storage.time.getTicks() % 20 == 0) {
 					when (mg.storage.time.getFullSeconds()) {
 						-10 -> {
-							mg.util.announce(standardText("Bingo starts in 10 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo starts in 10 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 							mg.server.isPvpEnabled = false
 						}
 
 						0 -> {
-							mg.util.announce(standardText("Bingo has started!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo has started!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 							mg.util.title("Bingo has started!")
 						}
 
 						gameTime - 900 -> {
-							mg.util.announce(standardText("Bingo ends in 15 minutes!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 15 minutes!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 300 -> {
-							mg.util.announce(standardText("Bingo ends in 5 minutes!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 5 minutes!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 30 -> {
-							mg.util.announce(standardText("Bingo ends in 30 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 30 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 5 -> {
-							mg.util.announce(standardText("Bingo ends in 5 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 5 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 4 -> {
-							mg.util.announce(standardText("Bingo ends in 4 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 4 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 3 -> {
-							mg.util.announce(standardText("Bingo ends in 3 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 3 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 2 -> {
-							mg.util.announce(standardText("Bingo ends in 2 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 2 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime - 1 -> {
-							mg.util.announce(standardText("Bingo ends in 1 seconds!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo ends in 1 seconds!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 						}
 
 						gameTime -> {
-							mg.util.announce(standardText("Bingo has ended!"), SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
+							mg.util.announce(
+								standardText("Bingo has ended!"),
+								SoundEvents.UI_BUTTON_CLICK.value(),
+								2.0f,
+								1.0f
+							)
 							finish()
 						}
 					}
@@ -311,6 +366,9 @@ class BingoGame(val mg: MG, val taskSourceSet: BingoTaskSourceSet) {
 	}
 
 	fun maxPoints(): Int {
+		if (mg.storage.bingo.tasks.isEmpty()) {
+			return 0
+		}
 		return mg.storage.bingo.tasks.map { it.value.reward }.reduce { a, b -> a + b }
 	}
 }

@@ -1,0 +1,66 @@
+[
+	{
+		"id": "minecraft:regeneration",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:speed",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:fire_resistance",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:instant_health",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:night_vision",
+		"rarity": 5
+	},
+	{
+		"id": "minecraft:strength",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:jump_boost",
+		"rarity": 5
+	},
+	{
+		"id": "minecraft:invisibility",
+		"rarity": 5
+	},
+	{
+		"id": "minecraft:poison",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:weakness",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:slowness",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:instant_damage",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:infested",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:oozing",
+		"rarity": 5
+	},
+	{
+		"id": "minecraft:weaving",
+		"rarity": 5
+	},
+	{
+		"id": "minecraft:wind_charged",
+		"rarity": 5
+	}
+]

@@ -1,0 +1,47 @@
+[
+	{
+		"tag": "diamond",
+		"count": 1,
+		"exclude": true
+	},
+	{
+		"tag": "end_mainland",
+		"count": 1,
+		"exclude": true
+	},
+	{
+		"tag": "nether",
+		"count": 5,
+		"exclude": true
+	},
+	{
+		"tag": "*",
+		"count": 1,
+		"exclude": false
+	},
+	{
+		"tag": "colored",
+		"count": 3,
+		"exclude": true
+	},
+	{
+		"tag": "wood",
+		"count": 3,
+		"exclude": true
+	},
+	{
+		"tag": "*",
+		"count": 1,
+		"exclude": false
+	},
+	{
+		"tag": "underground",
+		"count": 5,
+		"exclude": true
+	},
+	{
+		"tag": "rare_biomes",
+		"count": 1,
+		"exclude": true
+	}
+]

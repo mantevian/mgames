@@ -1,0 +1,134 @@
+[
+	{
+		"id": "minecraft:aqua_affinity",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:bane_of_arthropods",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:blast_protection",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:binding_curse",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:vanishing_curse",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:depth_strider",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:efficiency",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:feather_falling",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:fire_aspect",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:fire_protection",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:flame",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:fortune",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:frost_walker",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:infinity",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:knockback",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:looting",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:luck_of_the_sea",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:lure",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:mending",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:multishot",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:piercing",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:power",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:projectile_protection",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:protection",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:punch",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:quick_charge",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:respiration",
+		"rarity": 4
+	},
+	{
+		"id": "minecraft:sharpness",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:silk_touch",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:smite",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:soul_speed",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:sweeping_edge",
+		"rarity": 3
+	},
+	{
+		"id": "minecraft:thorns",
+		"rarity": 4
+	}
+]

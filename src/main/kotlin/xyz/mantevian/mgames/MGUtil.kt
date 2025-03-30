@@ -16,7 +16,6 @@ import net.minecraft.scoreboard.ScoreHolder
 import net.minecraft.scoreboard.ScoreboardCriterion
 import net.minecraft.scoreboard.ScoreboardDisplaySlot
 import net.minecraft.server.network.ServerPlayerEntity
-import net.minecraft.server.network.ServerRecipeBook
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvent
@@ -124,7 +123,14 @@ class MGUtil(private val mg: MG) {
 		if (mg.server.scoreboard.getNullableObjective("${Main.MOD_ID}.$scoreboardName") != null) {
 			return
 		}
-		val objective = mg.server.scoreboard.addObjective("${Main.MOD_ID}.$scoreboardName", ScoreboardCriterion.DUMMY, standardText(displayName), ScoreboardCriterion.RenderType.INTEGER, true, null)
+		val objective = mg.server.scoreboard.addObjective(
+			"${Main.MOD_ID}.$scoreboardName",
+			ScoreboardCriterion.DUMMY,
+			standardText(displayName),
+			ScoreboardCriterion.RenderType.INTEGER,
+			true,
+			null
+		)
 		mg.server.scoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, objective)
 	}
 
@@ -152,12 +158,21 @@ class MGUtil(private val mg: MG) {
 	}
 
 	fun calculateColorValue(colors: List<String>): Int {
-		val stack = ItemStackBuilder(Items.WOLF_ARMOR).ofColorMix(colors.map { DyeColor.byName(it, DyeColor.BLACK)!! }).build()
+		val stack =
+			ItemStackBuilder(Items.WOLF_ARMOR).ofColorMix(colors.map { DyeColor.byName(it, DyeColor.BLACK)!! }).build()
 		return DyedColorComponent.getColor(stack, 0)
 	}
 
 	fun nextInt(range: IntRange): Int {
 		return mg.server.overworld.random.nextBetween(range.first, range.last)
+	}
+
+	fun nextDouble(min: Double, max: Double): Double {
+		return mg.server.overworld.random.nextDouble() * (max - min) + min
+	}
+
+	fun nextBoolean(chance: Double): Boolean {
+		return nextDouble(0.0, 1.0) < chance
 	}
 
 	fun teleportInCircle(players: List<ServerPlayerEntity>, radius: Int, precision: Int) {
@@ -190,7 +205,12 @@ class MGUtil(private val mg: MG) {
 		playSound(getAllPlayers(), soundEvent, volume, pitch)
 	}
 
-	fun playSound(players: List<ServerPlayerEntity>, soundEvent: SoundEvent, volume: Float = 1.0f, pitch: Float = 1.0f) {
+	fun playSound(
+		players: List<ServerPlayerEntity>,
+		soundEvent: SoundEvent,
+		volume: Float = 1.0f,
+		pitch: Float = 1.0f
+	) {
 		players.forEach {
 			it.playSoundToPlayer(soundEvent, SoundCategory.MASTER, volume, pitch)
 		}
@@ -201,6 +221,15 @@ class MGUtil(private val mg: MG) {
 	}
 
 	fun teleport(player: ServerPlayerEntity, world: ServerWorld, pos: BlockPos) {
-		player.teleport(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), PositionFlag.getFlags(0), player.yaw, player.pitch, false)
+		player.teleport(
+			world,
+			pos.x.toDouble(),
+			pos.y.toDouble(),
+			pos.z.toDouble(),
+			PositionFlag.getFlags(0),
+			player.yaw,
+			player.pitch,
+			false
+		)
 	}
 }
