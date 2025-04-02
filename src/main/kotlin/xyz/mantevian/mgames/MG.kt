@@ -46,7 +46,6 @@ class MG(
 		}
 
 		storage.state = GameState.PLAYING
-		storage.time.set(0)
 	}
 
 	private fun tick() {

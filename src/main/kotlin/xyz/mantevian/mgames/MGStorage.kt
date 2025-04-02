@@ -127,6 +127,11 @@ class BingoStorage {
 		tasks = mutableMapOf()
 		players = mutableMapOf()
 	}
+
+	fun reinit() {
+		tasks = mutableMapOf()
+		players = mutableMapOf()
+	}
 }
 
 @Serializable

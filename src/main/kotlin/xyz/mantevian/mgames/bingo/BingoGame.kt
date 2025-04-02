@@ -23,7 +23,7 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 		mg.util.tpPlayersToWorldBottom()
 		mg.util.resetPlayersMinecraftStats()
 
-		mg.storage.bingo.reset()
+		mg.storage.bingo.reinit()
 
 		mg.util.deleteScoreboard("bingo.score")
 		mg.util.createScoreboardSidebar("bingo.score", "★ Points ★")
@@ -57,6 +57,8 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 
 		mg.storage.time.set(-20 * 10)
 
+		mg.util.resetPlayersMinecraftStats()
+
 		mg.util.forEachPlayer {
 			val playerData = BingoPlayer()
 
@@ -65,8 +67,6 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 			}
 
 			mg.storage.bingo.players[it.uuidAsString] = playerData
-
-			mg.util.resetPlayersMinecraftStats()
 
 			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
 
@@ -80,7 +80,6 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 		mg.executeCommand("execute in the_nether run worldborder set ${mg.storage.bingo.worldSize * 2}")
 		mg.executeCommand("execute in the_end run worldborder set ${mg.storage.bingo.worldSize * 2}")
 
-		mg.util.effectForEveryone(StatusEffects.BLINDNESS, 20 * 10, 0)
 		mg.util.effectForEveryone(StatusEffects.SLOWNESS, 20 * 10, 5)
 		mg.util.effectForEveryone(StatusEffects.MINING_FATIGUE, 20 * 10, 5)
 		mg.util.effectForEveryone(StatusEffects.WEAKNESS, 20 * 10, 5)
@@ -89,11 +88,9 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 		mg.util.effectForEveryone(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5, 0)
 		mg.util.effectForEveryone(StatusEffects.RESISTANCE, 20 * 60 * 5, 0)
 
-		mg.util.teleportInCircle(mg.util.getAllPlayers(), 500, 10)
+		mg.executeCommand("gamerule fallDamage false")
 
-		mg.util.forEachPlayer {
-			it.setSpawnPointFrom(it)
-		}
+		mg.util.teleportInCircle(mg.util.getAllPlayers(), 500, 10)
 
 		return true
 	}
@@ -101,20 +98,13 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 	fun finish() {
 		mg.storage.state = GameState.NOT_INIT
 
-		val sortedPlayers = mg.util.getAllPlayers()
-			.map {
-				val playerData = mg.storage.bingo.players[it.uuidAsString] ?: return
-				val lastTime =
-					playerData.tasks.map { task -> task.value }.sortedByDescending { dur -> dur?.getTicks() }[0]
-				Triple(it, countPoints(it), lastTime ?: MGDuration.zero())
-			}
-			.sortedWith(compareBy({ it.second }, { it.third.getTicks() }))
+		val sortedPlayers = mg.util.getAllPlayers().sortedByDescending { getScore(it) }
 
 		mg.util.title("Bingo has ended!")
 
 		mg.util.announce(standardText("Leaderboard for this game:").formatted(Formatting.AQUA))
 
-		sortedPlayers.forEachIndexed { i, (player, points, time) ->
+		sortedPlayers.forEachIndexed { i, player ->
 			mg.util.announce(standardText("").apply {
 				append(standardText("${i + 1}. "))
 				append(
@@ -127,8 +117,8 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 						}
 					)
 				)
-				append(standardText(" $points ★").formatted(Formatting.WHITE))
-				append(standardText(" [${time.formatHourMinSec()}]").formatted(Formatting.GRAY))
+				append(standardText(" ${countPoints(player)} ★").formatted(Formatting.WHITE))
+				append(standardText(" [${getLastTime(player).formatHourMinSec()}]").formatted(Formatting.GRAY))
 			})
 		}
 
@@ -195,7 +185,9 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 				player.inventory.contains { stack ->
 					stack.enchantments.enchantments.any { enchantment ->
 						enchantment.idAsString == task.id
-					}
+					} || stack.get(DataComponentTypes.STORED_ENCHANTMENTS)?.enchantments?.any {
+						it.idAsString == task.id
+					} ?: false
 				}
 			}
 
@@ -250,7 +242,7 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 							Identifier.of(
 								"mantevian",
 								"${Main.MOD_ID}/bingo/item_${it.key}"
-							), if (completed) 2000 else 0
+							), if (alreadyMarkedCompleted) 2000 else 0
 						)
 					}
 
@@ -267,8 +259,10 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 					}
 
 					if (mg.storage.bingo.unbreakableItems) {
-						player.getStackInHand(Hand.MAIN_HAND)
-							.set(DataComponentTypes.UNBREAKABLE, UnbreakableComponent(true))
+						val mainhand = player.getStackInHand(Hand.MAIN_HAND)
+						if (mainhand.get(DataComponentTypes.MAX_DAMAGE) != null) {
+							mainhand.set(DataComponentTypes.UNBREAKABLE, UnbreakableComponent(true))
+						}
 					}
 				}
 
@@ -293,6 +287,12 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 								1.0f
 							)
 							mg.util.title("Bingo has started!")
+
+							mg.util.forEachPlayer {
+								it.setSpawnPointFrom(it)
+							}
+
+							mg.executeCommand("gamerule fallDamage true")
 						}
 
 						gameTime - 900 -> {
@@ -398,6 +398,16 @@ class BingoGame(val mg: MG, var taskSourceSet: BingoTaskSourceSet, var splashes:
 			}
 		}
 		return sum
+	}
+
+	fun getLastTime(player: ServerPlayerEntity): MGDuration {
+		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return MGDuration.zero()
+		return playerData.tasks.map { task -> task.value }.sortedByDescending { dur -> dur?.getTicks() }[0]
+			?: MGDuration.zero()
+	}
+
+	fun getScore(player: ServerPlayerEntity): Int {
+		return (countPoints(player) + 1) * mg.storage.bingo.gameTime.getTicks() - getLastTime(player).getTicks()
 	}
 
 	fun maxPoints(): Int {

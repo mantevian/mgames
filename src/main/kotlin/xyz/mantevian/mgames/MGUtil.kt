@@ -27,6 +27,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import kotlin.math.PI
 import kotlin.math.cos
+import kotlin.math.roundToInt
 import kotlin.math.sin
 
 infix fun ItemStack.isId(id: String): Boolean {
@@ -49,7 +50,7 @@ class MGUtil(private val mg: MG) {
 	fun resetPlayersMinecraftStats() {
 		forEachPlayer {
 			it.clearStatusEffects()
-			it.advancementTracker.clearCriteria()
+//			it.advancementTracker.clearCriteria()
 			it.setExperienceLevel(0)
 			it.setExperiencePoints(0)
 			it.inventory.clear()
@@ -180,9 +181,19 @@ class MGUtil(private val mg: MG) {
 		for (i in players.indices) {
 			val player = players[i]
 			val angle = i.toDouble() / count.toDouble()
-			val x = cos(angle) * radius
-			val y = sin(angle) * radius
-			mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
+			val x = cos(angle * 2 * PI) * radius
+			val z = sin(angle * 2 * PI) * radius
+
+			player.teleport(
+				mg.server.overworld,
+				x,
+				mg.server.overworld.logicalHeight.toDouble(),
+				z,
+				setOf(),
+				player.yaw,
+				player.pitch,
+				false
+			)
 		}
 	}
 
@@ -208,8 +219,8 @@ class MGUtil(private val mg: MG) {
 	fun randomTeleport(player: ServerPlayerEntity, radius: Int, precision: Int) {
 		val angle = mg.server.overworld.random.nextFloat() * PI * 2
 		val x = cos(angle) * radius
-		val y = sin(angle) * radius
-		mg.executeCommand("spreadplayers $x $y 0 $precision true ${player.nameForScoreboard}")
+		val z = sin(angle) * radius
+		mg.executeCommand("spreadplayers ${x.roundToInt()} ${z.roundToInt()} 0 $precision true ${player.nameForScoreboard}")
 	}
 
 	fun getAllPlayers(): MutableList<ServerPlayerEntity> {
