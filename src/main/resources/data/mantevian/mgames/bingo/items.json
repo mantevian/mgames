@@ -1307,7 +1307,9 @@
 		"id": "minecraft:calcite",
 		"max_count": 32,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:calibrated_sculk_sensor",
@@ -4427,31 +4429,41 @@
 		"id": "minecraft:leather_boots",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:leather_chestplate",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:leather_helmet",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:leather_horse_armor",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:leather_leggings",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:lectern",
@@ -7089,7 +7101,8 @@
 		"max_count": 64,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"gold"
 		]
 	},
 	{
@@ -7097,7 +7110,8 @@
 		"max_count": 8,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"gold"
 		]
 	},
 	{
@@ -8573,7 +8587,9 @@
 		"id": "minecraft:tropical_fish",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"rare_biomes"
+		]
 	},
 	{
 		"id": "minecraft:tropical_fish_bucket",
@@ -9153,7 +9169,9 @@
 		"id": "minecraft:wolf_armor",
 		"max_count": 1,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"any_color"
+		]
 	},
 	{
 		"id": "minecraft:wooden_axe",

@@ -2,9 +2,6 @@ package xyz.mantevian.mgames.bingo
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-
-val json = Json
 
 @Serializable
 data class BingoTaskSourceSet(

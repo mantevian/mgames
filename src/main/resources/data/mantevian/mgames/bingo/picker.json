@@ -1,6 +1,6 @@
 {
 	"rules": {
-		"target_points": 60,
+		"target_points": -1,
 		"never_repeat": [
 			"oak",
 			"birch",
@@ -53,24 +53,14 @@
 			"carpet",
 			"copper",
 			"banner",
-			"slab",
-			"stairs",
-			"pressure_plate",
-			"button",
-			"door",
-			"boat",
-			"stripped",
 			"bundle",
 			"rail",
 			"minecart",
 			"book",
-			"sign",
 			"lantern",
 			"torch",
 			"bucket",
 			"tuff",
-			"sapling",
-			"log",
 			"nylium"
 		]
 	},
@@ -130,7 +120,7 @@
 		},
 		{
 			"tag": "colored",
-			"count": 3,
+			"count": 2,
 			"exclude_tags": []
 		},
 		{
@@ -140,12 +130,12 @@
 		},
 		{
 			"tag": "underground",
-			"count": 5,
+			"count": 4,
 			"exclude_tags": []
 		},
 		{
 			"tag": "wood",
-			"count": 3,
+			"count": 2,
 			"exclude_tags": []
 		},
 		{

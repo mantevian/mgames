@@ -5,6 +5,7 @@ import eu.pb4.sgui.api.elements.GuiElementInterface
 import eu.pb4.sgui.api.gui.SimpleGui
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Items
+import net.minecraft.registry.RegistryKeys
 import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.screen.slot.SlotActionType
 import net.minecraft.server.network.ServerPlayerEntity
@@ -12,74 +13,77 @@ import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import xyz.mantevian.mgames.*
+import xyz.mantevian.mgames.game.BingoComponent
+import xyz.mantevian.mgames.game.WorldSizeComponent
+import xyz.mantevian.mgames.util.*
 
-class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandlerType.GENERIC_9X5, player, false) {
+class BingoMenu(player: ServerPlayerEntity) : SimpleGui(ScreenHandlerType.GENERIC_9X5, player, false) {
+	private val bingo = game.getComponent<BingoComponent>()!!
+
 	override fun getTitle(): Text {
-		return Text.literal(mg.bingo.splashes.shuffled()[0])
+		return Text.literal(resourceManager.get<List<String>>("bingo/splashes.json")!!.shuffled()[0])
 	}
 
 	override fun onOpen() {
 		super.onOpen()
 
-		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return
+		val playerData = bingo.players[player.uuidAsString] ?: return
 
 		for (i in 0..44) {
 			setSlot(i, ItemStackBuilder(Items.GRAY_STAINED_GLASS_PANE).hideTooltip().build())
 		}
 
 		for (i in 0..24) {
-			val task = mg.storage.bingo.tasks[i]?.data
-			val reward = mg.storage.bingo.tasks[i]?.reward
+			val task = bingo.tasks[i]?.data
+			val reward = bingo.tasks[i]?.reward
 
 			val x = i % 5
 			val y = i / 5
 
 			val builder = when (task) {
-				is BingoTypedTaskData.Item -> ItemStackBuilder(task.id)
-					.setCustomName(Text.translatable(mg.util.itemById(task.id).translationKey).resetStyle())
-					.addLore(standardText("Obtain ${task.count} of this item").formatted(Formatting.GRAY))
-					.withCount(task.count)
+				is BingoTypedTaskData.Item -> {
+					val name = Text.translatable(itemById(task.id).translationKey).resetStyle()
+
+					val builder = ItemStackBuilder(task.id)
+						.withCount(task.count)
+						.setCustomName(name)
+
+					if (task.count > 1) {
+						builder.setCustomName(name.append(standardText(" (${task.count})")))
+					}
+
+					builder
+				}
 
 				is BingoTypedTaskData.Enchantment -> {
 					ItemStackBuilder(Items.ENCHANTED_BOOK)
-						.setCustomName(standardText("Enchantment"))
-						.addLore(
-							standardText(
-								Text.translatable(
-									"enchantment.${
-										task.id.replace(
-											":",
-											"."
-										)
-									}"
-								).string
-							).formatted(Formatting.AQUA)
-						)
-						.addLore(standardText("Obtain any item with this enchantment").formatted(Formatting.GRAY))
+						.setCustomName(Text.translatable("enchantment.${task.id.replace(":", ".")}").resetStyle())
 				}
 
 				is BingoTypedTaskData.Potion -> {
-					val effect = mg.util.statusEffectById(task.id) ?: StatusEffects.WITHER.value()
-
+					val effect = statusEffectById(task.id) ?: StatusEffects.WITHER.value()
 					ItemStackBuilder(Items.POTION)
 						.setPotionColor(effect)
-						.setCustomName(standardText("Potion"))
-						.addLore(
-							standardText(
-								Text.translatable(
-									"effect.${
-										task.id.replace(
-											":",
-											"."
-										)
-									}"
-								).string
-							).formatted(Formatting.AQUA)
-						)
-						.addLore(standardText("Obtain a potion with this effect").formatted(Formatting.GRAY))
+						.setCustomName(Text.translatable("effect.${task.id.replace(":", ".")}").resetStyle())
 				}
 
-				is BingoTypedTaskData.ColoredItem -> ItemStackBuilder(task.id)
+				is BingoTypedTaskData.ColoredItem -> {
+					val builder = ItemStackBuilder(task.id)
+						.setCustomName(Text.translatable(itemById(task.id).translationKey).resetStyle())
+						.ofColorMix(task.colorNames)
+
+					task.colorNames.forEach { name ->
+						val item = server.registryManager.getOrThrow(RegistryKeys.ITEM)
+							.get(Identifier.of("minecraft", "${name}_dye")) ?: return@forEach
+
+						builder.addLore(
+							Text.translatable(item.translationKey)
+								.styled { it.withItalic(false).withColor(Formatting.GRAY) }
+						)
+					}
+
+					builder
+				}
 
 				else -> ItemStackBuilder(Items.BEDROCK)
 			}
@@ -93,7 +97,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 				builder.setCooldown(
 					Identifier.of(
 						"mantevian",
-						"${Main.MOD_ID}/bingo/item_${i}"
+						"$MOD_ID/bingo/item_${i}"
 					), 2000
 				)
 
@@ -109,7 +113,7 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 		// 9, 27
 
 		val requiredPoints = (playerData.usedRTP + 1) * 15
-		val canUseRTP = mg.bingo.countPoints(player) >= requiredPoints
+		val canUseRTP = bingo.countPoints(player) >= requiredPoints
 
 		val rtpBuilder = ItemStackBuilder(Items.ENDER_PEARL)
 			.setCustomName(standardText("Random teleport"))
@@ -140,28 +144,30 @@ class BingoMenu(player: ServerPlayerEntity, val mg: MG) : SimpleGui(ScreenHandle
 	}
 
 	override fun onClick(index: Int, type: ClickType, action: SlotActionType, element: GuiElementInterface): Boolean {
-		val playerData = mg.storage.bingo.players[player.uuidAsString] ?: return false
+		val playerData = bingo.players[player.uuidAsString] ?: return false
 
 		when (index) {
 			9 -> {
 				val requiredPoints = (playerData.usedRTP + 1) * 15
-				val canUseRTP = mg.bingo.countPoints(player) >= requiredPoints
+				val canUseRTP = bingo.countPoints(player) >= requiredPoints
+
+				val worldSize = game.getComponentOrDefault<WorldSizeComponent>().value
 
 				if (canUseRTP) {
 					close()
-					mg.util.randomTeleport(player, mg.storage.bingo.worldSize / 2, mg.storage.bingo.worldSize / 8)
+					randomTeleport(player, worldSize / 2, worldSize / 8)
 					playerData.usedRTP++
 				}
 			}
 
 			18 -> {
 				close()
-				mg.util.teleportToOwnSpawn(player)
+				teleportToOwnSpawn(player)
 			}
 
 			27 -> {
 				close()
-				mg.util.teleportToWorldSpawn(player)
+				teleportToWorldSpawn(player)
 			}
 		}
 

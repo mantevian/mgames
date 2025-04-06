@@ -3,62 +3,82 @@ package xyz.mantevian.mgames
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
-import xyz.mantevian.mgames.bingo.*
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.server.MinecraftServer
+import xyz.mantevian.mgames.game.Game
+import xyz.mantevian.mgames.util.*
+
+const val MOD_ID = "mgames"
+lateinit var server: MinecraftServer
+lateinit var resourceManager: ResourceManager
+var initialized = false
+var game = Game()
 
 class Main : ModInitializer {
-	companion object {
-		const val MOD_ID = "mgames"
-
-		var mg: MG? = null
-
-		val resourceManager = ResourceManager()
-	}
-
 	override fun onInitialize() {
-		ServerLifecycleEvents.SERVER_STARTING.register { server ->
-			val json = xyz.mantevian.mgames.bingo.json
+		resourceManager = ResourceManager()
 
-			mg = MG(
-				server,
-				load(),
-				BingoTaskSourceSet(
-					resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json", json)!!,
-					resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json", json)!!,
-					resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
-					resourceManager.get<BingoPicker>("bingo/picker.json", json)!!
-				),
-				resourceManager.get<List<String>>("bingo/splashes.json", json)!!
-			)
+		ServerLifecycleEvents.SERVER_STARTING.register { s ->
+			server = s
+			initialized = true
+
+			game = load()
 		}
 
 		ServerLifecycleEvents.BEFORE_SAVE.register { _, _, _ ->
-			mg?.storage?.let { save(it) }
+			if (initialized) {
+				save()
+			}
 		}
 
 		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { _, _, _ ->
-			mg?.bingo?.taskSourceSet = BingoTaskSourceSet(
-				resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json", json)!!,
-				resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json", json)!!,
-				resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json", json)!!,
-				resourceManager.get<BingoPicker>("bingo/picker.json", json)!!
-			)
-			mg?.bingo?.splashes = resourceManager.get<List<String>>("bingo/splashes.json", json)!!
+			if (!initialized) {
+				return@register
+			}
+		}
+
+		ServerTickEvents.END_SERVER_TICK.register {
+			tick()
 		}
 
 		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
 			registerCommands(dispatcher, registryAccess, env)
 		}
 
-		resourceManager.apply {
-			registerFile("bingo/items.json")
-			registerFile("bingo/enchantments.json")
-			registerFile("bingo/potions.json")
-			registerFile("bingo/picker.json")
-			registerFile("bingo/splashes.json")
-
-			registerDir("bingo/set")
-		}
-
 		MGItems.init()
 	}
+
+	private fun tick() {
+		when (game.state) {
+			GameState.WAITING -> {
+				infiniteEffectForEveryone(StatusEffects.RESISTANCE)
+				infiniteEffectForEveryone(StatusEffects.SATURATION)
+				infiniteEffectForEveryone(StatusEffects.NIGHT_VISION)
+			}
+
+			GameState.PLAYING -> {
+				game.time.inc()
+				forEachPlayer {
+					if (game.time.getTicks() >= 0) {
+						it.sendMessageToClient(standardText(game.time.formatHourMinSec()), true)
+					}
+				}
+			}
+
+			else -> {}
+		}
+
+		game.tick()
+	}
+}
+
+fun startGame() {
+	if (!game.canStart()) {
+		return
+	}
+
+	game.start()
+
+	game.state = GameState.PLAYING
 }

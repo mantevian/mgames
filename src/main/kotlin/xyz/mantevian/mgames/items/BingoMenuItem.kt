@@ -13,16 +13,15 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Identifier
 import net.minecraft.world.World
-import xyz.mantevian.mgames.Main
 import xyz.mantevian.mgames.bingo.BingoMenu
-import xyz.mantevian.mgames.standardText
+import xyz.mantevian.mgames.game
+import xyz.mantevian.mgames.game.BingoComponent
+import xyz.mantevian.mgames.util.standardText
 import xyz.nucleoid.packettweaker.PacketContext
 
 class BingoMenuItem(settings: Settings) : SimplePolymerItem(settings) {
 	override fun use(world: World, user: PlayerEntity, hand: Hand): ActionResult {
-		Main.mg?.let {
-			BingoMenu(user as ServerPlayerEntity, it).open()
-		}
+		BingoMenu(user as ServerPlayerEntity).open()
 
 		return ActionResult.SUCCESS
 	}
@@ -42,14 +41,12 @@ class BingoMenuItem(settings: Settings) : SimplePolymerItem(settings) {
 	override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
 		super.inventoryTick(stack, world, entity, slot, selected)
 
-		val mg = Main.mg ?: return
-
 		if (entity !is ServerPlayerEntity) {
 			return
 		}
 
-		val maxPoints = mg.bingo.maxPoints()
-		val points = mg.bingo.countPoints(entity)
+		val maxPoints = game.getComponent<BingoComponent>()?.maxPoints() ?: 0
+		val points = game.getComponent<BingoComponent>()?.countPoints(entity) ?: 0
 
 		stack.set(DataComponentTypes.MAX_STACK_SIZE, 1)
 		stack.set(DataComponentTypes.MAX_DAMAGE, maxPoints)

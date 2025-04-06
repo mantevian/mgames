@@ -2,23 +2,38 @@ package xyz.mantevian.mgames.bingo
 
 import xyz.mantevian.mgames.BingoTaskData
 import xyz.mantevian.mgames.BingoTypedTaskData
-import xyz.mantevian.mgames.MG
+import xyz.mantevian.mgames.game
+import xyz.mantevian.mgames.game.BingoComponent
+import xyz.mantevian.mgames.resourceManager
+import xyz.mantevian.mgames.util.calculateColorValue
+import xyz.mantevian.mgames.util.nextBoolean
+import xyz.mantevian.mgames.util.nextInt
+import kotlin.math.floor
 
-class BingoGenerator(sources: BingoTaskSourceSet) {
+class BingoGenerator {
+	private val sources = BingoTaskSourceSet(
+		resourceManager.get<List<BingoTaskSourceItemEntry>>("bingo/items.json")!!,
+		resourceManager.get<List<BingoTaskSourceEnchantmentEntry>>("bingo/enchantments.json")!!,
+		resourceManager.get<List<BingoTaskSourcePotionEntry>>("bingo/potions.json")!!,
+		resourceManager.get<BingoPicker>("bingo/picker.json")!!
+	)
+
 	private val items: MutableList<BingoTaskSourceItemEntry> = sources.items.toMutableList()
 	private val enchantments: MutableList<BingoTaskSourceEnchantmentEntry> = sources.enchantments.toMutableList()
 	private val potions: MutableList<BingoTaskSourcePotionEntry> = sources.potions.toMutableList()
 	private val picker: BingoPicker = sources.picker
 
-	fun generateTasks(mg: MG): Boolean {
+	private val bingo = game.getComponent<BingoComponent>()!!
+
+	fun generateTasks(): Boolean {
 		var attempts = 0
 
 		while (true) {
-			val (ok, tasks) = tryGenerateTasks(mg)
+			val (ok, tasks) = tryGenerateTasks()
 
 			if (ok) {
 				tasks.keys.shuffled().forEachIndexed { index, key ->
-					mg.storage.bingo.tasks[index] = tasks[key]!!
+					bingo.tasks[index] = tasks[key]!!
 				}
 
 				break
@@ -33,18 +48,22 @@ class BingoGenerator(sources: BingoTaskSourceSet) {
 
 		val target = picker.rules.targetPoints
 
+		if (target < 0) {
+			return true
+		}
+
 		attempts = 0
 
-		while (mg.bingo.maxPoints() != target) {
-			mg.storage.bingo.tasks.forEach {
-				if (mg.bingo.maxPoints() < target) {
-					if (it.value.reward in 1..3 && mg.util.nextBoolean(0.1)) {
+		while (bingo.maxPoints() != target) {
+			bingo.tasks.forEach {
+				if (bingo.maxPoints() < target) {
+					if (it.value.reward in 1..3 && nextBoolean(0.1)) {
 						it.value.reward++
 					}
 				}
 
-				if (mg.bingo.maxPoints() > target) {
-					if (it.value.reward in 2..4 && mg.util.nextBoolean(0.1)) {
+				if (bingo.maxPoints() > target) {
+					if (it.value.reward in 2..4 && nextBoolean(0.1)) {
 						it.value.reward--
 					}
 				}
@@ -85,7 +104,11 @@ class BingoGenerator(sources: BingoTaskSourceSet) {
 		return result
 	}
 
-	private fun takeItem(tag: String, exceptTags: List<String>): BingoTaskSourceItemEntry? {
+	private fun takeItem(
+		tag: String,
+		exceptTags: List<String> = listOf(),
+		excludeTags: List<String> = listOf()
+	): BingoTaskSourceItemEntry? {
 		if (items.size == 0) {
 			return null
 		}
@@ -110,14 +133,18 @@ class BingoGenerator(sources: BingoTaskSourceSet) {
 			}
 		}
 
+		excludeTags.forEach { excludeTag ->
+			items.removeAll { item -> item.tags.contains(excludeTag) }
+		}
+
 		return result
 	}
 
-	private fun toTask(mg: MG, entry: BingoTaskSourceItemEntry): BingoTaskData {
+	private fun toTask(entry: BingoTaskSourceItemEntry): BingoTaskData {
 		var cost = entry.rarity
 
-		val count = if (mg.util.nextBoolean(0.5)) {
-			mg.util.nextInt(1..entry.maxCount)
+		val count = if (nextBoolean(0.5)) {
+			nextInt(1..entry.maxCount)
 		} else {
 			1
 		}
@@ -129,21 +156,56 @@ class BingoGenerator(sources: BingoTaskSourceSet) {
 		return BingoTaskData(cost, BingoTypedTaskData.Item(entry.id, count))
 	}
 
-	private fun tryGenerateTasks(mg: MG): Pair<Boolean, Map<Int, BingoTaskData>> {
+	private fun tryGenerateTasks(): Pair<Boolean, Map<Int, BingoTaskData>> {
 		val result = mutableMapOf<Int, BingoTaskData>()
 
 		var curr = 0
 
-		if (mg.storage.bingo.taskEnchantment) {
+		if (bingo.taskEnchantment) {
 			val source = peekEnchantment()
 			result[curr] = BingoTaskData(source.rarity, BingoTypedTaskData.Enchantment(source.id))
 			curr++
 		}
 
-		if (mg.storage.bingo.taskPotion) {
+		if (bingo.taskPotion) {
 			val source = peekPotion()
 			result[curr] = BingoTaskData(source.rarity, BingoTypedTaskData.Potion(source.id))
 			curr++
+		}
+
+		if (bingo.taskColored) {
+			val source = takeItem("any_color", excludeTags = listOf("any_color"))
+
+			if (source != null) {
+				val colors = listOf(
+					setOf("red", "orange", "yellow", "pink") to 0.4,
+					setOf("light_blue", "blue", "purple", "magenta") to 0.5,
+					setOf("white", "light_gray", "gray", "black") to 0.7,
+					setOf("lime", "green", "cyan", "brown") to 1.0
+				)
+
+				var cost = 2.0
+				val list = mutableListOf<String>()
+
+				while (nextBoolean(0.5) && cost < 3.25) {
+					val color = colors.shuffled()[0]
+					list.add(color.first.shuffled()[0])
+					cost += color.second
+				}
+
+				result[curr] = BingoTaskData(
+					floor(cost).toInt(),
+					BingoTypedTaskData.ColoredItem(source.id, list, calculateColorValue(list))
+				)
+
+				list.forEach { color ->
+					items.removeAll { item ->
+						item.id.startsWith("minecraft:${color}_")
+					}
+				}
+
+				curr++
+			}
 		}
 
 		picker.list.forEach {
@@ -151,13 +213,13 @@ class BingoGenerator(sources: BingoTaskSourceSet) {
 				if (curr == 25) {
 					return@forEach
 				}
-				result[curr] = toTask(mg, item)
+				result[curr] = toTask(item)
 				curr++
 			}
 		}
 
 		while (curr < 25) {
-			result[curr] = toTask(mg, takeItem("*", listOf()) ?: return false to result)
+			result[curr] = toTask(takeItem("*", listOf()) ?: return false to result)
 			curr++
 		}
 
