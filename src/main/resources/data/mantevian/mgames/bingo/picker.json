@@ -1,5 +1,6 @@
 {
 	"rules": {
+		"task_count": 25,
 		"target_points": -1,
 		"never_repeat": [
 			"oak",

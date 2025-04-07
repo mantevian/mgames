@@ -122,4 +122,7 @@ sealed interface BingoTypedTaskData {
 }
 
 @Serializable
-class SirPlayer
+class SirPlayer {
+	@SerialName("deaths")
+	var deaths: Int = 0
+}

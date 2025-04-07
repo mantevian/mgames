@@ -78,7 +78,7 @@ fun startGame() {
 		return
 	}
 
-	game.start()
-
 	game.state = GameState.PLAYING
+
+	game.start()
 }

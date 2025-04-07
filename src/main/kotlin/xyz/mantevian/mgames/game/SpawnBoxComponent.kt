@@ -16,7 +16,7 @@ class SpawnBoxComponent(
 	val pos: Vec3i = Vec3i(0, -62, 0)
 ) : GameComponent {
 	override fun init() {
-		bedrockBoxAtWorldBottom()
+		box(pos, 7, 6, "minecraft:bedrock")
 		tpPlayersToWorldBottom()
 	}
 

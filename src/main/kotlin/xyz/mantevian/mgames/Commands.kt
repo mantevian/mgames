@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType
 import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
+import net.minecraft.block.Blocks
 import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.command.argument.RegistryEntryReferenceArgumentType
 import net.minecraft.registry.RegistryKeys
@@ -13,6 +14,8 @@ import net.minecraft.server.command.CommandManager.RegistrationEnvironment
 import net.minecraft.server.command.ServerCommandSource
 import xyz.mantevian.mgames.bingo.createBingoGame
 import xyz.mantevian.mgames.game.*
+import xyz.mantevian.mgames.util.Vec3i
+import xyz.mantevian.mgames.util.island
 import xyz.mantevian.mgames.util.standardText
 
 fun registerCommands(
@@ -21,6 +24,11 @@ fun registerCommands(
 	env: RegistrationEnvironment
 ) {
 	val root = CommandManager.literal("mg").requires { it.hasPermissionLevel(1) }
+
+	val test = CommandManager.literal("test").then(
+		CommandManager.argument("value", StringArgumentType.greedyString())
+			.executes(::testCommand)
+	)
 
 	val initBingo = CommandManager.literal("bingo").executes(::initBingoCommand)
 
@@ -96,6 +104,8 @@ fun registerCommands(
 			.then(config)
 			.then(start)
 	)
+
+	dispatcher.register(test)
 }
 
 private fun initBingoCommand(context: CommandContext<ServerCommandSource>): Int {
@@ -134,7 +144,7 @@ private fun configWorldSizeCommand(context: CommandContext<ServerCommandSource>)
 
 	val component = game.getComponentOrSetDefault<WorldSizeComponent>()
 
-	component.value = value
+	component.update(value)
 
 	context.source.sendFeedback({ standardText("Set world size to $value") }, true)
 
@@ -206,6 +216,208 @@ private fun configBingoTaskUseNoSetCommand(context: CommandContext<ServerCommand
 	component.useSet = null
 
 	context.source.sendFeedback({ standardText("No longer using a bingo set") }, true)
+
+	return 1
+}
+
+private fun testCommand(context: CommandContext<ServerCommandSource>): Int {
+	val value = StringArgumentType.getString(context, "value")
+
+	when (value) {
+		"oak" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_default",
+			treeFeature = "oak"
+		)
+
+		"birch" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_default",
+			treeFeature = "birch_tall"
+		)
+
+		"spruce" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "patch_brown_mushroom",
+			treeFeature = "trees_taiga"
+		)
+
+		"acacia" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_plain",
+			treeFeature = "acacia"
+		)
+
+		"jungle" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass_jungle",
+			flowerFeature = "flower_default",
+			treeFeature = "jungle_tree"
+		)
+
+		"cherry" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_cherry",
+			treeFeature = "cherry"
+		)
+
+		"pale" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.PALE_MOSS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "pale_moss_patch",
+			flowerFeature = "flower_pale_garden",
+			treeFeature = "pale_oak"
+		)
+
+		"lush" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_flower_forest",
+			treeFeature = "azalea_tree"
+		)
+
+		"crimson" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.CRIMSON_NYLIUM,
+			mainBlock = Blocks.NETHERRACK,
+			stoneBlock = Blocks.BLACKSTONE,
+			grassFeature = "crimson_forest_vegetation",
+			flowerFeature = "crimson_forest_vegetation",
+			treeFeature = "crimson_fungus"
+		)
+
+		"warped" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.WARPED_NYLIUM,
+			mainBlock = Blocks.NETHERRACK,
+			stoneBlock = Blocks.BLACKSTONE,
+			grassFeature = "warped_forest_vegetation",
+			flowerFeature = "warped_forest_vegetation",
+			treeFeature = "warped_fungus"
+		)
+
+		"soul_sand" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SOUL_SOIL,
+			mainBlock = Blocks.SOUL_SAND,
+			stoneBlock = Blocks.NETHERRACK,
+			grassFeature = "patch_soul_fire",
+			flowerFeature = "",
+			treeFeature = "fossil_diamonds"
+		)
+
+		"desert" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SAND,
+			mainBlock = Blocks.SANDSTONE,
+			stoneBlock = Blocks.STONE,
+			addSupportingBlocks = true,
+			grassFeature = "patch_dead_bush",
+			flowerFeature = "patch_cactus",
+			treeFeature = ""
+		)
+
+		"badlands" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.RED_SAND,
+			mainBlock = Blocks.TERRACOTTA,
+			stoneBlock = Blocks.STONE,
+			addSupportingBlocks = true,
+			grassFeature = "patch_dead_bush",
+			flowerFeature = "patch_cactus",
+			treeFeature = ""
+		)
+
+		"snow" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SNOW_BLOCK,
+			mainBlock = Blocks.PACKED_ICE,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "pile_snow",
+			flowerFeature = "patch_pumpkin",
+			treeFeature = "trees_taiga"
+		)
+
+		"ice" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 30,
+			surfaceBlock = Blocks.BLUE_ICE,
+			mainBlock = Blocks.PACKED_ICE,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "",
+			flowerFeature = "blue_ice",
+			treeFeature = "ice_spike"
+		)
+
+		"mushroom" -> island(
+			center = Vec3i(context.source.position),
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.MYCELIUM,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_brown_mushroom",
+			flowerFeature = "patch_red_mushroom",
+			treeFeature = "mushroom_island_vegetation"
+		)
+	}
 
 	return 1
 }

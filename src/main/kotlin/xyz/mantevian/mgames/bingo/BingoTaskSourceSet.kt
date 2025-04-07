@@ -40,7 +40,8 @@ data class BingoPicker(
 @Serializable
 data class BingoPickerRuleSet(
 	@SerialName("never_repeat") val neverRepeat: List<String> = listOf(),
-	@SerialName("target_points") val targetPoints: Int = 60
+	@SerialName("target_points") val targetPoints: Int = 60,
+	@SerialName("task_count") val taskCount: Int = 25
 )
 
 @Serializable

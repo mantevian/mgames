@@ -77,6 +77,7 @@ class Game {
 
 	fun init() {
 		resetPlayersMinecraftStats()
+		state = GameState.WAITING
 		components.forEach { it.init() }
 	}
 

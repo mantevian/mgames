@@ -42,6 +42,8 @@ class BingoComponent : GameComponent {
 		tasks.clear()
 		players.clear()
 
+		executeCommand("gamerule keepInventory true")
+
 		deleteScoreboard("bingo.score")
 		createScoreboardSidebar("bingo.score", "★ Points ★")
 	}
@@ -118,7 +120,9 @@ class BingoComponent : GameComponent {
 							forEachPlayer {
 								setSpawnPoint(it)
 							}
+						}
 
+						30 -> {
 							executeCommand("gamerule fallDamage true")
 						}
 

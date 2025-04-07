@@ -210,7 +210,7 @@ class BingoGenerator {
 
 		picker.list.forEach {
 			for (item in takeItems(it.tag, it.exceptTags, it.count, it.excludeTags)) {
-				if (curr == 25) {
+				if (curr == sources.picker.rules.taskCount) {
 					return@forEach
 				}
 				result[curr] = toTask(item)
@@ -218,7 +218,7 @@ class BingoGenerator {
 			}
 		}
 
-		while (curr < 25) {
+		while (curr < sources.picker.rules.taskCount) {
 			result[curr] = toTask(takeItem("*", listOf()) ?: return false to result)
 			curr++
 		}
