@@ -141,7 +141,8 @@
 		"rarity": 2,
 		"tags": [
 			"iron",
-			"redstone"
+			"redstone",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -174,7 +175,8 @@
 		"max_count": 16,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -231,7 +233,8 @@
 		"max_count": 2,
 		"rarity": 3,
 		"tags": [
-			"iron"
+			"iron",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -272,7 +275,9 @@
 		"id": "minecraft:arrow",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:axolotl_bucket",
@@ -310,7 +315,9 @@
 		"id": "minecraft:baked_potato",
 		"max_count": 64,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:bamboo",
@@ -514,13 +521,17 @@
 		"id": "minecraft:beetroot",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:beetroot_seeds",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:beetroot_soup",
@@ -532,7 +543,9 @@
 		"id": "minecraft:bell",
 		"max_count": 2,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:big_dripleaf",
@@ -835,7 +848,8 @@
 		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"iron"
+			"iron",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -843,7 +857,8 @@
 		"max_count": 16,
 		"rarity": 3,
 		"tags": [
-			"fortress"
+			"fortress",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -851,7 +866,8 @@
 		"max_count": 8,
 		"rarity": 3,
 		"tags": [
-			"fortress"
+			"fortress",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -996,7 +1012,9 @@
 		"id": "minecraft:bone",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:bone_block",
@@ -1093,10 +1111,11 @@
 	},
 	{
 		"id": "minecraft:brewing_stand",
-		"max_count": 1,
+		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"nether"
+			"nether",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -1212,7 +1231,9 @@
 		"id": "minecraft:brown_mushroom",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:brown_mushroom_block",
@@ -1300,10 +1321,11 @@
 	},
 	{
 		"id": "minecraft:bucket",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 2,
 		"tags": [
-			"iron"
+			"iron",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -1434,7 +1456,7 @@
 	},
 	{
 		"id": "minecraft:charcoal",
-		"max_count": 8,
+		"max_count": 16,
 		"rarity": 1,
 		"tags": []
 	},
@@ -1609,7 +1631,9 @@
 		"id": "minecraft:chicken",
 		"max_count": 8,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:chiseled_bookshelf",
@@ -1750,7 +1774,8 @@
 		"max_count": 64,
 		"rarity": 1,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -1758,7 +1783,8 @@
 		"max_count": 8,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -1849,7 +1875,7 @@
 	},
 	{
 		"id": "minecraft:cocoa_beans",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 2,
 		"tags": [
 			"rare_biomes"
@@ -1857,7 +1883,7 @@
 	},
 	{
 		"id": "minecraft:cod",
-		"max_count": 4,
+		"max_count": 8,
 		"rarity": 2,
 		"tags": []
 	},
@@ -1871,7 +1897,7 @@
 	},
 	{
 		"id": "minecraft:comparator",
-		"max_count": 1,
+		"max_count": 8,
 		"rarity": 2,
 		"tags": [
 			"redstone",
@@ -1905,45 +1931,58 @@
 		"id": "minecraft:cooked_beef",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cooked_chicken",
 		"max_count": 8,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cooked_cod",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cooked_mutton",
 		"max_count": 12,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cooked_porkchop",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cooked_rabbit",
-		"max_count": 2,
+		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"rare_biomes"
+			"rare_biomes",
+			"increase_cost_with_count"
 		]
 	},
 	{
 		"id": "minecraft:cooked_salmon",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:cookie",
@@ -2892,10 +2931,11 @@
 	},
 	{
 		"id": "minecraft:diamond",
-		"max_count": 8,
+		"max_count": 12,
 		"rarity": 3,
 		"tags": [
-			"diamond"
+			"diamond",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3045,15 +3085,17 @@
 		"max_count": 8,
 		"rarity": 3,
 		"tags": [
-			"redstone"
+			"redstone",
+			"increase_cost_with_count"
 		]
 	},
 	{
 		"id": "minecraft:dragon_breath",
-		"max_count": 1,
+		"max_count": 2,
 		"rarity": 4,
 		"tags": [
-			"end_mainland"
+			"end_mainland",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3112,9 +3154,11 @@
 	},
 	{
 		"id": "minecraft:egg",
-		"max_count": 8,
+		"max_count": 4,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:elytra",
@@ -3128,13 +3172,17 @@
 		"id": "minecraft:emerald",
 		"max_count": 32,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:emerald_block",
 		"max_count": 4,
 		"rarity": 3,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:emerald_ore",
@@ -3152,10 +3200,11 @@
 	},
 	{
 		"id": "minecraft:enchanting_table",
-		"max_count": 1,
+		"max_count": 4,
 		"rarity": 3,
 		"tags": [
-			"diamond"
+			"diamond",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3163,7 +3212,8 @@
 		"max_count": 4,
 		"rarity": 3,
 		"tags": [
-			"nether"
+			"nether",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3218,7 +3268,9 @@
 		"id": "minecraft:ender_pearl",
 		"max_count": 4,
 		"rarity": 3,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:experience_bottle",
@@ -3250,7 +3302,9 @@
 		"id": "minecraft:fermented_spider_eye",
 		"max_count": 4,
 		"rarity": 3,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:fern",
@@ -3421,7 +3475,8 @@
 		"max_count": 4,
 		"rarity": 3,
 		"tags": [
-			"nether"
+			"nether",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3478,7 +3533,7 @@
 	},
 	{
 		"id": "minecraft:glow_ink_sac",
-		"max_count": 16,
+		"max_count": 4,
 		"rarity": 2,
 		"tags": [
 			"underground"
@@ -3486,7 +3541,7 @@
 	},
 	{
 		"id": "minecraft:glow_item_frame",
-		"max_count": 8,
+		"max_count": 4,
 		"rarity": 3,
 		"tags": [
 			"underground"
@@ -3524,10 +3579,11 @@
 	},
 	{
 		"id": "minecraft:gold_block",
-		"max_count": 8,
+		"max_count": 12,
 		"rarity": 3,
 		"tags": [
-			"gold"
+			"gold",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3535,7 +3591,8 @@
 		"max_count": 64,
 		"rarity": 2,
 		"tags": [
-			"gold"
+			"gold",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -3581,7 +3638,7 @@
 	{
 		"id": "minecraft:golden_carrot",
 		"max_count": 16,
-		"rarity": 2,
+		"rarity": 3,
 		"tags": [
 			"gold"
 		]
@@ -3942,7 +3999,9 @@
 		"id": "minecraft:gunpowder",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:guster_banner_pattern",
@@ -4011,7 +4070,8 @@
 		"max_count": 8,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"iron"
 		]
 	},
 	{
@@ -4194,7 +4254,8 @@
 		"max_count": 32,
 		"rarity": 2,
 		"tags": [
-			"iron"
+			"iron",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -4270,7 +4331,8 @@
 		"max_count": 8,
 		"rarity": 3,
 		"tags": [
-			"diamond"
+			"diamond",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -4450,7 +4512,7 @@
 	},
 	{
 		"id": "minecraft:lapis_block",
-		"max_count": 4,
+		"max_count": 8,
 		"rarity": 2,
 		"tags": [
 			"underground"
@@ -4793,14 +4855,17 @@
 		"max_count": 8,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"gold"
 		]
 	},
 	{
 		"id": "minecraft:lightning_rod",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"underground"
+		]
 	},
 	{
 		"id": "minecraft:lilac",
@@ -4952,10 +5017,10 @@
 	},
 	{
 		"id": "minecraft:lodestone",
-		"max_count": 4,
-		"rarity": 2,
+		"max_count": 1,
+		"rarity": 5,
 		"tags": [
-			"iron"
+			"netherite"
 		]
 	},
 	{
@@ -5989,9 +6054,10 @@
 	{
 		"id": "minecraft:obsidian",
 		"max_count": 16,
-		"rarity": 2,
+		"rarity": 3,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -6359,7 +6425,9 @@
 		"id": "minecraft:paper",
 		"max_count": 64,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:pearlescent_froglight",
@@ -6820,7 +6888,9 @@
 		"id": "minecraft:porkchop",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:potato",
@@ -6944,7 +7014,9 @@
 		"id": "minecraft:pumpkin",
 		"max_count": 32,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:pumpkin_pie",
@@ -7152,10 +7224,11 @@
 	},
 	{
 		"id": "minecraft:rabbit",
-		"max_count": 2,
-		"rarity": 3,
+		"max_count": 4,
+		"rarity": 2,
 		"tags": [
-			"rare_biomes"
+			"rare_biomes",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7188,7 +7261,8 @@
 		"rarity": 2,
 		"tags": [
 			"iron",
-			"redstone"
+			"redstone",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7238,7 +7312,8 @@
 		"max_count": 32,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7246,7 +7321,8 @@
 		"max_count": 4,
 		"rarity": 2,
 		"tags": [
-			"underground"
+			"underground",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7614,7 +7690,9 @@
 		"id": "minecraft:salmon",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:salmon_bucket",
@@ -7730,7 +7808,7 @@
 	{
 		"id": "minecraft:seagrass",
 		"max_count": 64,
-		"rarity": 1,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -7846,7 +7924,8 @@
 		"max_count": 16,
 		"rarity": 3,
 		"tags": [
-			"rare_biomes"
+			"rare_biomes",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7854,7 +7933,8 @@
 		"max_count": 2,
 		"rarity": 3,
 		"tags": [
-			"rare_biomes"
+			"rare_biomes",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -7878,7 +7958,8 @@
 		"max_count": 16,
 		"rarity": 2,
 		"tags": [
-			"iron"
+			"iron",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -8060,14 +8141,17 @@
 		"max_count": 64,
 		"rarity": 3,
 		"tags": [
-			"nether"
+			"nether",
+			"increase_cost_with_count"
 		]
 	},
 	{
 		"id": "minecraft:spider_eye",
 		"max_count": 8,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:spire_armor_trim_smithing_template",
@@ -8249,7 +8333,8 @@
 		"rarity": 3,
 		"tags": [
 			"redstone",
-			"rare_biomes"
+			"rare_biomes",
+			"increase_cost_with_count"
 		]
 	},
 	{
@@ -8346,7 +8431,9 @@
 		"id": "minecraft:string",
 		"max_count": 16,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:stripped_acacia_log",
@@ -8576,7 +8663,9 @@
 		"id": "minecraft:sweet_berries",
 		"max_count": 64,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:tadpole_bucket",
@@ -8632,12 +8721,14 @@
 		"id": "minecraft:tnt",
 		"max_count": 8,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:tnt_minecart",
 		"max_count": 1,
-		"rarity": 2,
+		"rarity": 3,
 		"tags": []
 	},
 	{
@@ -9125,13 +9216,17 @@
 		"id": "minecraft:wheat",
 		"max_count": 64,
 		"rarity": 2,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:wheat_seeds",
 		"max_count": 64,
 		"rarity": 1,
-		"tags": []
+		"tags": [
+			"increase_cost_with_count"
+		]
 	},
 	{
 		"id": "minecraft:white_banner",

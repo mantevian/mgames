@@ -62,7 +62,8 @@
 			"torch",
 			"bucket",
 			"tuff",
-			"nylium"
+			"nylium",
+			"trim"
 		]
 	},
 	"list": [

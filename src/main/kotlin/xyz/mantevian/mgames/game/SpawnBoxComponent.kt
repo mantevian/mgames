@@ -2,9 +2,9 @@ package xyz.mantevian.mgames.game
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minecraft.util.math.BlockPos
-import xyz.mantevian.mgames.server
-import xyz.mantevian.mgames.util.*
+import xyz.mantevian.mgames.util.Vec3i
+import xyz.mantevian.mgames.util.box
+import xyz.mantevian.mgames.util.tpPlayers
 
 @Serializable
 @SerialName("spawn_box")
@@ -13,16 +13,17 @@ class SpawnBoxComponent(
 	val worldId: String = "minecraft:overworld",
 
 	@SerialName("pos")
-	val pos: Vec3i = Vec3i(0, -62, 0)
+	val pos: Vec3i = Vec3i(0, -63, 0),
+
+	@SerialName("block")
+	val block: String = "minecraft:bedrock"
 ) : GameComponent {
 	override fun init() {
-		box(pos, 7, 6, "minecraft:bedrock")
-		tpPlayersToWorldBottom()
+		box(pos, 9, 6, block)
+		tpPlayers(pos.up())
 	}
 
 	override fun finish() {
-		forEachPlayer {
-			teleport(it, worldById(worldId) ?: server.overworld, BlockPos(pos.x, pos.y, pos.z))
-		}
+		tpPlayers(pos.up())
 	}
 }

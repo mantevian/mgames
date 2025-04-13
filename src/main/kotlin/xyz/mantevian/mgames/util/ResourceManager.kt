@@ -16,7 +16,6 @@ class ResourceManager : SimpleSynchronousResourceReloadListener {
 	}
 
 	inline fun <reified T> get(key: String): T? {
-		println("get resource $key")
 		return values[key.replace("$MOD_ID/", "")]?.let { json.decodeFromString(it) }
 	}
 

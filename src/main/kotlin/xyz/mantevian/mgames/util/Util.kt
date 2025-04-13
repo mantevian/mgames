@@ -3,6 +3,7 @@ package xyz.mantevian.mgames.util
 import net.minecraft.block.Blocks
 import net.minecraft.component.type.DyedColorComponent
 import net.minecraft.enchantment.Enchantment
+import net.minecraft.entity.attribute.EntityAttribute
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.Item
@@ -36,6 +37,9 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
+import kotlin.random.Random
+
+val random = Random
 
 infix fun ItemStack.isId(id: String): Boolean {
 	return Registries.ITEM.getId(this.item).toString() == id
@@ -69,13 +73,13 @@ fun resetPlayersMinecraftStats() {
 	executeCommand("advancement revoke @a everything")
 }
 
-fun tpPlayersToWorldBottom() {
+fun tpPlayers(pos: Vec3i) {
 	forEachPlayer { player ->
 		player.teleport(
 			server.overworld,
-			0.0,
-			-62.0,
-			0.0,
+			pos.x.toDouble(),
+			pos.y.toDouble(),
+			pos.z.toDouble(),
 			setOf(),
 			0.0f,
 			0.0f,
@@ -127,6 +131,10 @@ fun getEnchantmentEntry(enchantment: Enchantment): RegistryEntry<Enchantment> {
 	return server.registryManager.getOrThrow(RegistryKeys.ENCHANTMENT).getEntry(enchantment)
 }
 
+fun getAttributeEntry(attribute: EntityAttribute): RegistryEntry<EntityAttribute> {
+	return server.registryManager.getOrThrow(RegistryKeys.ATTRIBUTE).getEntry(attribute)
+}
+
 fun potionById(id: String): Potion? {
 	return Registries.POTION.get(Identifier.of(id))
 }
@@ -136,7 +144,6 @@ fun statusEffectById(id: String): StatusEffect? {
 }
 
 fun worldById(id: String): World? {
-	server.worldRegistryKeys.forEach { println("$it.value.path} $id") }
 	val key = server.worldRegistryKeys.find { it.value.path == id } ?: return server.overworld
 	return server.getWorld(key)
 }
@@ -186,11 +193,11 @@ fun calculateColorValue(colors: List<String>): Int {
 }
 
 fun nextInt(range: IntRange): Int {
-	return server.overworld.random.nextBetween(range.first, range.last)
+	return random.nextInt(range.first, range.last + 1)
 }
 
 fun nextDouble(min: Double, max: Double): Double {
-	return server.overworld.random.nextDouble() * (max - min) + min
+	return random.nextDouble() * (max - min) + min
 }
 
 fun nextBoolean(chance: Double): Boolean {
@@ -201,19 +208,31 @@ fun highestY(world: World, pos: BlockPos): Int {
 	return world.getChunk(pos).getHeightmap(Heightmap.Type.MOTION_BLOCKING).get(pos.x % 16, pos.z % 16)
 }
 
-fun teleportInCircle(players: List<ServerPlayerEntity>, radius: Int) {
-	val count = players.size
-	for (i in players.indices) {
-		val player = players[i]
+fun pointsInCircle(center: Vec3i, radius: Int, count: Int): List<Vec3i> {
+	val result: MutableList<Vec3i> = mutableListOf()
+
+	for (i in 0..<count) {
 		val angle = i.toDouble() / count.toDouble()
 		val x = cos(angle * 2 * PI) * radius
 		val z = sin(angle * 2 * PI) * radius
 
+		result.add(Vec3i(center.x + x.roundToInt(), center.y, center.z + z.roundToInt()))
+	}
+
+	return result
+}
+
+fun teleportInCircle(players: List<ServerPlayerEntity>, radius: Int) {
+	val points = pointsInCircle(Vec3i(0, 0, 0), radius, players.size)
+
+	for (i in players.indices) {
+		val player = players[i]
+
 		player.teleport(
 			server.overworld,
-			x,
+			points[i].x.toDouble(),
 			server.overworld.logicalHeight.toDouble(),
-			z,
+			points[i].z.toDouble(),
 			setOf(),
 			player.yaw,
 			player.pitch,
@@ -252,7 +271,7 @@ fun teleportToOwnSpawn(player: ServerPlayerEntity) {
 }
 
 fun randomTeleport(player: ServerPlayerEntity, radius: Int, precision: Int) {
-	val angle = server.overworld.random.nextFloat() * PI * 2
+	val angle = random.nextFloat() * PI * 2
 	val x = cos(angle) * radius
 	val z = sin(angle) * radius
 	executeCommand("spreadplayers ${x.roundToInt()} ${z.roundToInt()} 0 $precision true ${player.nameForScoreboard}")

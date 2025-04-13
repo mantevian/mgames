@@ -136,6 +136,204 @@ fun island(
 	setBlock(server.overworld, center, Blocks.BEDROCK)
 }
 
+fun island(variant: String, pos: Vec3i) {
+	when (variant) {
+		"oak" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_default",
+			treeFeature = "oak"
+		)
+
+		"birch" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_default",
+			treeFeature = "birch_tall"
+		)
+
+		"spruce" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "patch_brown_mushroom",
+			treeFeature = "trees_taiga"
+		)
+
+		"acacia" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_plain",
+			treeFeature = "acacia"
+		)
+
+		"jungle" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass_jungle",
+			flowerFeature = "flower_default",
+			treeFeature = "jungle_tree"
+		)
+
+		"cherry" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_cherry",
+			treeFeature = "cherry"
+		)
+
+		"pale" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.PALE_MOSS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "pale_moss_patch",
+			flowerFeature = "flower_pale_garden",
+			treeFeature = "pale_oak"
+		)
+
+		"lush" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.GRASS_BLOCK,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_grass",
+			flowerFeature = "flower_flower_forest",
+			treeFeature = "azalea_tree"
+		)
+
+		"crimson" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.CRIMSON_NYLIUM,
+			mainBlock = Blocks.NETHERRACK,
+			stoneBlock = Blocks.BLACKSTONE,
+			grassFeature = "crimson_forest_vegetation",
+			flowerFeature = "crimson_forest_vegetation",
+			treeFeature = "crimson_fungus"
+		)
+
+		"warped" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.WARPED_NYLIUM,
+			mainBlock = Blocks.NETHERRACK,
+			stoneBlock = Blocks.BLACKSTONE,
+			grassFeature = "warped_forest_vegetation",
+			flowerFeature = "warped_forest_vegetation",
+			treeFeature = "warped_fungus"
+		)
+
+		"soul_sand" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SOUL_SOIL,
+			mainBlock = Blocks.SOUL_SAND,
+			stoneBlock = Blocks.NETHERRACK,
+			grassFeature = "patch_soul_fire",
+			flowerFeature = "",
+			treeFeature = "fossil_diamonds"
+		)
+
+		"desert" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SAND,
+			mainBlock = Blocks.SANDSTONE,
+			stoneBlock = Blocks.STONE,
+			addSupportingBlocks = true,
+			grassFeature = "patch_dead_bush",
+			flowerFeature = "patch_cactus",
+			treeFeature = ""
+		)
+
+		"badlands" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.RED_SAND,
+			mainBlock = Blocks.TERRACOTTA,
+			stoneBlock = Blocks.STONE,
+			addSupportingBlocks = true,
+			grassFeature = "patch_dead_bush",
+			flowerFeature = "patch_cactus",
+			treeFeature = ""
+		)
+
+		"snow" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.SNOW_BLOCK,
+			mainBlock = Blocks.PACKED_ICE,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "pile_snow",
+			flowerFeature = "patch_pumpkin",
+			treeFeature = "trees_taiga"
+		)
+
+		"ice" -> island(
+			center = pos,
+			radius = 10,
+			height = 30,
+			surfaceBlock = Blocks.BLUE_ICE,
+			mainBlock = Blocks.PACKED_ICE,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "",
+			flowerFeature = "blue_ice",
+			treeFeature = "ice_spike"
+		)
+
+		"mushroom" -> island(
+			center = pos,
+			radius = 10,
+			height = 10,
+			surfaceBlock = Blocks.MYCELIUM,
+			mainBlock = Blocks.DIRT,
+			stoneBlock = Blocks.STONE,
+			grassFeature = "patch_brown_mushroom",
+			flowerFeature = "patch_red_mushroom",
+			treeFeature = "mushroom_island_vegetation"
+		)
+	}
+}
+
 fun getFeature(name: String): ConfiguredFeature<*, *>? {
 	val registry = server.registryManager.getOrThrow(RegistryKeys.CONFIGURED_FEATURE)
 	return registry.get(Identifier.of("minecraft", name))

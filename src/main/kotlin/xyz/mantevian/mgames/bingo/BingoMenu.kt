@@ -155,7 +155,7 @@ class BingoMenu(player: ServerPlayerEntity) : SimpleGui(ScreenHandlerType.GENERI
 
 				if (canUseRTP) {
 					close()
-					randomTeleport(player, worldSize / 2, worldSize / 8)
+					randomTeleport(player, worldSize * 2 / 3, worldSize / 8)
 					playerData.usedRTP++
 				}
 			}

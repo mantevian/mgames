@@ -20,6 +20,8 @@ val json = Json {
 			subclass(HandUnbreakableComponent::class)
 			subclass(SpawnBoxComponent::class)
 			subclass(WorldSizeComponent::class)
+			subclass(KeepInventoryComponent::class)
+			subclass(SirComponent::class)
 		}
 
 		polymorphic(BingoTypedTaskData::class) {

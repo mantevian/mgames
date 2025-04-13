@@ -2,10 +2,10 @@ package xyz.mantevian.mgames
 
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.arguments.BoolArgumentType
+import com.mojang.brigadier.arguments.DoubleArgumentType
 import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.context.CommandContext
-import net.minecraft.block.Blocks
 import net.minecraft.command.CommandRegistryAccess
 import net.minecraft.command.argument.RegistryEntryReferenceArgumentType
 import net.minecraft.registry.RegistryKeys
@@ -14,6 +14,7 @@ import net.minecraft.server.command.CommandManager.RegistrationEnvironment
 import net.minecraft.server.command.ServerCommandSource
 import xyz.mantevian.mgames.bingo.createBingoGame
 import xyz.mantevian.mgames.game.*
+import xyz.mantevian.mgames.sir.createSirGame
 import xyz.mantevian.mgames.util.Vec3i
 import xyz.mantevian.mgames.util.island
 import xyz.mantevian.mgames.util.standardText
@@ -31,9 +32,11 @@ fun registerCommands(
 	)
 
 	val initBingo = CommandManager.literal("bingo").executes(::initBingoCommand)
+	val initSir = CommandManager.literal("sir").executes(::initSirCommand)
 
 	val init = CommandManager.literal("init")
 		.then(initBingo)
+		.then(initSir)
 
 	val start = CommandManager.literal("start").executes(::startCommand)
 
@@ -49,7 +52,7 @@ fun registerCommands(
 				.executes(::configWorldSizeCommand)
 		)
 
-	val configBingoEnchantment = CommandManager.literal("enchantment")
+	val configEnchantment = CommandManager.literal("enchantment")
 		.then(
 			CommandManager.argument(
 				"id",
@@ -57,8 +60,20 @@ fun registerCommands(
 			)
 				.then(
 					CommandManager.argument("level", IntegerArgumentType.integer(1, 127))
-						.executes(::configBingoEnchantmentCommand)
+						.executes(::configEnchantmentCommand)
 				)
+		)
+
+	val configUnbreakable = CommandManager.literal("unbreakable")
+		.then(
+			CommandManager.argument("value", BoolArgumentType.bool())
+				.executes(::configUnbreakableCommand)
+		)
+
+	val configKeepInventory = CommandManager.literal("keep_inventory")
+		.then(
+			CommandManager.argument("value", BoolArgumentType.bool())
+				.executes(::configKeepInventoryCommand)
 		)
 
 	val configBingoTaskUseSet = CommandManager.literal("use_set")
@@ -66,12 +81,6 @@ fun registerCommands(
 		.then(
 			CommandManager.argument("value", StringArgumentType.greedyString())
 				.executes(::configBingoTaskUseSetCommand)
-		)
-
-	val configBingoUnbreakable = CommandManager.literal("unbreakable")
-		.then(
-			CommandManager.argument("value", BoolArgumentType.bool())
-				.executes(::configBingoUnbreakableCommand)
 		)
 
 	val configBingoTaskEnchantment = CommandManager.literal("task_enchantment")
@@ -86,17 +95,63 @@ fun registerCommands(
 				.executes(::configBingoTaskPotionCommand)
 		)
 
+	val configBingoTaskColored = CommandManager.literal("task_colored")
+		.then(
+			CommandManager.argument("value", BoolArgumentType.bool())
+				.executes(::configBingoTaskColoredCommand)
+		)
+
+	val configSirLifeCount = CommandManager.literal("life_count")
+		.then(
+			CommandManager.argument("value", IntegerArgumentType.integer(1, 100))
+				.executes(::configSirLifeCountCommand)
+		)
+
+	val configSirItemTimer = CommandManager.literal("item_timer")
+		.then(
+			CommandManager.argument("value", StringArgumentType.greedyString())
+				.executes(::configSirItemTimerCommand)
+		)
+
+	val configSirRadius = CommandManager.literal("radius")
+		.then(
+			CommandManager.argument("value", IntegerArgumentType.integer(10, 200))
+				.executes(::configSirRadiusCommand)
+		)
+
+	val configSirEnchantmentChance = CommandManager.literal("enchantment_chance")
+		.then(
+			CommandManager.argument("value", DoubleArgumentType.doubleArg(0.0, 0.9))
+				.executes(::configSirEnchantmentChanceCommand)
+		)
+
+	val configSirAttributeModifierChance = CommandManager.literal("attribute_modifier_chance")
+		.then(
+			CommandManager.argument("value", DoubleArgumentType.doubleArg(0.0, 0.9))
+				.executes(::configSirAttributeModifierChanceCommand)
+		)
+
 	val configBingo = CommandManager.literal("bingo")
-		.then(configBingoEnchantment)
-		.then(configBingoUnbreakable)
 		.then(configBingoTaskEnchantment)
 		.then(configBingoTaskPotion)
+		.then(configBingoTaskColored)
 		.then(configBingoTaskUseSet)
+
+	val configSir = CommandManager.literal("sir")
+		.then(configSirLifeCount)
+		.then(configSirItemTimer)
+		.then(configSirRadius)
+		.then(configSirEnchantmentChance)
+		.then(configSirAttributeModifierChance)
 
 	val config = CommandManager.literal("config")
 		.then(configBingo)
+		.then(configSir)
 		.then(configGameTime)
 		.then(configWorldSize)
+		.then(configEnchantment)
+		.then(configUnbreakable)
+		.then(configKeepInventory)
 
 	dispatcher.register(
 		root
@@ -112,7 +167,16 @@ private fun initBingoCommand(context: CommandContext<ServerCommandSource>): Int 
 	game = createBingoGame()
 	game.init()
 
-	context.source.sendFeedback({ standardText("Initializing the game Bingo") }, true)
+	context.source.sendFeedback({ standardText("Initializing Bingo") }, true)
+
+	return 1
+}
+
+private fun initSirCommand(context: CommandContext<ServerCommandSource>): Int {
+	game = createSirGame()
+	game.init()
+
+	context.source.sendFeedback({ standardText("Initializing Skyblock Item Randomizer") }, true)
 
 	return 1
 }
@@ -151,7 +215,7 @@ private fun configWorldSizeCommand(context: CommandContext<ServerCommandSource>)
 	return 1
 }
 
-private fun configBingoEnchantmentCommand(context: CommandContext<ServerCommandSource>): Int {
+private fun configEnchantmentCommand(context: CommandContext<ServerCommandSource>): Int {
 	val id = RegistryEntryReferenceArgumentType.getEnchantment(context, "id")
 	val level = IntegerArgumentType.getInteger(context, "level")
 
@@ -164,12 +228,22 @@ private fun configBingoEnchantmentCommand(context: CommandContext<ServerCommandS
 	return 1
 }
 
-private fun configBingoUnbreakableCommand(context: CommandContext<ServerCommandSource>): Int {
+private fun configUnbreakableCommand(context: CommandContext<ServerCommandSource>): Int {
 	val value = BoolArgumentType.getBool(context, "value")
 
 	game.toggleComponent<HandUnbreakableComponent>(value)
 
 	context.source.sendFeedback({ standardText("Set unbreakable items to $value") }, true)
+
+	return 1
+}
+
+private fun configKeepInventoryCommand(context: CommandContext<ServerCommandSource>): Int {
+	val value = BoolArgumentType.getBool(context, "value")
+
+	game.toggleComponent<KeepInventoryComponent>(value)
+
+	context.source.sendFeedback({ standardText("Set keepInventory to $value") }, true)
 
 	return 1
 }
@@ -198,6 +272,18 @@ private fun configBingoTaskPotionCommand(context: CommandContext<ServerCommandSo
 	return 1
 }
 
+private fun configBingoTaskColoredCommand(context: CommandContext<ServerCommandSource>): Int {
+	val value = BoolArgumentType.getBool(context, "value")
+
+	val component = game.getComponent<BingoComponent>() ?: return 0
+
+	component.taskColored = value
+
+	context.source.sendFeedback({ standardText("Set task of colored to $value") }, true)
+
+	return 1
+}
+
 private fun configBingoTaskUseSetCommand(context: CommandContext<ServerCommandSource>): Int {
 	val value = StringArgumentType.getString(context, "value")
 
@@ -220,204 +306,68 @@ private fun configBingoTaskUseNoSetCommand(context: CommandContext<ServerCommand
 	return 1
 }
 
+private fun configSirLifeCountCommand(context: CommandContext<ServerCommandSource>): Int {
+	val component = game.getComponent<SirComponent>() ?: return 0
+
+	val value = IntegerArgumentType.getInteger(context, "value")
+	component.lifeCount = value
+
+	context.source.sendFeedback({ standardText("Set life count to $value") }, true)
+
+	return 1
+}
+
+private fun configSirItemTimerCommand(context: CommandContext<ServerCommandSource>): Int {
+	val value = StringArgumentType.getString(context, "value")
+
+	val component = game.getComponent<SirComponent>() ?: return 0
+
+	if (component.itemTimer.set(value)) {
+		context.source.sendFeedback({ standardText("Set item timer to $value") }, true)
+		return 1
+	}
+
+	context.source.sendFeedback({ standardText("Couldn't parse the time") }, false)
+	return 0
+}
+
+private fun configSirRadiusCommand(context: CommandContext<ServerCommandSource>): Int {
+	val component = game.getComponent<SirComponent>() ?: return 0
+
+	val value = IntegerArgumentType.getInteger(context, "value")
+	component.radius = value
+
+	context.source.sendFeedback({ standardText("Set radius to $value") }, true)
+
+	return 1
+}
+
+private fun configSirEnchantmentChanceCommand(context: CommandContext<ServerCommandSource>): Int {
+	val component = game.getComponent<SirComponent>() ?: return 0
+
+	val value = DoubleArgumentType.getDouble(context, "value")
+	component.enchantmentChance = value
+
+	context.source.sendFeedback({ standardText("Set enchantment chance to $value") }, true)
+
+	return 1
+}
+
+private fun configSirAttributeModifierChanceCommand(context: CommandContext<ServerCommandSource>): Int {
+	val component = game.getComponent<SirComponent>() ?: return 0
+
+	val value = DoubleArgumentType.getDouble(context, "value")
+	component.attributeModifierChance = value
+
+	context.source.sendFeedback({ standardText("Set attribute modifier chance to $value") }, true)
+
+	return 1
+}
+
 private fun testCommand(context: CommandContext<ServerCommandSource>): Int {
 	val value = StringArgumentType.getString(context, "value")
 
-	when (value) {
-		"oak" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "flower_default",
-			treeFeature = "oak"
-		)
-
-		"birch" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "flower_default",
-			treeFeature = "birch_tall"
-		)
-
-		"spruce" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "patch_brown_mushroom",
-			treeFeature = "trees_taiga"
-		)
-
-		"acacia" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "flower_plain",
-			treeFeature = "acacia"
-		)
-
-		"jungle" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass_jungle",
-			flowerFeature = "flower_default",
-			treeFeature = "jungle_tree"
-		)
-
-		"cherry" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "flower_cherry",
-			treeFeature = "cherry"
-		)
-
-		"pale" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.PALE_MOSS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "pale_moss_patch",
-			flowerFeature = "flower_pale_garden",
-			treeFeature = "pale_oak"
-		)
-
-		"lush" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.GRASS_BLOCK,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_grass",
-			flowerFeature = "flower_flower_forest",
-			treeFeature = "azalea_tree"
-		)
-
-		"crimson" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.CRIMSON_NYLIUM,
-			mainBlock = Blocks.NETHERRACK,
-			stoneBlock = Blocks.BLACKSTONE,
-			grassFeature = "crimson_forest_vegetation",
-			flowerFeature = "crimson_forest_vegetation",
-			treeFeature = "crimson_fungus"
-		)
-
-		"warped" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.WARPED_NYLIUM,
-			mainBlock = Blocks.NETHERRACK,
-			stoneBlock = Blocks.BLACKSTONE,
-			grassFeature = "warped_forest_vegetation",
-			flowerFeature = "warped_forest_vegetation",
-			treeFeature = "warped_fungus"
-		)
-
-		"soul_sand" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.SOUL_SOIL,
-			mainBlock = Blocks.SOUL_SAND,
-			stoneBlock = Blocks.NETHERRACK,
-			grassFeature = "patch_soul_fire",
-			flowerFeature = "",
-			treeFeature = "fossil_diamonds"
-		)
-
-		"desert" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.SAND,
-			mainBlock = Blocks.SANDSTONE,
-			stoneBlock = Blocks.STONE,
-			addSupportingBlocks = true,
-			grassFeature = "patch_dead_bush",
-			flowerFeature = "patch_cactus",
-			treeFeature = ""
-		)
-
-		"badlands" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.RED_SAND,
-			mainBlock = Blocks.TERRACOTTA,
-			stoneBlock = Blocks.STONE,
-			addSupportingBlocks = true,
-			grassFeature = "patch_dead_bush",
-			flowerFeature = "patch_cactus",
-			treeFeature = ""
-		)
-
-		"snow" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.SNOW_BLOCK,
-			mainBlock = Blocks.PACKED_ICE,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "pile_snow",
-			flowerFeature = "patch_pumpkin",
-			treeFeature = "trees_taiga"
-		)
-
-		"ice" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 30,
-			surfaceBlock = Blocks.BLUE_ICE,
-			mainBlock = Blocks.PACKED_ICE,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "",
-			flowerFeature = "blue_ice",
-			treeFeature = "ice_spike"
-		)
-
-		"mushroom" -> island(
-			center = Vec3i(context.source.position),
-			radius = 10,
-			height = 10,
-			surfaceBlock = Blocks.MYCELIUM,
-			mainBlock = Blocks.DIRT,
-			stoneBlock = Blocks.STONE,
-			grassFeature = "patch_brown_mushroom",
-			flowerFeature = "patch_red_mushroom",
-			treeFeature = "mushroom_island_vegetation"
-		)
-	}
+	island(value, Vec3i(context.source.position))
 
 	return 1
 }

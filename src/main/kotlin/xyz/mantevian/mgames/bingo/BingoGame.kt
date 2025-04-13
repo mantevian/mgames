@@ -9,7 +9,8 @@ fun createBingoGame(): Game {
 			GameTimeComponent(),
 			HandEnchantmentsComponent(),
 			SpawnBoxComponent(),
-			WorldSizeComponent()
+			WorldSizeComponent(),
+			KeepInventoryComponent()
 		)
 	}
 }

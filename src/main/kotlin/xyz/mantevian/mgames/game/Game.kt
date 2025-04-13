@@ -2,6 +2,8 @@ package xyz.mantevian.mgames.game
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageSource
 import xyz.mantevian.mgames.util.GameState
 import xyz.mantevian.mgames.util.MGDuration
 import xyz.mantevian.mgames.util.resetPlayersMinecraftStats
@@ -86,6 +88,9 @@ class Game {
 	}
 
 	fun start() {
+		resetPlayersMinecraftStats()
+		time.set(-20 * 10)
+
 		components.forEach { it.start() }
 	}
 
@@ -95,5 +100,15 @@ class Game {
 
 	fun finish() {
 		components.forEach { it.finish() }
+	}
+
+	fun reset() {
+		components.forEach { it.reset() }
+	}
+
+	fun onDeath(entity: LivingEntity, source: DamageSource) {
+		if (state == GameState.PLAYING) {
+			components.forEach { it.onDeath(entity, source) }
+		}
 	}
 }

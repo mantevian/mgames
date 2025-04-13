@@ -2,9 +2,16 @@ package xyz.mantevian.mgames
 
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.minecraft.enchantment.Enchantment
+import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.item.Item
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.entry.RegistryEntry
 import net.minecraft.server.MinecraftServer
 import xyz.mantevian.mgames.game.Game
 import xyz.mantevian.mgames.util.*
@@ -15,6 +22,11 @@ lateinit var resourceManager: ResourceManager
 var initialized = false
 var game = Game()
 
+val allItems: MutableList<RegistryEntry<Item>> = mutableListOf()
+val allEnchantments: MutableList<RegistryEntry<Enchantment>> = mutableListOf()
+val allEffects: MutableList<RegistryEntry<StatusEffect>> = mutableListOf()
+val allAttributes: MutableList<RegistryEntry<EntityAttribute>> = mutableListOf()
+
 class Main : ModInitializer {
 	override fun onInitialize() {
 		resourceManager = ResourceManager()
@@ -22,6 +34,11 @@ class Main : ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register { s ->
 			server = s
 			initialized = true
+
+			allItems.addAll(server.registryManager.getOrThrow(RegistryKeys.ITEM).indexedEntries)
+			allEnchantments.addAll(server.registryManager.getOrThrow(RegistryKeys.ENCHANTMENT).indexedEntries)
+			allEffects.addAll(server.registryManager.getOrThrow(RegistryKeys.STATUS_EFFECT).indexedEntries)
+			allAttributes.addAll(server.registryManager.getOrThrow(RegistryKeys.ATTRIBUTE).indexedEntries)
 
 			game = load()
 		}
@@ -44,6 +61,12 @@ class Main : ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
 			registerCommands(dispatcher, registryAccess, env)
+		}
+
+		ServerLivingEntityEvents.AFTER_DEATH.register { entity, source ->
+			if (initialized) {
+				game.onDeath(entity, source)
+			}
 		}
 
 		MGItems.init()

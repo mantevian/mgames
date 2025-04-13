@@ -149,7 +149,7 @@ class BingoGenerator {
 			1
 		}
 
-		if (count > 1 && count > entry.maxCount / 2) {
+		if (entry.tags.contains("increase_cost_with_count") && count > 1 && count >= entry.maxCount / 2) {
 			cost++
 		}
 
@@ -177,20 +177,23 @@ class BingoGenerator {
 			val source = takeItem("any_color", excludeTags = listOf("any_color"))
 
 			if (source != null) {
-				val colors = listOf(
-					setOf("red", "orange", "yellow", "pink") to 0.4,
-					setOf("light_blue", "blue", "purple", "magenta") to 0.5,
-					setOf("white", "light_gray", "gray", "black") to 0.7,
-					setOf("lime", "green", "cyan", "brown") to 1.0
+				val colors = mutableMapOf(
+					"warm" to (setOf("red", "orange", "yellow", "pink") to 0.5),
+					"cold" to (setOf("light_blue", "blue", "purple", "magenta") to 0.7),
+					"bw" to (setOf("white", "light_gray", "gray", "black") to 0.9),
+					"rare" to (setOf("lime", "green", "cyan", "brown") to 1.2)
 				)
 
 				var cost = 2.0
 				val list = mutableListOf<String>()
 
-				while (nextBoolean(0.5) && cost < 3.25) {
-					val color = colors.shuffled()[0]
-					list.add(color.first.shuffled()[0])
-					cost += color.second
+				for (i in 1..2) {
+					val key = colors.keys.shuffled()[0]
+					val colorSet = colors[key] ?: (setOf("red") to 0.3)
+					val color = colorSet.first.shuffled()[0]
+					list.add(color)
+					cost += colorSet.second
+					colors.remove(key)
 				}
 
 				result[curr] = BingoTaskData(

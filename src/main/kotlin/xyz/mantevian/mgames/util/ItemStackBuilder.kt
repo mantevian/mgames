@@ -1,16 +1,17 @@
 package xyz.mantevian.mgames.util
 
 import net.minecraft.component.DataComponentTypes
-import net.minecraft.component.type.DyedColorComponent
-import net.minecraft.component.type.LoreComponent
-import net.minecraft.component.type.PotionContentsComponent
-import net.minecraft.component.type.UseCooldownComponent
+import net.minecraft.component.type.*
 import net.minecraft.enchantment.Enchantment
+import net.minecraft.entity.attribute.EntityAttribute
+import net.minecraft.entity.attribute.EntityAttributeModifier
 import net.minecraft.entity.effect.StatusEffect
+import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.item.DyeItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemConvertible
 import net.minecraft.item.ItemStack
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect
 import net.minecraft.potion.Potion
 import net.minecraft.registry.Registries
 import net.minecraft.text.Text
@@ -50,7 +51,12 @@ class ItemStackBuilder() {
 		return this
 	}
 
-	fun addStatusEffect(): ItemStackBuilder {
+	fun addStatusEffect(effect: StatusEffectInstance): ItemStackBuilder {
+		val component = stack.getOrDefault(DataComponentTypes.CONSUMABLE, ConsumableComponent.builder().build())
+		val componentBuilder = ConsumableComponent.builder()
+		component.onConsumeEffects.forEach { componentBuilder.consumeEffect(it) }
+		componentBuilder.consumeEffect(ApplyEffectsConsumeEffect(effect))
+		stack.set(DataComponentTypes.CONSUMABLE, component)
 		return this
 	}
 
@@ -109,6 +115,18 @@ class ItemStackBuilder() {
 			DataComponentTypes.USE_COOLDOWN,
 			UseCooldownComponent(ticks.toFloat().div(20.0f), Optional.of(cooldownGroup))
 		)
+		return this
+	}
+
+	fun addAttributeModifier(
+		attribute: EntityAttribute,
+		modifier: EntityAttributeModifier,
+		slot: AttributeModifierSlot
+	): ItemStackBuilder {
+		val component = stack.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT)
+		val newComponent = component.with(getAttributeEntry(attribute), modifier, slot)
+		stack.set(DataComponentTypes.ATTRIBUTE_MODIFIERS, newComponent)
+
 		return this
 	}
 

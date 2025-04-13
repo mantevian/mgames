@@ -42,8 +42,6 @@ class BingoComponent : GameComponent {
 		tasks.clear()
 		players.clear()
 
-		executeCommand("gamerule keepInventory true")
-
 		deleteScoreboard("bingo.score")
 		createScoreboardSidebar("bingo.score", "★ Points ★")
 	}
@@ -53,15 +51,11 @@ class BingoComponent : GameComponent {
 	}
 
 	override fun start() {
-		game.time.set(-20 * 10)
-
-		resetPlayersMinecraftStats()
-
 		forEachPlayer {
 			val playerData = BingoPlayer()
 			playerData.tasks.clear()
 			players[it.uuidAsString] = playerData
-			it.giveItemStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
+			it.giveOrDropStack(ItemStackBuilder(MGItems.BINGO_MENU_ITEM).build())
 			it.changeGameMode(GameMode.SURVIVAL)
 		}
 
@@ -294,7 +288,7 @@ class BingoComponent : GameComponent {
 
 		playSound(player, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP)
 
-		player.giveItemStack(ItemStack(Items.ENDER_EYE))
+		player.giveOrDropStack(ItemStack(Items.ENDER_EYE))
 	}
 
 	fun countPoints(player: ServerPlayerEntity): Int {

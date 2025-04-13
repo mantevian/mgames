@@ -14,4 +14,8 @@ data class Vec3i(var x: Int, var y: Int, var z: Int) {
 	fun blockPos(): BlockPos {
 		return BlockPos(x, y, z)
 	}
+
+	fun up(): Vec3i {
+		return Vec3i(x, y + 1, z)
+	}
 }
