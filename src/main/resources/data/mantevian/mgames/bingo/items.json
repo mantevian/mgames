@@ -3265,6 +3265,14 @@
 		]
 	},
 	{
+		"id": "minecraft:ender_chest",
+		"max_count": 4,
+		"rarity": 2,
+		"tags": [
+			"increase_cost_with_count"
+		]
+	},
+	{
 		"id": "minecraft:ender_pearl",
 		"max_count": 4,
 		"rarity": 3,

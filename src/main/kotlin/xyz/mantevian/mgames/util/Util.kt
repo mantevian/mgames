@@ -14,9 +14,6 @@ import net.minecraft.potion.Potion
 import net.minecraft.registry.Registries
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.entry.RegistryEntry
-import net.minecraft.scoreboard.ScoreHolder
-import net.minecraft.scoreboard.ScoreboardCriterion
-import net.minecraft.scoreboard.ScoreboardDisplaySlot
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
@@ -29,7 +26,6 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.Heightmap
 import net.minecraft.world.World
-import xyz.mantevian.mgames.MOD_ID
 import xyz.mantevian.mgames.game
 import xyz.mantevian.mgames.game.SpawnBoxComponent
 import xyz.mantevian.mgames.server
@@ -111,6 +107,10 @@ fun announce(text: Text, soundEvent: SoundEvent, pitch: Float = 1.0f, volume: Fl
 	playSoundToEveryone(soundEvent, volume, pitch)
 }
 
+fun announce(lines: List<Text>) {
+	lines.forEach { announce(it) }
+}
+
 fun announceClick(text: Text) {
 	announce(text, SoundEvents.UI_BUTTON_CLICK.value(), 2.0f, 1.0f)
 }
@@ -146,44 +146,6 @@ fun statusEffectById(id: String): StatusEffect? {
 fun worldById(id: String): World? {
 	val key = server.worldRegistryKeys.find { it.value.path == id } ?: return server.overworld
 	return server.getWorld(key)
-}
-
-fun createScoreboardSidebar(scoreboardName: String, displayName: String) {
-	if (server.scoreboard.getNullableObjective("$MOD_ID.$scoreboardName") != null) {
-		return
-	}
-	val objective = server.scoreboard.addObjective(
-		"$MOD_ID.$scoreboardName",
-		ScoreboardCriterion.DUMMY,
-		standardText(displayName),
-		ScoreboardCriterion.RenderType.INTEGER,
-		true,
-		null
-	)
-	server.scoreboard.setObjectiveSlot(ScoreboardDisplaySlot.SIDEBAR, objective)
-}
-
-fun deleteScoreboard(scoreboardName: String) {
-	val objective = server.scoreboard.getNullableObjective("$MOD_ID.$scoreboardName") ?: return
-	server.scoreboard.removeObjective(objective)
-}
-
-fun getScore(playerName: String, scoreboardName: String): Int {
-	val objective = server.scoreboard.getNullableObjective("$MOD_ID.$scoreboardName") ?: return 0
-	val scoreAccess = server.scoreboard.getOrCreateScore(ScoreHolder.fromName(playerName), objective)
-	return scoreAccess.score
-}
-
-fun setScore(playerName: String, scoreboardName: String, value: Int) {
-	val objective = server.scoreboard.getNullableObjective("$MOD_ID.$scoreboardName") ?: return
-	val scoreAccess = server.scoreboard.getOrCreateScore(ScoreHolder.fromName(playerName), objective)
-	scoreAccess.score = value
-}
-
-fun addScore(playerName: String, scoreboardName: String, value: Int) {
-	val objective = server.scoreboard.getNullableObjective("$MOD_ID.$scoreboardName") ?: return
-	val scoreAccess = server.scoreboard.getOrCreateScore(ScoreHolder.fromName(playerName), objective)
-	scoreAccess.score += value
 }
 
 fun calculateColorValue(colors: List<String>): Int {

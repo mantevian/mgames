@@ -21,7 +21,9 @@ import xyz.nucleoid.packettweaker.PacketContext
 
 class BingoMenuItem(settings: Settings) : SimplePolymerItem(settings) {
 	override fun use(world: World, user: PlayerEntity, hand: Hand): ActionResult {
-		BingoMenu(user as ServerPlayerEntity).open()
+		if (game.hasComponent<BingoComponent>()) {
+			BingoMenu(user as ServerPlayerEntity).open()
+		}
 
 		return ActionResult.SUCCESS
 	}

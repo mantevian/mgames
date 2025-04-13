@@ -56,7 +56,7 @@ class ItemStackBuilder() {
 		val componentBuilder = ConsumableComponent.builder()
 		component.onConsumeEffects.forEach { componentBuilder.consumeEffect(it) }
 		componentBuilder.consumeEffect(ApplyEffectsConsumeEffect(effect))
-		stack.set(DataComponentTypes.CONSUMABLE, component)
+		stack.set(DataComponentTypes.CONSUMABLE, componentBuilder.build())
 		return this
 	}
 

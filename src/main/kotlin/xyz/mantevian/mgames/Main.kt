@@ -78,6 +78,8 @@ class Main : ModInitializer {
 				infiniteEffectForEveryone(StatusEffects.RESISTANCE)
 				infiniteEffectForEveryone(StatusEffects.SATURATION)
 				infiniteEffectForEveryone(StatusEffects.NIGHT_VISION)
+
+				hideSidebar()
 			}
 
 			GameState.PLAYING -> {
@@ -89,7 +91,9 @@ class Main : ModInitializer {
 				}
 			}
 
-			else -> {}
+			else -> {
+				hideSidebar()
+			}
 		}
 
 		game.tick()

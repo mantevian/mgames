@@ -42,8 +42,8 @@ class BingoComponent : GameComponent {
 		tasks.clear()
 		players.clear()
 
-		deleteScoreboard("bingo.score")
-		createScoreboardSidebar("bingo.score", "★ Points ★")
+		deleteObjective("bingo.score")
+		createObjective("bingo.score", standardText("★ Points ★"))
 	}
 
 	override fun canStart(): Boolean {
@@ -98,6 +98,8 @@ class BingoComponent : GameComponent {
 
 					setScore(player.nameForScoreboard, "bingo.score", countPoints(player))
 				}
+
+				setSidebar(standardText("Bingo"), leaderboard(false))
 
 				val gameTime = game.getComponentOrDefault<GameTimeComponent>().value.getFullSeconds()
 				if (game.time.getTicks() % 20 == 0) {
@@ -171,29 +173,36 @@ class BingoComponent : GameComponent {
 	}
 
 	override fun finish() {
-		val sortedPlayers = getAllPlayers().sortedByDescending { getScore(it) }
-
 		title("Bingo has ended!")
 
 		announce(standardText("Leaderboard for this game:").formatted(Formatting.AQUA))
+		announce(leaderboard(true).values.toList())
+	}
+
+	private fun leaderboard(showTime: Boolean, asPlayer: ServerPlayerEntity? = null): Map<Int, Text> {
+		val sortedPlayers = getAllPlayers().sortedByDescending { getScore(it) }
+
+		val result: MutableMap<Int, Text> = mutableMapOf()
 
 		sortedPlayers.forEachIndexed { i, player ->
-			announce(standardText("").apply {
-				append(standardText("${i + 1}. "))
-				append(
-					standardText(player.nameForScoreboard).formatted(
-						when (i) {
-							0 -> Formatting.YELLOW
-							1 -> Formatting.GRAY
-							2 -> Formatting.GOLD
-							else -> Formatting.WHITE
-						}
-					)
-				)
-				append(standardText(" ${countPoints(player)} ★").formatted(Formatting.WHITE))
-				append(standardText(" [${getLastTime(player).formatHourMinSec()}]").formatted(Formatting.GRAY))
-			})
+			val text = standardText("").apply {
+				append(standardText("${i + 1}. ").formatted(Formatting.GRAY))
+				append(standardText(player.nameForScoreboard).formatted(Formatting.WHITE))
+				append(standardText(" ${countPoints(player)} ★").formatted(Formatting.YELLOW))
+
+				if (showTime) {
+					append(standardText(" [${getLastTime(player).formatHourMinSec()}]").formatted(Formatting.GRAY))
+				}
+			}
+
+			if (asPlayer != null && player.uuidAsString == asPlayer.uuidAsString) {
+				text.formatted(Formatting.BOLD)
+			}
+
+			result[i] = text
 		}
+
+		return result
 	}
 
 	private fun checkTask(player: ServerPlayerEntity, task: BingoTypedTaskData): Boolean {
