@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm") version "2.1.0"
-	id("fabric-loom") version "1.9-SNAPSHOT"
+	id("fabric-loom") version "1.10-SNAPSHOT"
 	id("maven-publish")
 	kotlin("plugin.serialization") version "2.1.0"
 }
@@ -55,8 +55,8 @@ dependencies {
 
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0-RC")
 
-	include("eu.pb4:sgui:1.8.2+1.21.4")?.let { modImplementation(it) }
-	include("eu.pb4:polymer-core:0.11.8+1.21.4")?.let { modImplementation(it) }
+	include("eu.pb4:sgui:1.9.0+1.21.5")?.let { modImplementation(it) }
+	include("eu.pb4:polymer-core:0.12.4+1.21.5")?.let { modImplementation(it) }
 }
 
 tasks.processResources {

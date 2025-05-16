@@ -218,8 +218,9 @@ fun teleportToWorldSpawn(player: ServerPlayerEntity) {
 }
 
 fun teleportToOwnSpawn(player: ServerPlayerEntity) {
-	val pos = player.spawnPointPosition ?: server.overworld.spawnPos
-	val dimension = player.spawnPointDimension
+	val pos = player.respawn?.pos ?: server.overworld.spawnPos
+	val dimension = player.respawn?.dimension ?: server.overworld.registryKey
+
 	player.teleport(
 		server.getWorld(dimension),
 		pos.x.toDouble(),
@@ -281,10 +282,12 @@ fun teleport(player: ServerPlayerEntity, world: World, pos: BlockPos) {
 
 fun setSpawnPoint(player: ServerPlayerEntity) {
 	player.setSpawnPoint(
-		player.world.registryKey,
-		player.blockPos,
-		0f,
-		true,
+		ServerPlayerEntity.Respawn(
+			player.world.registryKey,
+			player.blockPos,
+			0f,
+			true
+		),
 		true
 	)
 }

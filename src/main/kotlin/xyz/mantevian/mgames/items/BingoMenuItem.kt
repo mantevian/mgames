@@ -3,11 +3,13 @@ package xyz.mantevian.mgames.items
 import eu.pb4.polymer.core.api.item.SimplePolymerItem
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
@@ -40,8 +42,12 @@ class BingoMenuItem(settings: Settings) : SimplePolymerItem(settings) {
 		return standardText("Bingo")
 	}
 
-	override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
-		super.inventoryTick(stack, world, entity, slot, selected)
+	override fun inventoryTick(stack: ItemStack?, world: ServerWorld?, entity: Entity?, slot: EquipmentSlot?) {
+		super.inventoryTick(stack, world, entity, slot)
+
+		if (stack == null || world == null || entity == null || slot == null) {
+			return
+		}
 
 		if (entity !is ServerPlayerEntity) {
 			return

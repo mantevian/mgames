@@ -64,6 +64,12 @@ fun registerCommands(
 				)
 		)
 
+	val configMiningEfficiency = CommandManager.literal("mining_efficiency")
+		.then(
+			CommandManager.argument("value", DoubleArgumentType.doubleArg(-1024.0, 1024.0))
+				.executes(::configMiningEfficiencyCommand)
+		)
+
 	val configUnbreakable = CommandManager.literal("unbreakable")
 		.then(
 			CommandManager.argument("value", BoolArgumentType.bool())
@@ -152,6 +158,7 @@ fun registerCommands(
 		.then(configEnchantment)
 		.then(configUnbreakable)
 		.then(configKeepInventory)
+		.then(configMiningEfficiency)
 
 	dispatcher.register(
 		root
@@ -211,6 +218,18 @@ private fun configWorldSizeCommand(context: CommandContext<ServerCommandSource>)
 	component.update(value)
 
 	context.source.sendFeedback({ standardText("Set world size to $value") }, true)
+
+	return 1
+}
+
+private fun configMiningEfficiencyCommand(context: CommandContext<ServerCommandSource>): Int {
+	val value = DoubleArgumentType.getDouble(context, "value")
+
+	val component = game.getComponentOrSetDefault<PlayersMiningEfficiencyComponent>()
+
+	component.value = value
+
+	context.source.sendFeedback({ standardText("Set players' mining efficiency to $value") }, true)
 
 	return 1
 }

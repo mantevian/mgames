@@ -1,5 +1,6 @@
 package xyz.mantevian.mgames.util
 
+import net.minecraft.component.ComponentType
 import net.minecraft.component.DataComponentTypes
 import net.minecraft.component.type.*
 import net.minecraft.enchantment.Enchantment
@@ -17,7 +18,6 @@ import net.minecraft.registry.Registries
 import net.minecraft.text.Text
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
-import net.minecraft.util.Unit
 import java.util.*
 
 class ItemStackBuilder() {
@@ -96,17 +96,27 @@ class ItemStackBuilder() {
 	}
 
 	fun ofColorMix(colors: List<String>): ItemStackBuilder {
-		stack = DyedColorComponent.setColor(stack, colors.map { DyeItem.byColor(DyeColor.byName(it, DyeColor.BLACK)) })
+		stack = DyedColorComponent.setColor(stack, colors.map { DyeItem.byColor(DyeColor.byId(it, DyeColor.BLACK)) })
+		return this
+	}
+
+	fun hideAdditionalTooltip(componentType: ComponentType<*>): ItemStackBuilder {
+		val component = stack.getOrDefault(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplayComponent.DEFAULT)
+		stack.set(DataComponentTypes.TOOLTIP_DISPLAY, component.with(componentType, true))
 		return this
 	}
 
 	fun hideAdditionalTooltip(): ItemStackBuilder {
-		stack.set(DataComponentTypes.HIDE_ADDITIONAL_TOOLTIP, Unit.INSTANCE)
+		hideAdditionalTooltip(DataComponentTypes.ENCHANTMENTS)
+		hideAdditionalTooltip(DataComponentTypes.POTION_CONTENTS)
+		hideAdditionalTooltip(DataComponentTypes.ATTRIBUTE_MODIFIERS)
 		return this
 	}
 
 	fun hideTooltip(): ItemStackBuilder {
-		stack.set(DataComponentTypes.HIDE_TOOLTIP, Unit.INSTANCE)
+		val component = stack.getOrDefault(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplayComponent.DEFAULT)
+		val newComponent = TooltipDisplayComponent(true, component.hiddenComponents)
+		stack.set(DataComponentTypes.TOOLTIP_DISPLAY, newComponent)
 		return this
 	}
 
