@@ -2,10 +2,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "2.1.0"
-	id("fabric-loom") version "1.10-SNAPSHOT"
+	kotlin("jvm") version "2.2.0"
+	id("fabric-loom") version "1.11-SNAPSHOT"
 	id("maven-publish")
-	kotlin("plugin.serialization") version "2.1.0"
+	kotlin("plugin.serialization") version "2.2.0"
 }
 
 version = project.property("mod_version") as String
@@ -55,8 +55,8 @@ dependencies {
 
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0-RC")
 
-	include("eu.pb4:sgui:1.9.0+1.21.5")?.let { modImplementation(it) }
-	include("eu.pb4:polymer-core:0.12.4+1.21.5")?.let { modImplementation(it) }
+	include("eu.pb4:sgui:1.10.2+1.21.8")?.let { modImplementation(it) }
+	include("eu.pb4:polymer-core:0.13.9+1.21.8")?.let { modImplementation(it) }
 }
 
 tasks.processResources {
@@ -68,9 +68,9 @@ tasks.processResources {
 	filesMatching("fabric.mod.json") {
 		expand(
 			"version" to project.version,
-			"minecraft_version" to project.property("minecraft_version"),
-			"loader_version" to project.property("loader_version"),
-			"kotlin_loader_version" to project.property("kotlin_loader_version")
+			"minecraft_version" to project.property("minecraft_version")!!,
+			"loader_version" to project.property("loader_version")!!,
+			"kotlin_loader_version" to project.property("kotlin_loader_version")!!
 		)
 	}
 }

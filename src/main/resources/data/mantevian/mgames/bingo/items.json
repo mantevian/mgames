@@ -4568,11 +4568,9 @@
 	},
 	{
 		"id": "minecraft:lead",
-		"max_count": 1,
-		"rarity": 3,
-		"tags": [
-			"rare_biomes"
-		]
+		"max_count": 4,
+		"rarity": 2,
+		"tags": []
 	},
 	{
 		"id": "minecraft:leather",
@@ -7691,7 +7689,7 @@
 	{
 		"id": "minecraft:saddle",
 		"max_count": 1,
-		"rarity": 3,
+		"rarity": 2,
 		"tags": []
 	},
 	{
@@ -9556,5 +9554,155 @@
 		"tags": [
 			"ultra_rare"
 		]
+	},
+	{
+		"id": "minecraft:dried_ghast",
+		"max_count": 1,
+		"rarity": 3,
+		"tags": [
+			"nether"
+		]
+	},
+	{
+		"id": "minecraft:red_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:orange_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:yellow_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:lime_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:green_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:cyan_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:light_blue_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:blue_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:purple_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:magenta_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:pink_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:brown_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:white_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:light_gray_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:gray_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:black_harness",
+		"max_count": 1,
+		"rarity": 2,
+		"tags": [
+			"colored"
+		]
+	},
+	{
+		"id": "minecraft:music_disc_tears",
+		"max_count": 1,
+		"rarity": 3,
+		"tags": [
+			"nether"
+		]
+	},
+	{
+		"id": "minecraft:music_disc_lava_chicken",
+		"max_count": 1,
+		"rarity": 4,
+		"tags": []
 	}
 ]
