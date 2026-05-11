@@ -5,107 +5,105 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
-import net.minecraft.enchantment.Enchantment
-import net.minecraft.entity.attribute.EntityAttribute
-import net.minecraft.entity.effect.StatusEffect
-import net.minecraft.entity.effect.StatusEffects
-import net.minecraft.item.Item
-import net.minecraft.registry.RegistryKeys
-import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.core.registries.Registries
 import net.minecraft.server.MinecraftServer
+import net.minecraft.world.effect.MobEffect
+import net.minecraft.world.effect.MobEffects
+import net.minecraft.world.entity.ai.attributes.Attribute
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.enchantment.Enchantment
 import xyz.mantevian.mgames.game.Game
 import xyz.mantevian.mgames.util.*
 
 const val MOD_ID = "mgames"
 lateinit var server: MinecraftServer
-lateinit var resourceManager: ResourceManager
+lateinit var resourceManager: MGResourceManager
 var initialized = false
 var game = Game()
 
-val allItems: MutableList<RegistryEntry<Item>> = mutableListOf()
-val allEnchantments: MutableList<RegistryEntry<Enchantment>> = mutableListOf()
-val allEffects: MutableList<RegistryEntry<StatusEffect>> = mutableListOf()
-val allAttributes: MutableList<RegistryEntry<EntityAttribute>> = mutableListOf()
+val allItems: MutableList<Item> = mutableListOf()
+val allEnchantments: MutableList<Enchantment> = mutableListOf()
+val allEffects: MutableList<MobEffect> = mutableListOf()
+val allAttributes: MutableList<Attribute> = mutableListOf()
 
 class Main : ModInitializer {
-	override fun onInitialize() {
-		resourceManager = ResourceManager()
+    override fun onInitialize() {
+        resourceManager = MGResourceManager()
 
-		ServerLifecycleEvents.SERVER_STARTING.register { s ->
-			server = s
-			initialized = true
+        ServerLifecycleEvents.SERVER_STARTING.register { s ->
+            server = s
+            initialized = true
+            allItems.addAll(getRegistry(Registries.ITEM).stream().toList())
+            allEnchantments.addAll(getRegistry(Registries.ENCHANTMENT).stream().toList())
+            allEffects.addAll(getRegistry(Registries.MOB_EFFECT).stream().toList())
+            allAttributes.addAll(getRegistry(Registries.ATTRIBUTE).stream().toList())
 
-			allItems.addAll(server.registryManager.getOrThrow(RegistryKeys.ITEM).indexedEntries)
-			allEnchantments.addAll(server.registryManager.getOrThrow(RegistryKeys.ENCHANTMENT).indexedEntries)
-			allEffects.addAll(server.registryManager.getOrThrow(RegistryKeys.STATUS_EFFECT).indexedEntries)
-			allAttributes.addAll(server.registryManager.getOrThrow(RegistryKeys.ATTRIBUTE).indexedEntries)
+            game = load()
+        }
 
-			game = load()
-		}
+        ServerLifecycleEvents.BEFORE_SAVE.register { _, _, _ ->
+            if (initialized) {
+                save()
+            }
+        }
 
-		ServerLifecycleEvents.BEFORE_SAVE.register { _, _, _ ->
-			if (initialized) {
-				save()
-			}
-		}
+        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { _, _, _ ->
+            if (!initialized) {
+                return@register
+            }
+        }
 
-		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register { _, _, _ ->
-			if (!initialized) {
-				return@register
-			}
-		}
+        ServerTickEvents.END_SERVER_TICK.register {
+            tick()
+        }
 
-		ServerTickEvents.END_SERVER_TICK.register {
-			tick()
-		}
+        CommandRegistrationCallback.EVENT.register { dispatcher, buildContext, commandSelection ->
+            registerCommands(dispatcher, buildContext, commandSelection)
+        }
 
-		CommandRegistrationCallback.EVENT.register { dispatcher, registryAccess, env ->
-			registerCommands(dispatcher, registryAccess, env)
-		}
+        ServerLivingEntityEvents.AFTER_DEATH.register { entity, source ->
+            if (initialized) {
+                game.onDeath(entity, source)
+            }
+        }
 
-		ServerLivingEntityEvents.AFTER_DEATH.register { entity, source ->
-			if (initialized) {
-				game.onDeath(entity, source)
-			}
-		}
+        MGItems.init()
+    }
 
-		MGItems.init()
-	}
+    private fun tick() {
+        when (game.state) {
+            GameState.WAITING -> {
+                infiniteEffectForEveryone(MobEffects.RESISTANCE)
+                infiniteEffectForEveryone(MobEffects.SATURATION)
+                infiniteEffectForEveryone(MobEffects.NIGHT_VISION)
 
-	private fun tick() {
-		when (game.state) {
-			GameState.WAITING -> {
-				infiniteEffectForEveryone(StatusEffects.RESISTANCE)
-				infiniteEffectForEveryone(StatusEffects.SATURATION)
-				infiniteEffectForEveryone(StatusEffects.NIGHT_VISION)
+                hideSidebar()
+            }
 
-				hideSidebar()
-			}
+            GameState.PLAYING -> {
+                game.time.inc()
+                forEachPlayer {
+                    if (game.time.getTicks() >= 0) {
+                        it.sendSystemMessage(standardText(game.time.formatHourMinSec()), true)
+                    }
+                }
+            }
 
-			GameState.PLAYING -> {
-				game.time.inc()
-				forEachPlayer {
-					if (game.time.getTicks() >= 0) {
-						it.sendMessageToClient(standardText(game.time.formatHourMinSec()), true)
-					}
-				}
-			}
+            else -> {
+                hideSidebar()
+            }
+        }
 
-			else -> {
-				hideSidebar()
-			}
-		}
-
-		game.tick()
-	}
+        game.tick()
+    }
 }
 
 fun startGame() {
-	if (!game.canStart()) {
-		return
-	}
+    if (!game.canStart()) {
+        return
+    }
 
-	game.state = GameState.PLAYING
+    game.state = GameState.PLAYING
 
-	game.start()
+    game.start()
 }

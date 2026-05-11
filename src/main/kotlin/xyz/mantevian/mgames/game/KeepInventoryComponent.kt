@@ -2,16 +2,17 @@ package xyz.mantevian.mgames.game
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import xyz.mantevian.mgames.util.executeCommand
+import net.minecraft.world.level.gamerules.GameRules
+import xyz.mantevian.mgames.server
 
 @Serializable
 @SerialName("keep_inventory")
 class KeepInventoryComponent : GameComponent {
-	override fun start() {
-		executeCommand("gamerule keepInventory true")
-	}
+    override fun start() {
+        server.gameRules.set(GameRules.KEEP_INVENTORY, true, server)
+    }
 
-	override fun reset() {
-		executeCommand("gamerule keepInventory false")
-	}
+    override fun reset() {
+        server.gameRules.set(GameRules.KEEP_INVENTORY, false, server)
+    }
 }
